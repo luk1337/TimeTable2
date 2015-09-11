@@ -1,0 +1,11 @@
+<resources>
+    <string name="title_activity_settings">Ustawienia</string>
+
+    <string name="pref_category_app">Ustawienia aplikacji</string>
+    <string name="pref_category_api">Ustawienia API</string>
+
+    <string name="pref_title_school">URL</string>
+
+    <string name="pref_title_light_theme">Jasny motyw</string>
+    <string name="pref_title_restore_lessons">Przywróć ukryte lekcje</string>
+</resources>

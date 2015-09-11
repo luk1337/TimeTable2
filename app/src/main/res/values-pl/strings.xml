@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Plan Lekcji</string>
+
+    <string name="menu_update_timetable">Synchronizuj</string>
+    <string name="menu_update_app">Sprawdź aktualizacje</string>
+    <string name="menu_settings">Ustawienia</string>
+
+    <string name="error_title">Błąd</string>
+    <string name="error_offline">Nie można połączyć się z API</string>
+
+    <string name="select_class">Wybierz klasę:</string>
+
+    <string name="sync_in_progress">Proszę czekać...</string>
+
+    <string name="update_latest">Twoja wersja aplikacji jest aktualna</string>
+    <string name="update_available">Aktualizacja jest dostępna!\nCzy chcesz pobrać wersję %s?</string>
+
+    <string name="hide_title">Ukryj lekcje</string>
+    <string name="hide_text">Czy na pewno chcesz ukryć tą lekcję?</string>
+
+    <string name="restore_title">Przywróć lekcje</string>
+    <string name="restore_empty">Nie ma niczego do przywrócenia</string>
+
+    <string name="widget_label">Ciemny</string>
+    <string name="widget_light_label">Jasny</string>
+
+    <string-array name="days">
+        <item>Poniedziałek</item>
+        <item>Wtorek</item>
+        <item>Środa</item>
+        <item>Czwartek</item>
+        <item>Piątek</item>
+    </string-array>
+</resources>

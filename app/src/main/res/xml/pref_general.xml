@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_category_app">
+        <CheckBoxPreference
+            android:key="light_theme"
+            android:title="@string/pref_title_light_theme"/>
+
+        <Preference
+            android:key="restore_lessons"
+            android:title="@string/pref_title_restore_lessons" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_api" >
+        <EditTextPreference
+            android:key="school"
+            android:title="@string/pref_title_school" />
+    </PreferenceCategory>
+</PreferenceScreen>

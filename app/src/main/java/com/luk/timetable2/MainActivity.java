@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.luk.timetable2.listeners.deleteDialogListener;
+import com.luk.timetable2.listeners.themeChangeListener;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.ArrayList;
@@ -39,15 +40,7 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
         // save instance
         instance = this;
 
-        // load light theme
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPref.registerOnSharedPreferenceChangeListener(themeListener);
-        light_theme = sharedPref.getBoolean("light_theme", false);
-
-        if (light_theme) {
-            super.setTheme(R.style.AppTheme_Light);
-        }
-
+        themeChangeListener.getInstance().setupListener();
         setContentView(R.layout.layout_main);
 
         // define some variables we may need
@@ -71,14 +64,6 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
             actionBar.setSelectedNavigationItem(day);
         }
     }
-
-    SharedPreferences.OnSharedPreferenceChangeListener themeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            if (key.equals("light_theme")) {
-                recreate();
-            }
-        }
-    };
 
     public void loadLessons(final int day) {
         LinearLayout container = (LinearLayout) findViewById(R.id.mainLayout);

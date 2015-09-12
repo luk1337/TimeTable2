@@ -9,7 +9,7 @@ import android.widget.RemoteViewsService;
 public class WidgetViewsService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        WidgetViewsFactory dataProvider = new WidgetViewsFactory(getApplicationContext(), intent);
+        WidgetViewsFactory dataProvider = new WidgetViewsFactory(getApplicationContext());
         return dataProvider;
     }
 }

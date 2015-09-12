@@ -1,7 +1,6 @@
 package com.luk.timetable2.widget.dark;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -20,7 +19,7 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
     private Context context = null;
     ArrayList<String[]> lessons = new ArrayList<>();
 
-    public WidgetViewsFactory(Context context, Intent intent) {
+    public WidgetViewsFactory(Context context) {
         this.context = context;
     }
 

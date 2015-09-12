@@ -15,21 +15,20 @@ import java.util.regex.Pattern;
  * Created by luk on 5/16/15.
  */
 public class Parser {
-
     private String url;
     private ArrayList<String> hours = new ArrayList<>();
-    HashMap<Integer, ArrayList<HashMap<String, String>>> lessons = new HashMap<>();
-    Pattern regex_group = Pattern.compile("-\\d/\\d");
+    private HashMap<Integer, ArrayList<HashMap<String, String>>> lessons = new HashMap<>();
+    private Pattern regex_group = Pattern.compile("-\\d/\\d");
 
-    String QUERY_CLASSES_SELECT = "select[name=oddzialy]";
-    String QUERY_CLASSES_A = "a[target=plan]";
+    private String QUERY_CLASSES_SELECT = "select[name=oddzialy]";
+    private String QUERY_CLASSES_A = "a[target=plan]";
 
-    String QUERY_TABLE = "table[class=tabela]";
-    String QUERY_LESSON = "td[class=l]";
-    String QUERY_LESSON_MULTIPLE = "span[style=font-size:85%]";
-    String QUERY_SUBJECT = "span[class=p]";
-    String QUERY_HOUR = "td[class=g]";
-    String QUERY_ROOM = "a[class=s]";
+    private String QUERY_TABLE = "table[class=tabela]";
+    private String QUERY_LESSON = "td[class=l]";
+    private String QUERY_LESSON_MULTIPLE = "span[style=font-size:85%]";
+    private String QUERY_SUBJECT = "span[class=p]";
+    private String QUERY_HOUR = "td[class=g]";
+    private String QUERY_ROOM = "a[class=s]";
 
     public Parser(String url) {
         this.url = url;

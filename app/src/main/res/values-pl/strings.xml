@@ -10,7 +10,7 @@
 
     <string name="select_class">Wybierz klasę:</string>
 
-    <string name="sync_in_progress">Proszę czekać...</string>
+    <string name="sync_in_progress">Proszę czekać…</string>
 
     <string name="update_latest">Twoja wersja aplikacji jest aktualna</string>
     <string name="update_available">Aktualizacja jest dostępna!\nCzy chcesz pobrać wersję %s?</string>

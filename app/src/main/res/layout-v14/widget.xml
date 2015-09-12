@@ -18,7 +18,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="-2.5dp"
             android:gravity="center_vertical"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:text="@string/app_name"/>
 
         <ImageView

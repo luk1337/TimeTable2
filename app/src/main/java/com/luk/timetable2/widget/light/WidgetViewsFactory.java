@@ -2,7 +2,6 @@ package com.luk.timetable2.widget.light;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.TypedValue;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -85,7 +84,6 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
 
         // set lesson name
         lesson.setTextViewText(R.id.lesson, lessons.get(position)[0]);
-        lesson.setTextViewTextSize(R.id.lesson, TypedValue.COMPLEX_UNIT_DIP, Utils.calculateFontSize(lessons.get(position)[0]));
 
         // set lesson additional info { hours, classroom }
         lesson.setTextViewText(R.id.info, lessons.get(position)[1]);

@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -92,7 +91,6 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 
             TextView lesson = (TextView) view.findViewById(R.id.lesson);
             lesson.setText(_lesson.substring(0, _lesson.length() - 1));
-            lesson.setTextSize(TypedValue.COMPLEX_UNIT_DIP, Utils.calculateFontSize(_lesson.substring(0, _lesson.length() - 1)));
 
             // set lesson additional info { hours, classroom }
             TextView info = (TextView) view.findViewById(R.id.info);

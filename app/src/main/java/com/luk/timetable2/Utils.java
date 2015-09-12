@@ -89,18 +89,4 @@ public class Utils {
 
         return array;
     }
-
-    public static int calculateFontSize(String txt) {
-        int size;
-
-        switch (txt.split("\n").length) {
-            case 3:
-                size = 10;
-                break;
-            default:
-                size = 15;
-        }
-
-        return size;
-    }
 }

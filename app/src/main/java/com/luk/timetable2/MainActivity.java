@@ -129,7 +129,7 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
             if (!new Utils().isOnline()) {
                 new AlertDialog.Builder(this)
                         .setTitle(getString(R.string.error_title))
-                        .setMessage(getString(R.string.error_offline))
+                        .setMessage(getString(R.string.error_no_network))
                         .setPositiveButton(android.R.string.yes, null).show();
                 return false;
             }

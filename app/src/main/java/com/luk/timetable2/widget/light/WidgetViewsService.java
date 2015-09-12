@@ -3,8 +3,6 @@ package com.luk.timetable2.widget.light;
 import android.content.Intent;
 import android.widget.RemoteViewsService;
 
-import com.luk.timetable2.widget.light.WidgetViewsFactory;
-
 /**
  * Created by luk on 5/12/15.
  */

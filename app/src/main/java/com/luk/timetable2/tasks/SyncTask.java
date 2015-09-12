@@ -8,15 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.luk.timetable2.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
-import com.luk.timetable2.Utils;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;

@@ -56,17 +56,18 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
         List<String> days = Arrays.asList(getResources().getStringArray(R.array.days));
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, days);
 
-        // Set navigation on the action bar
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setListNavigationCallbacks(arrayAdapter, this);
-
         // load lessons for current day
         Calendar calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_WEEK) - 2;
         if (day == -1 || day == 5) day = 0; // set monday
 
-        actionBar.setSelectedNavigationItem(day);
+        // Set navigation on the action bar
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            actionBar.setListNavigationCallbacks(arrayAdapter, this);
+            actionBar.setSelectedNavigationItem(day);
+        }
     }
 
     SharedPreferences.OnSharedPreferenceChangeListener themeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {

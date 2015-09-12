@@ -28,14 +28,16 @@ import java.util.List;
 
 public class MainActivity extends Activity implements ActionBar.OnNavigationListener {
     private LayoutInflater inflater;
-    static MainActivity instance;
+    private static MainActivity instance;
     public int day;
     public boolean light_theme = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.instance = this;
+
+        // save instance
+        instance = this;
 
         // load light theme
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);

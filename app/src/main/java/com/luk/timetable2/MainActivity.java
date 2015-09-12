@@ -42,9 +42,9 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
         // load light theme
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPref.registerOnSharedPreferenceChangeListener(themeListener);
+        light_theme = sharedPref.getBoolean("light_theme", false);
 
-        if (sharedPref.getBoolean("light_theme", false)) {
-            light_theme = true;
+        if (light_theme) {
             super.setTheme(R.style.AppTheme_Light);
         }
 

@@ -105,7 +105,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             });
         }
 
-        MainActivity.getInstance().loadLessons(MainActivity.getInstance().getActionBar().getSelectedNavigationIndex());
+        MainActivity.getInstance().loadLessons(MainActivity.getInstance().day);
 
         if(dialog != null) {
             dialog.dismiss();

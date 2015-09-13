@@ -1,11 +1,13 @@
 package com.luk.timetable2;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,18 +15,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.luk.timetable2.listeners.dayChangeListener;
 import com.luk.timetable2.listeners.deleteDialogListener;
 import com.luk.timetable2.listeners.themeChangeListener;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends Activity implements ActionBar.OnNavigationListener {
+public class MainActivity extends ActionBarActivity {
     private LayoutInflater inflater;
     private static MainActivity instance;
     public int day;
@@ -32,39 +35,38 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         // save instance
         instance = this;
 
+        // setup layout
         themeChangeListener.getInstance().setupListener();
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
         // define some variables we may need
         inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ActionBar actionBar = getActionBar();
-
-        // load list of days Mon -> Fri
-        List<String> days = Arrays.asList(getResources().getStringArray(R.array.days));
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, days);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        ActionBar actionBar = getSupportActionBar();
 
         // load lessons for current day
         Calendar calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_WEEK) - 2;
         if (day == -1 || day == 5) day = 0; // set monday
 
-        // Set navigation on the action bar
+        // set current day
+        Spinner daySelector = (Spinner) findViewById(R.id.day);
+        daySelector.setOnItemSelectedListener(new dayChangeListener());
+        daySelector.setSelection(day);
+
+        // Hide title name
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-            actionBar.setListNavigationCallbacks(arrayAdapter, this);
-            actionBar.setSelectedNavigationItem(day);
         }
     }
 
     public void loadLessons(final int day) {
         LinearLayout container = (LinearLayout) findViewById(R.id.mainLayout);
-        container.removeAllViews(); // remove current set of lessons
+        container.removeAllViews();
 
         ArrayList<List<String>> hours = Utils.getHours(this, day);
 
@@ -102,13 +104,6 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
             // add to view
             container.addView(view);
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(int i, long l) {
-        day = i;
-        loadLessons(day);
-        return false;
     }
 
     @Override

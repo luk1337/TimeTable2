@@ -26,8 +26,6 @@ public class themeChangeListener {
     SharedPreferences.OnSharedPreferenceChangeListener themeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             if (key.equals("light_theme")) {
-                activity.light_theme = sharedPref.getBoolean("light_theme", false);
-                activity.setTheme(activity.light_theme ? R.style.AppTheme_Light : R.style.AppTheme);
                 activity.recreate();
             }
         }

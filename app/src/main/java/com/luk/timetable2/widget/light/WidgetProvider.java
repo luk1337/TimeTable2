@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 
 import com.luk.timetable2.R;
+import com.luk.timetable2.Utils;
 
 /**
  * Implementation of App Widget functionality.
@@ -65,15 +66,8 @@ public class WidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         if (REFRESH_CLICKED.equals(intent.getAction())) {
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-
-            ComponentName watchWidget = new ComponentName(context, WidgetProvider.class);
-
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(watchWidget), R.id.widget);
-            appWidgetManager.updateAppWidget(watchWidget, initViews(context, appWidgetManager, R.layout.widget_light));
-        }
-
-        if (TITLE_CLICKED.equals(intent.getAction())) {
+            Utils.refreshWidgets();
+        } else if (TITLE_CLICKED.equals(intent.getAction())) {
             Intent i = new Intent();
             i.setClassName("com.luk.timetable2", "com.luk.timetable2.MainActivity");
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

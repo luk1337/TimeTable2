@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import com.luk.timetable2.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
+import com.luk.timetable2.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,6 +106,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             });
         }
 
+        Utils.refreshWidgets();
         MainActivity.getInstance().loadLessons(MainActivity.getInstance().day);
 
         if(dialog != null) {

@@ -105,7 +105,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             });
         }
 
-        Utils.refreshWidgets();
+        Utils.refreshWidgets(MainActivity.getInstance());
         MainActivity.getInstance().loadLessons(MainActivity.getInstance().day);
 
         if(dialog != null) {

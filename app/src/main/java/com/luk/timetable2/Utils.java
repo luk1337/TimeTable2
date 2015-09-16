@@ -92,16 +92,16 @@ public class Utils {
         return array;
     }
 
-    public static void refreshWidgets() {
-        int widgetIDs_dark[] = AppWidgetManager.getInstance(MainActivity.getInstance().getApplication()).getAppWidgetIds(new ComponentName(MainActivity.getInstance().getApplication(), com.luk.timetable2.widget.dark.WidgetProvider.class));
-        int widgetIDs_light[] = AppWidgetManager.getInstance(MainActivity.getInstance().getApplication()).getAppWidgetIds(new ComponentName(MainActivity.getInstance().getApplication(), com.luk.timetable2.widget.light.WidgetProvider.class));
+    public static void refreshWidgets(Context context) {
+        int widgetIDs_dark[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.dark.WidgetProvider.class));
+        int widgetIDs_light[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.light.WidgetProvider.class));
 
         for (int id : widgetIDs_dark) {
-            AppWidgetManager.getInstance(MainActivity.getInstance().getApplication()).notifyAppWidgetViewDataChanged(id, R.id.widget);
+            AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(id, R.id.widget);
         }
 
         for (int id : widgetIDs_light) {
-            AppWidgetManager.getInstance(MainActivity.getInstance().getApplication()).notifyAppWidgetViewDataChanged(id, R.id.widget);
+            AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(id, R.id.widget);
         }
     }
 }

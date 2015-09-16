@@ -66,7 +66,7 @@ public class WidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         if (REFRESH_CLICKED.equals(intent.getAction())) {
-            Utils.refreshWidgets();
+            Utils.refreshWidgets(context);
         } else if (TITLE_CLICKED.equals(intent.getAction())) {
             Intent i = new Intent();
             i.setClassName("com.luk.timetable2", "com.luk.timetable2.MainActivity");

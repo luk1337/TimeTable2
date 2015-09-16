@@ -18,7 +18,7 @@ public class Parser {
     private String url;
     private ArrayList<String> hours = new ArrayList<>();
     private HashMap<Integer, ArrayList<HashMap<String, String>>> lessons = new HashMap<>();
-    private Pattern regex_group = Pattern.compile("-\\d/\\d");
+    private Pattern regex_group = Pattern.compile("-[a-zA-z0-9/]+$");
 
     private String QUERY_CLASSES_SELECT = "select[name=oddzialy]";
     private String QUERY_CLASSES_A = "a[target=plan]";
@@ -144,9 +144,13 @@ public class Parser {
             _lesson = _lesson.replace(match.group(0), ""); // remove group from lesson
             _group = match.group(0).substring(1);
         } else {
-            match = regex_group.matcher(lesson.html());
-            if (match.find()) {
-                _group = match.group(num).substring(1);
+            for (String line : lesson.html().split("\n")) {
+                match = regex_group.matcher(line.trim());
+
+                if (match.find()) {
+                    _group = match.group(num).substring(1);
+                    break;
+                }
             }
         }
 

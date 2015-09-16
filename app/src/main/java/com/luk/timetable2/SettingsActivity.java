@@ -95,7 +95,7 @@ public class SettingsActivity extends PreferenceActivity {
                 for (int day = 0; day < 5; day++) {
                     ArrayList<List<String>> lessons = Utils.getHiddenLessons(getApplicationContext(), day);
 
-                    if (lessons.size() > 0) {
+                    if (lessons != null && lessons.size() > 0) {
                         TextView textView = new TextView(getApplicationContext());
                         textView.setText(String.format("%s:", days.get(day)));
                         textView.setPadding(0, 15, 0, 15);

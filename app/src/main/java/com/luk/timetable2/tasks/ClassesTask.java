@@ -11,7 +11,6 @@ import com.luk.timetable2.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -41,7 +40,7 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
 
         try {
             data = new Parser(String.format("%s/lista.html", _api)).parseClasses();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }

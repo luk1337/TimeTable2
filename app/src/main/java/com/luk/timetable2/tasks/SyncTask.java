@@ -15,7 +15,6 @@ import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,7 +46,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
 
         try {
             data = new Parser(String.format("%s/plany/o%d.html", _api, _class)).parseLessons();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }

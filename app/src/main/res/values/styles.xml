@@ -3,10 +3,14 @@
     <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+
+        <item name="themeName">dark</item>
     </style>
 
     <style name="AppTheme_Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+
+        <item name="themeName">light</item>
     </style>
 </resources>

@@ -1,26 +1,26 @@
 package com.luk.timetable2;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.luk.timetable2.listeners.dayChangeListener;
 import com.luk.timetable2.listeners.deleteDialogListener;
-import com.luk.timetable2.listeners.themeChangeListener;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.ArrayList;
@@ -31,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
     private LayoutInflater inflater;
     private static MainActivity instance;
     public int day;
-    public boolean light_theme = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         instance = this;
 
         // setup layout
-        themeChangeListener.getInstance().setupListener();
+        setTheme(Utils.getCurrentTheme(this) ? R.style.AppTheme_Light : R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
@@ -62,12 +61,17 @@ public class MainActivity extends ActionBarActivity {
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
         }
+
+        // setup theme change intent
+        Utils.setThemeListener(this);
     }
 
     public void loadLessons(final int day) {
         LinearLayout container = (LinearLayout) findViewById(R.id.mainLayout);
         container.removeAllViews();
 
+        TypedValue theme = new TypedValue();
+        getTheme().resolveAttribute(R.attr.themeName, theme, true);
         ArrayList<List<String>> hours = Utils.getHours(this, day);
 
         if (hours == null) return;
@@ -89,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
                 _room += l.get(1) + " / ";
             }
 
-            View view = inflater.inflate(light_theme ? R.layout.template_lesson_light : R.layout.template_lesson, null);
+            View view = inflater.inflate(theme.string.toString().equals("light") ? R.layout.template_lesson_light : R.layout.template_lesson, null);
 
             TextView lesson = (TextView) view.findViewById(R.id.lesson);
             lesson.setText(_lesson.substring(0, _lesson.length() - 1));

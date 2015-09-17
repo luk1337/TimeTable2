@@ -2,8 +2,11 @@ package com.luk.timetable2;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -15,6 +18,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -45,6 +49,16 @@ public class SettingsActivity extends PreferenceActivity {
      * shown on tablets.
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // setup layout
+        setTheme(Utils.getCurrentTheme(this) ? R.style.AppTheme_Light : R.style.AppTheme);
+        super.onCreate(savedInstanceState);
+
+        // setup theme change intent
+        Utils.setThemeListener(this);
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -85,6 +99,14 @@ public class SettingsActivity extends PreferenceActivity {
 
         bindPreferenceSummaryToValue(findPreference("school"));
         findPreference("school").setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+        findPreference("light_theme").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                sendBroadcast(new Intent("THEME_CHANGE"));
+
+                return true;
+            }
+        });
 
         findPreference("restore_lessons").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {

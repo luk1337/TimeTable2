@@ -1,12 +1,18 @@
 package com.luk.timetable2;
 
+import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -103,5 +109,26 @@ public class Utils {
         for (int id : widgetIDs_light) {
             AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(id, R.id.widget);
         }
+    }
+
+    public static boolean getCurrentTheme(Activity activity) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+
+        return sharedPref.getBoolean("light_theme", false);
+    }
+
+    public static void setThemeListener(final Activity activity) {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("THEME_CHANGE");
+
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                context.unregisterReceiver(this);
+                activity.recreate();
+            }
+        };
+
+        activity.registerReceiver(broadcastReceiver, intentFilter);
     }
 }

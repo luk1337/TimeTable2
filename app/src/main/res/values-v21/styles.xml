@@ -7,6 +7,8 @@
 
         <item name="android:colorPrimaryDark">#191919</item>
         <item name="android:navigationBarColor">#191919</item>
+
+        <item name="themeName">dark</item>
     </style>
 
     <style name="AppTheme_Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
@@ -15,5 +17,7 @@
 
         <item name="android:colorPrimaryDark">#BBBBBB</item>
         <item name="android:navigationBarColor">#BBBBBB</item>
+
+        <item name="themeName">light</item>
     </style>
 </resources>

@@ -55,9 +55,6 @@ public class SettingsActivity extends PreferenceActivity {
         // setup layout
         setTheme(Utils.getCurrentTheme(this) ? R.style.AppTheme_Light : R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
-        // setup theme change intent
-        Utils.setThemeListener(this);
     }
 
     @Override
@@ -102,7 +99,7 @@ public class SettingsActivity extends PreferenceActivity {
         findPreference("light_theme").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                sendBroadcast(new Intent("THEME_CHANGE"));
+                recreate();
 
                 return true;
             }

@@ -30,6 +30,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
     private LayoutInflater inflater;
     private static MainActivity instance;
+    private static boolean currentTheme = false;
     public int day;
 
     @Override
@@ -38,7 +39,8 @@ public class MainActivity extends ActionBarActivity {
         instance = this;
 
         // setup layout
-        setTheme(Utils.getCurrentTheme(this) ? R.style.AppTheme_Light : R.style.AppTheme);
+        currentTheme = Utils.getCurrentTheme(this);
+        setTheme(currentTheme ? R.style.AppTheme_Light : R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
@@ -61,9 +63,15 @@ public class MainActivity extends ActionBarActivity {
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
         }
+    }
 
-        // setup theme change intent
-        Utils.setThemeListener(this);
+    @Override
+    protected void onResume() {
+        if (currentTheme != Utils.getCurrentTheme(this)) {
+            recreate();
+        }
+
+        super.onResume();
     }
 
     public void loadLessons(final int day) {

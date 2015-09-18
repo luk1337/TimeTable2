@@ -116,19 +116,4 @@ public class Utils {
 
         return sharedPref.getBoolean("light_theme", false);
     }
-
-    public static void setThemeListener(final Activity activity) {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("THEME_CHANGE");
-
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                context.unregisterReceiver(this);
-                activity.recreate();
-            }
-        };
-
-        activity.registerReceiver(broadcastReceiver, intentFilter);
-    }
 }

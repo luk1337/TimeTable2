@@ -1,16 +1,13 @@
 package com.luk.timetable2;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -84,8 +81,6 @@ public class MainActivity extends ActionBarActivity {
         TypedValue backgroundColor = new TypedValue();
         getTheme().resolveAttribute(R.attr.template_fontColor, fontColor, true);
         getTheme().resolveAttribute(R.attr.template_backgroundColor, backgroundColor, true);
-
-        Log.v("XD", fontColor.toString());
 
         ArrayList<List<String>> hours = Utils.getHours(this, day);
 

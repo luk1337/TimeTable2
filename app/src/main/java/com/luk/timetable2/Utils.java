@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -111,9 +112,13 @@ public class Utils {
         }
     }
 
-    public static boolean getCurrentTheme(Activity activity) {
+    public static int getCurrentTheme(Activity activity) {
+        HashMap<String, Integer> themes = new HashMap<>();
+        themes.put("dark", R.style.AppTheme);
+        themes.put("light", R.style.AppTheme_Light);
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
 
-        return sharedPref.getBoolean("light_theme", false);
+        return themes.get(sharedPref.getString("theme", "dark"));
     }
 }

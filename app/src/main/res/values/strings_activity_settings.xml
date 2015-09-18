@@ -6,6 +6,16 @@
 
     <string name="pref_title_school">URL</string>
 
-    <string name="pref_title_light_theme">Light theme</string>
+    <string name="pref_title_theme">Theme</string>
     <string name="pref_title_restore_lessons">Restore hidden lessons</string>
+
+    <string-array name="themeEntries">
+        <item>Dark</item>
+        <item>Light</item>
+    </string-array>
+
+    <string-array name="themeValues">
+        <item>dark</item>
+        <item>light</item>
+    </string-array>
 </resources>

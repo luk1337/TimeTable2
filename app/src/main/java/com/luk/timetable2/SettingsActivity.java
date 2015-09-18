@@ -2,11 +2,8 @@ package com.luk.timetable2;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -18,7 +15,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -53,7 +49,7 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // setup layout
-        setTheme(Utils.getCurrentTheme(this) ? R.style.AppTheme_Light : R.style.AppTheme);
+        setTheme(Utils.getCurrentTheme(this));
         super.onCreate(savedInstanceState);
     }
 
@@ -95,8 +91,9 @@ public class SettingsActivity extends PreferenceActivity {
         // to reflect the new value, per the Android Design guidelines.
 
         bindPreferenceSummaryToValue(findPreference("school"));
-        findPreference("school").setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-        findPreference("light_theme").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        bindPreferenceSummaryToValue(findPreference("theme"));
+        
+        findPreference("theme").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 recreate();

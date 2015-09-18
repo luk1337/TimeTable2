@@ -32,7 +32,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
     private LayoutInflater inflater;
     private static MainActivity instance;
-    private static boolean currentTheme = false;
+    private static int currentTheme;
     public int day;
 
     @Override
@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
         // setup layout
         currentTheme = Utils.getCurrentTheme(this);
-        setTheme(currentTheme ? R.style.AppTheme_Light : R.style.AppTheme);
+        setTheme(currentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 

@@ -1,8 +1,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_category_app">
-        <CheckBoxPreference
-            android:key="light_theme"
-            android:title="@string/pref_title_light_theme"/>
+        <ListPreference
+            android:key="theme"
+            android:title="@string/pref_title_theme"
+            android:entries="@array/themeEntries"
+            android:entryValues="@array/themeValues"
+            android:defaultValue="0" />
 
         <Preference
             android:key="restore_lessons"

@@ -8,7 +8,9 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,8 +80,13 @@ public class MainActivity extends ActionBarActivity {
         LinearLayout container = (LinearLayout) findViewById(R.id.mainLayout);
         container.removeAllViews();
 
-        TypedValue theme = new TypedValue();
-        getTheme().resolveAttribute(R.attr.themeName, theme, true);
+        TypedValue fontColor = new TypedValue();
+        TypedValue backgroundColor = new TypedValue();
+        getTheme().resolveAttribute(R.attr.template_fontColor, fontColor, true);
+        getTheme().resolveAttribute(R.attr.template_backgroundColor, backgroundColor, true);
+
+        Log.v("XD", fontColor.toString());
+
         ArrayList<List<String>> hours = Utils.getHours(this, day);
 
         if (hours == null) return;
@@ -101,13 +108,18 @@ public class MainActivity extends ActionBarActivity {
                 _room += l.get(1) + " / ";
             }
 
-            View view = inflater.inflate(theme.string.toString().equals("light") ? R.layout.template_lesson_light : R.layout.template_lesson, null);
+            View view = inflater.inflate(R.layout.template_lesson, null);
+
+            CardView cardView = (CardView) view.findViewById(R.id.card_lesson);
+            cardView.setBackgroundColor(backgroundColor.data);
 
             TextView lesson = (TextView) view.findViewById(R.id.lesson);
+            lesson.setTextColor(fontColor.data);
             lesson.setText(_lesson.substring(0, _lesson.length() - 1));
 
             // set lesson additional info { hours, classroom }
             TextView info = (TextView) view.findViewById(R.id.info);
+            info.setTextColor(fontColor.data);
             info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
 
             // set long click listener (currently disabled)

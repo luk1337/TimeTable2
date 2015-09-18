@@ -8,6 +8,9 @@
         <item name="android:colorPrimaryDark">#191919</item>
         <item name="android:navigationBarColor">#191919</item>
 
+        <item name="template_fontColor">@android:color/white</item>
+        <item name="template_backgroundColor">#363636</item>
+
         <item name="themeName">dark</item>
     </style>
 
@@ -17,6 +20,9 @@
 
         <item name="android:colorPrimaryDark">#BBBBBB</item>
         <item name="android:navigationBarColor">#BBBBBB</item>
+
+        <item name="template_fontColor">@android:color/black</item>
+        <item name="template_backgroundColor">@android:color/white</item>
 
         <item name="themeName">light</item>
     </style>

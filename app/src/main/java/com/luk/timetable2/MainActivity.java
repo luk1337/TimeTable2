@@ -3,6 +3,7 @@ package com.luk.timetable2;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -105,20 +106,34 @@ public class MainActivity extends ActionBarActivity {
 
             View view = inflater.inflate(R.layout.template_lesson, null);
 
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                switch (currentTheme) {
+                    case R.style.AppTheme:
+                        view = inflater.inflate(R.layout.template_lesson, null);
+                        break;
+                    case R.style.AppTheme_Light:
+                        view = inflater.inflate(R.layout.template_lesson_light, null);
+                        break;
+                }
+            }
+
             CardView cardView = (CardView) view.findViewById(R.id.card_lesson);
-            cardView.setBackgroundColor(backgroundColor.data);
 
             TextView lesson = (TextView) view.findViewById(R.id.lesson);
-            lesson.setTextColor(fontColor.data);
             lesson.setText(_lesson.substring(0, _lesson.length() - 1));
 
             // set lesson additional info { hours, classroom }
             TextView info = (TextView) view.findViewById(R.id.info);
-            info.setTextColor(fontColor.data);
             info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
 
-            // set long click listener (currently disabled)
+            // set long click listener
             view.findViewById(R.id.card_lesson).setOnLongClickListener(new deleteDialogListener());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                cardView.setBackgroundColor(backgroundColor.data);
+                lesson.setTextColor(fontColor.data);
+                info.setTextColor(fontColor.data);
+            }
 
             // add to view
             container.addView(view);

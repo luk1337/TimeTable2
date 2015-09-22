@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.luk.timetable2.listeners.RestoreLessonsListener;
-import com.luk.timetable2.listeners.ThemeChangeListener;
+import com.luk.timetable2.listeners.SettingsActivity.RestoreLessonsListener;
+import com.luk.timetable2.listeners.SettingsActivity.ThemeChangeListener;
 
 /**
  * Created by luk on 9/22/15.

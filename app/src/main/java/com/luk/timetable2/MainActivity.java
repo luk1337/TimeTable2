@@ -19,8 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.luk.timetable2.listeners.DayChangeListener;
-import com.luk.timetable2.listeners.DeleteDialogListener;
+import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
+import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.ArrayList;

@@ -27,7 +27,7 @@ public class DeleteDialogListener implements View.OnLongClickListener {
 
         final ArrayList<List<String>> lessons = Utils.getLessonsForHour(MainActivity.getInstance(), MainActivity.getInstance().day, hour);
 
-        if (lessons.size() > 1) {
+        if (lessons != null && lessons.size() > 1) {
             final CharSequence[] items = new String[lessons.size()];;
             final int[] selected = {1};
             int i = 0;

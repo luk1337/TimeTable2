@@ -62,7 +62,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             // do nothing
         }
 
-        db.execSQL("CREATE TABLE lessons ( _id INTEGER PRIMARY KEY AUTOINCREMENT, day INTEGER, lesson STRING, room STRING, time STRING, hidden STRING );");
+        db.execSQL("CREATE TABLE lessons ( _id INTEGER PRIMARY KEY AUTOINCREMENT, day INTEGER, lesson TEXT, room TEXT, time TEXT, hidden TEXT );");
 
         for (int day = 1; day <= 5; day++) {
             if (data.get(day) == null) continue;

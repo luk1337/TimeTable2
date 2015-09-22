@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            this.addPreferencesFromResource(R.xml.pref_general);
+            this.addPreferencesFromResource(R.xml.preferences);
 
             bindPreferenceSummaryToValue(findPreference("school"));
             bindPreferenceSummaryToValue(findPreference("theme"));

@@ -47,6 +47,7 @@ public class Utils {
                 } while (c.moveToNext());
             }
 
+            c.close();
             db.close();
         } catch(Exception e) {
             Log.e(TAG, "", e);
@@ -70,6 +71,7 @@ public class Utils {
                 } while (c.moveToNext());
             }
 
+            c.close();
             db.close();
         } catch(Exception e) {
             Log.e(TAG, "", e);
@@ -93,6 +95,7 @@ public class Utils {
                 } while (c.moveToNext());
             }
 
+            c.close();
             db.close();
         } catch(Exception e) {
             Log.e(TAG, "", e);

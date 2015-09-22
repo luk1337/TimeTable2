@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.luk.timetable2.activities.MainActivity;
 
@@ -24,6 +25,8 @@ import java.util.List;
  * Created by LuK on 2015-05-01.
  */
 public class Utils {
+    private static String TAG = "Utils";
+
     public boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) MainActivity.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -45,8 +48,8 @@ public class Utils {
             }
 
             db.close();
-        } catch(Exception ex) {
-            ex.printStackTrace();
+        } catch(Exception e) {
+            Log.e(TAG, "", e);
             return null;
         }
 
@@ -68,8 +71,8 @@ public class Utils {
             }
 
             db.close();
-        } catch(Exception ex) {
-            ex.printStackTrace();
+        } catch(Exception e) {
+            Log.e(TAG, "", e);
             return null;
         }
 
@@ -91,8 +94,8 @@ public class Utils {
             }
 
             db.close();
-        } catch(Exception ex) {
-            ex.printStackTrace();
+        } catch(Exception e) {
+            Log.e(TAG, "", e);
             return null;
         }
 

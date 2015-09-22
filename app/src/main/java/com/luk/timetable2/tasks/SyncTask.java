@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
@@ -22,6 +23,7 @@ import java.util.HashMap;
  * Created by LuK on 2015-05-01.
  */
 public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
+    private static String TAG = "SyncTask";
     private ProgressDialog dialog;
     private int _class;
     private String _api;
@@ -47,10 +49,9 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         try {
             data = new Parser(String.format("%s/plany/o%d.html", _api, _class)).parseLessons();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "", e);
             return -1;
         }
-
         // create database
         File dbFile = MainActivity.getInstance().getDatabasePath("db");
         SQLiteDatabase db = MainActivity.getInstance().openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);

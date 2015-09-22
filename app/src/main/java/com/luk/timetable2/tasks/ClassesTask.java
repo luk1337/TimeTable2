@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
@@ -17,6 +18,7 @@ import java.util.HashMap;
  * Created by LuK on 2015-05-01.
  */
 public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
+    private static String TAG = "ClassesTask";
     private ProgressDialog dialog;
     private String _api;
     private HashMap<Integer, String> data;
@@ -41,7 +43,7 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
         try {
             data = new Parser(String.format("%s/lista.html", _api)).parseClasses();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "", e);
             return -1;
         }
 

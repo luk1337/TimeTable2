@@ -8,7 +8,7 @@ import com.luk.timetable2.MainActivity;
 /**
  * Created by luk on 9/13/15.
  */
-public class dayChangeListener implements AdapterView.OnItemSelectedListener {
+public class DayChangeListener implements AdapterView.OnItemSelectedListener {
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         MainActivity.getInstance().day = position;

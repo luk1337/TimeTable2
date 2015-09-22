@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.luk.timetable2.listeners.restoreLessonsListener;
-import com.luk.timetable2.listeners.themeChangeListener;
+import com.luk.timetable2.listeners.RestoreLessonsListener;
+import com.luk.timetable2.listeners.ThemeChangeListener;
 
 /**
  * Created by luk on 9/22/15.
@@ -54,8 +54,8 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(findPreference("school"));
             bindPreferenceSummaryToValue(findPreference("theme"));
 
-            findPreference("theme").setOnPreferenceChangeListener(new themeChangeListener());
-            findPreference("restore_lessons").setOnPreferenceClickListener(new restoreLessonsListener());
+            findPreference("theme").setOnPreferenceChangeListener(new ThemeChangeListener());
+            findPreference("restore_lessons").setOnPreferenceClickListener(new RestoreLessonsListener());
 
         }
 

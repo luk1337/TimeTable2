@@ -19,8 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.luk.timetable2.listeners.dayChangeListener;
-import com.luk.timetable2.listeners.deleteDialogListener;
+import com.luk.timetable2.listeners.DayChangeListener;
+import com.luk.timetable2.listeners.DeleteDialogListener;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         // set current day
         Spinner daySelector = (Spinner) findViewById(R.id.day);
-        daySelector.setOnItemSelectedListener(new dayChangeListener());
+        daySelector.setOnItemSelectedListener(new DayChangeListener());
         daySelector.setSelection(day);
 
         // Hide title name
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
 
             // set long click listener
-            view.findViewById(R.id.card_lesson).setOnLongClickListener(new deleteDialogListener());
+            view.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener());
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 cardView.setBackgroundColor(backgroundColor.data);

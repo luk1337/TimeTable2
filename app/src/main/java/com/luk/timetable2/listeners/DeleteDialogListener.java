@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by luk on 5/7/15.
  */
-public class deleteDialogListener implements View.OnLongClickListener {
+public class DeleteDialogListener implements View.OnLongClickListener {
     @Override
     public boolean onLongClick(View v) {
         TextView info = (TextView) v.findViewById(R.id.info);

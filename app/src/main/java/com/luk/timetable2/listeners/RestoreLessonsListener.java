@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by luk on 9/22/15.
  */
-public class restoreLessonsListener implements Preference.OnPreferenceClickListener {
+public class RestoreLessonsListener implements Preference.OnPreferenceClickListener {
     @Override
     public boolean onPreferenceClick(final Preference preference) {
         final Context context = preference.getContext();

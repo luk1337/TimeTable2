@@ -30,10 +30,17 @@ public class Parser {
     private String QUERY_HOUR = "td[class=g]";
     private String QUERY_ROOM = "a[class=s]";
 
+    /**
+     * @param url Vulcan API link
+     */
     public Parser(String url) {
         this.url = url;
     }
 
+    /**
+     * @return list of classes
+     * @throws IOException
+     */
     public HashMap<Integer, String> parseClasses() throws IOException {
         HashMap<Integer, String> class_list = new HashMap<>();
 
@@ -59,9 +66,17 @@ public class Parser {
         return class_list;
     }
 
+    /**
+     * Should return list of lessons for specific class in this scheme:
+     * day: {
+     *     lesson: [hour, lesson_name, group, room]
+     * }
+     *
+     * @return list of lessons
+     * @throws IOException
+     */
     public HashMap<Integer, ArrayList<HashMap<String, String>>> parseLessons() throws IOException {
         Document data = Jsoup.connect(url).get();
-
         Elements table = data.select(QUERY_TABLE);
         Elements tr = table.select("tr");
 
@@ -120,6 +135,13 @@ public class Parser {
         return lessons;
     }
 
+    /**
+     * Should return lesson in this scheme:
+     * lesson: [hour, lesson_name, group, room]
+     * Used internally.
+     *
+     * @return list of lessons
+     */
     private HashMap<String, String> parseLesson(Element lesson, String hour, Integer num) {
         HashMap<String, String> map = new HashMap<>();
 

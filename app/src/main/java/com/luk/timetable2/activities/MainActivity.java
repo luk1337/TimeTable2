@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         currentTheme = Utils.getCurrentTheme(this);
         setTheme(currentTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_main);
+        setContentView(R.layout.activity_main);
 
         // define some variables we may need
         inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -29,7 +29,7 @@ public class RestoreLessonsListener implements Preference.OnPreferenceClickListe
     public boolean onPreferenceClick(final Preference preference) {
         final Context context = preference.getContext();
         final Resources resources = context.getResources();
-        final View layout = View.inflate(context, R.layout.settings_restore_lessons, null);
+        final View layout = View.inflate(context, R.layout.dialog_restore_lessons, null);
         final LinearLayout view = (LinearLayout) layout.findViewById(R.id.lessons);
         final List<String> days = Arrays.asList(resources.getStringArray(R.array.days));
 

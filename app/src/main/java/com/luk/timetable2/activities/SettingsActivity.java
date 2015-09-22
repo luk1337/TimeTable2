@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
         setTheme(Utils.getCurrentTheme(this));
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_settings);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         instance = this;

@@ -16,6 +16,7 @@ import com.luk.timetable2.activities.MainActivity;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Utils {
 
             if (c.moveToFirst()) {
                 do {
-                    array.add(Arrays.asList(c.getString(0)));
+                    array.add(Collections.singletonList(c.getString(0)));
                 } while (c.moveToNext());
             }
 

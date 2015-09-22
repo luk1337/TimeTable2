@@ -3,7 +3,7 @@ package com.luk.timetable2.listeners.MainActivity;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.luk.timetable2.MainActivity;
+import com.luk.timetable2.activities.MainActivity;
 
 /**
  * Created by luk on 9/13/15.

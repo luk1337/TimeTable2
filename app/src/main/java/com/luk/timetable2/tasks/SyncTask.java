@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
-import com.luk.timetable2.MainActivity;
+import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;

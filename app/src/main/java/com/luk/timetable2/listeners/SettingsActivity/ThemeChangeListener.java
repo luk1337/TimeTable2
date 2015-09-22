@@ -2,7 +2,7 @@ package com.luk.timetable2.listeners.SettingsActivity;
 
 import android.preference.Preference;
 
-import com.luk.timetable2.SettingsActivity;
+import com.luk.timetable2.activities.SettingsActivity;
 
 /**
  * Created by luk on 9/22/15.

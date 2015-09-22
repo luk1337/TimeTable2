@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.luk.timetable2.MainActivity;
+import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 

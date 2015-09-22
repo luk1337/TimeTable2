@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.view.View;
 import android.widget.TextView;
 
-import com.luk.timetable2.MainActivity;
+import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 

@@ -1,4 +1,4 @@
-package com.luk.timetable2;
+package com.luk.timetable2.activities;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.luk.timetable2.R;
+import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.SettingsActivity.RestoreLessonsListener;
 import com.luk.timetable2.listeners.SettingsActivity.ThemeChangeListener;
 

@@ -1,4 +1,4 @@
-package com.luk.timetable2;
+package com.luk.timetable2.activities;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.luk.timetable2.R;
+import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
 import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
 import com.luk.timetable2.tasks.ClassesTask;

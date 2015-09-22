@@ -9,5 +9,5 @@
         android:id="@+id/settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.luk.timetable2.SettingsActivity$SettingsFragment" />
+        android:name="com.luk.timetable2.activities.SettingsActivity$SettingsFragment" />
 </LinearLayout>

@@ -69,7 +69,7 @@ public class WidgetProvider extends AppWidgetProvider {
             Utils.refreshWidgets(context);
         } else if (TITLE_CLICKED.equals(intent.getAction())) {
             Intent i = new Intent();
-            i.setClassName("com.luk.timetable2", "com.luk.timetable2.MainActivity");
+            i.setClassName("com.luk.timetable2", "com.luk.timetable2.activities.MainActivity");
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         }

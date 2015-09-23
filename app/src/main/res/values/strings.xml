@@ -10,6 +10,7 @@
     <string name="error_offline">Unable to connect to the API ;-;</string>
 
     <string name="select_class">Select class:</string>
+    <string name="select_lesson">Select lesson you want to hide:</string>
 
     <string name="sync_in_progress">Please wait…</string>
 

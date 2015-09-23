@@ -38,7 +38,7 @@ public class DeleteDialogListener implements View.OnLongClickListener {
             }
 
             new AlertDialog.Builder(MainActivity.getInstance())
-                    .setTitle(MainActivity.getInstance().getString(R.string.select_class))
+                    .setTitle(MainActivity.getInstance().getString(R.string.select_lesson))
                     .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int number) {

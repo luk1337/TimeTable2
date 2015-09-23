@@ -10,6 +10,7 @@
     <string name="error_offline">Nie można połączyć się z API</string>
 
     <string name="select_class">Wybierz klasę:</string>
+    <string name="select_lesson">Wybierz lekcje, którą chcesz ukryć:</string>
 
     <string name="sync_in_progress">Proszę czekać…</string>
 

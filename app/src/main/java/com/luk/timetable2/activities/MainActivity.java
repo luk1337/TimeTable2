@@ -106,12 +106,14 @@ public class MainActivity extends AppCompatActivity {
                 _room += l.get(1) + " / ";
             }
 
-            View view = inflater.inflate(R.layout.template_lesson, null);
+            View view = null;
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                view = inflater.inflate(R.layout.template_lesson, null);
+            } else {
                 switch (currentTheme) {
-                    case R.style.AppTheme:
-                        view = inflater.inflate(R.layout.template_lesson, null);
+                    case R.style.AppTheme_Dark:
+                        view = inflater.inflate(R.layout.template_lesson_dark, null);
                         break;
                     case R.style.AppTheme_Light:
                         view = inflater.inflate(R.layout.template_lesson_light, null);

@@ -39,7 +39,7 @@ public class WidgetProvider extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(watchWidget, views);
 
         Intent intent = new Intent(context, WidgetViewsFactory.class);
-        views.setRemoteAdapter(appWidgetId, R.id.widget, intent);
+        views.setRemoteAdapter(R.id.widget, intent);
 
         RemoteViews mView = initViews(context, appWidgetManager, appWidgetId);
 
@@ -55,7 +55,7 @@ public class WidgetProvider extends AppWidgetProvider {
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
 
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-        mView.setRemoteAdapter(widgetId, R.id.widget, intent);
+        mView.setRemoteAdapter(R.id.widget, intent);
 
         return mView;
     }

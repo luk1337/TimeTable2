@@ -22,4 +22,24 @@
         <item name="template_fontColor">@android:color/black</item>
         <item name="template_backgroundColor">@android:color/white</item>
     </style>
+
+    <style name="AppTheme_Dark_Red" parent="AppTheme_Dark">
+        <item name="colorPrimary">#F44336</item>
+        <item name="android:colorPrimary">#F44336</item>
+        <item name="android:colorPrimaryDark">#D32F2F</item>
+        <item name="android:colorAccent">#FF5252</item>
+        <item name="android:navigationBarColor">#D32F2F</item>
+
+        <item name="template_backgroundColor">#D32F2F</item>
+    </style>
+
+    <style name="AppTheme_Light_Red" parent="AppTheme_Light">
+        <item name="colorPrimary">#F44336</item>
+        <item name="android:colorPrimary">#F44336</item>
+        <item name="android:colorPrimaryDark">#D32F2F</item>
+        <item name="android:colorAccent">#FF5252</item>
+        <item name="android:navigationBarColor">#D32F2F</item>
+
+        <item name="template_backgroundColor">#F44336</item>
+    </style>
 </resources>

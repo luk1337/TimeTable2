@@ -11,6 +11,8 @@
 
     <string-array name="themeEntries">
         <item>Ciemny</item>
+        <item>Ciemny (czerwony)</item>
         <item>Jasny</item>
+        <item>Jasny (czerwony)</item>
     </string-array>
 </resources>

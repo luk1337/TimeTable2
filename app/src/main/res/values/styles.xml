@@ -9,4 +9,12 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="AppTheme_Dark_Red" parent="AppTheme_Dark">
+        <item name="colorPrimary">#F44336</item>
+    </style>
+
+    <style name="AppTheme_Light_Red" parent="AppTheme_Light">
+        <item name="colorPrimary">#F44336</item>
+    </style>
 </resources>

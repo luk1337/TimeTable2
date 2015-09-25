@@ -11,11 +11,15 @@
 
     <string-array name="themeEntries">
         <item>Dark</item>
+        <item>Dark (red)</item>
         <item>Light</item>
+        <item>Light (red)</item>
     </string-array>
 
     <string-array name="themeValues">
         <item>dark</item>
+        <item>dark_red</item>
         <item>light</item>
+        <item>light_red</item>
     </string-array>
 </resources>

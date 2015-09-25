@@ -115,8 +115,14 @@ public class MainActivity extends AppCompatActivity {
                     case R.style.AppTheme_Dark:
                         view = inflater.inflate(R.layout.template_lesson_dark, null);
                         break;
+                    case R.style.AppTheme_Dark_Red:
+                        view = inflater.inflate(R.layout.template_lesson_dark_red, null);
+                        break;
                     case R.style.AppTheme_Light:
                         view = inflater.inflate(R.layout.template_lesson_light, null);
+                        break;
+                    case R.style.AppTheme_Light_Red:
+                        view = inflater.inflate(R.layout.template_lesson_light_red, null);
                         break;
                 }
             }

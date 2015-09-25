@@ -122,8 +122,10 @@ public class Utils {
         HashMap<String, Integer> themes = new HashMap<>();
         themes.put("dark", R.style.AppTheme_Dark);
         themes.put("dark_red", R.style.AppTheme_Dark_Red);
+        themes.put("dark_green", R.style.AppTheme_Dark_Green);
         themes.put("light", R.style.AppTheme_Light);
         themes.put("light_red", R.style.AppTheme_Light_Red);
+        themes.put("light_green", R.style.AppTheme_Light_Green);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
 

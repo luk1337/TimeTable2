@@ -7,16 +7,18 @@
     <string name="pref_title_school">URL</string>
 
     <string name="pref_title_theme">Motyw</string>
+    <string name="pref_title_themeAccent">Akcent motywu</string>
     <string name="pref_title_restore_lessons">Przywróć ukryte lekcje</string>
 
     <string-array name="themeEntries">
         <item>Ciemny</item>
-        <item>Ciemny (czerwony)</item>
-        <item>Ciemny (zielony)</item>
-        <item>Ciemny (niebieski)</item>
         <item>Jasny</item>
-        <item>Jasny (czerwony)</item>
-        <item>Jasny (zielony)</item>
-        <item>Jasny (niebieski)</item>
+    </string-array>
+
+    <string-array name="themeAccentEntries">
+        <item>Normalny</item>
+        <item>Czerwony</item>
+        <item>Zielony</item>
+        <item>Niebieski</item>
     </string-array>
 </resources>

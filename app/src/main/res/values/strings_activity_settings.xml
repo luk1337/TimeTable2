@@ -7,27 +7,30 @@
     <string name="pref_title_school">URL</string>
 
     <string name="pref_title_theme">Theme</string>
+    <string name="pref_title_themeAccent">Theme accent</string>
     <string name="pref_title_restore_lessons">Restore hidden lessons</string>
 
     <string-array name="themeEntries">
         <item>Dark</item>
-        <item>Dark (red)</item>
-        <item>Dark (green)</item>
-        <item>Dark (blue)</item>
         <item>Light</item>
-        <item>Light (red)</item>
-        <item>Light (green)</item>
-        <item>Light (blue)</item>
+    </string-array>
+
+    <string-array name="themeAccentEntries">
+        <item>Normal</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
     </string-array>
 
     <string-array name="themeValues">
         <item>dark</item>
-        <item>dark_red</item>
-        <item>dark_green</item>
-        <item>dark_blue</item>
         <item>light</item>
-        <item>light_red</item>
-        <item>light_green</item>
-        <item>light_blue</item>
+    </string-array>
+
+    <string-array name="themeAccentValues">
+        <item>normal</item>
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
     </string-array>
 </resources>

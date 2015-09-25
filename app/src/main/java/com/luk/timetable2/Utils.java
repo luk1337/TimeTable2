@@ -130,7 +130,13 @@ public class Utils {
         themes.put("light_blue", R.style.AppTheme_Light_Blue);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+        String theme = sharedPref.getString("theme", "dark");
+        String themeAccent = sharedPref.getString("themeAccent", "normal");
 
-        return themes.get(sharedPref.getString("theme", "dark"));
+        if (!themeAccent.equals("normal")) {
+            return themes.get(String.format("%s_%s", theme, themeAccent));
+        }
+
+        return themes.get(theme);
     }
 }

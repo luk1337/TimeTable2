@@ -55,8 +55,10 @@ public class SettingsActivity extends AppCompatActivity {
 
             bindPreferenceSummaryToValue(findPreference("school"));
             bindPreferenceSummaryToValue(findPreference("theme"));
+            bindPreferenceSummaryToValue(findPreference("themeAccent"));
 
             findPreference("theme").setOnPreferenceChangeListener(new ThemeChangeListener());
+            findPreference("themeAccent").setOnPreferenceChangeListener(new ThemeChangeListener());
             findPreference("restore_lessons").setOnPreferenceClickListener(new RestoreLessonsListener());
 
         }

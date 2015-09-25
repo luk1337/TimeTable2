@@ -7,6 +7,13 @@
             android:entryValues="@array/themeValues"
             android:defaultValue="dark" />
 
+        <ListPreference
+            android:key="themeAccent"
+            android:title="@string/pref_title_themeAccent"
+            android:entries="@array/themeAccentEntries"
+            android:entryValues="@array/themeAccentValues"
+            android:defaultValue="normal" />
+
         <Preference
             android:key="restore_lessons"
             android:title="@string/pref_title_restore_lessons" />

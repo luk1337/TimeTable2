@@ -88,12 +88,16 @@ public class MainActivity extends AppCompatActivity {
                 return inflater.inflate(R.layout.template_lesson_dark_red, null);
             case R.style.AppTheme_Dark_Green:
                 return inflater.inflate(R.layout.template_lesson_dark_green, null);
+            case R.style.AppTheme_Dark_Blue:
+                return inflater.inflate(R.layout.template_lesson_dark_blue, null);
             case R.style.AppTheme_Light:
                 return inflater.inflate(R.layout.template_lesson_light, null);
             case R.style.AppTheme_Light_Red:
                 return inflater.inflate(R.layout.template_lesson_light_red, null);
             case R.style.AppTheme_Light_Green:
                 return inflater.inflate(R.layout.template_lesson_light_green, null);
+            case R.style.AppTheme_Light_Blue:
+                return inflater.inflate(R.layout.template_lesson_light_blue, null);
         }
 
         return null;

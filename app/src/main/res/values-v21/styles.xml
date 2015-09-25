@@ -62,4 +62,25 @@
 
         <item name="template_backgroundColor">#4CAF50</item>
     </style>
+
+
+    <style name="AppTheme_Dark_Blue" parent="AppTheme_Dark">
+        <item name="colorPrimary">#2196F3</item>
+        <item name="android:colorPrimary">#2196F3</item>
+        <item name="android:colorPrimaryDark">#1976D2</item>
+        <item name="android:colorAccent">#03A9F4</item>
+        <item name="android:navigationBarColor">#1976D2</item>
+
+        <item name="template_backgroundColor">#1976D2</item>
+    </style>
+
+    <style name="AppTheme_Light_Blue" parent="AppTheme_Light">
+        <item name="colorPrimary">#2196F3</item>
+        <item name="android:colorPrimary">#2196F3</item>
+        <item name="android:colorPrimaryDark">#1976D2</item>
+        <item name="android:colorAccent">#03A9F4</item>
+        <item name="android:navigationBarColor">#1976D2</item>
+
+        <item name="template_backgroundColor">#2196F3</item>
+    </style>
 </resources>

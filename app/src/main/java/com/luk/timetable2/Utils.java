@@ -120,12 +120,16 @@ public class Utils {
 
     public static int getCurrentTheme(Activity activity) {
         HashMap<String, Integer> themes = new HashMap<>();
+
         themes.put("dark", R.style.AppTheme_Dark);
         themes.put("dark_red", R.style.AppTheme_Dark_Red);
         themes.put("dark_green", R.style.AppTheme_Dark_Green);
+        themes.put("dark_blue", R.style.AppTheme_Dark_Blue);
+
         themes.put("light", R.style.AppTheme_Light);
         themes.put("light_red", R.style.AppTheme_Light_Red);
         themes.put("light_green", R.style.AppTheme_Light_Green);
+        themes.put("light_blue", R.style.AppTheme_Light_Blue);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
 

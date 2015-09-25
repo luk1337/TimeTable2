@@ -13,8 +13,10 @@
         <item>Ciemny</item>
         <item>Ciemny (czerwony)</item>
         <item>Ciemny (zielony)</item>
+        <item>Ciemny (niebieski)</item>
         <item>Jasny</item>
         <item>Jasny (czerwony)</item>
         <item>Jasny (zielony)</item>
+        <item>Jasny (niebieski)</item>
     </string-array>
 </resources>

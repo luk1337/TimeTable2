@@ -25,4 +25,12 @@
     <style name="AppTheme_Light_Green" parent="AppTheme_Light">
         <item name="colorPrimary">#4CAF50</item>
     </style>
+
+    <style name="AppTheme_Dark_Blue" parent="AppTheme_Dark">
+        <item name="colorPrimary">#2196F3</item>
+    </style>
+
+    <style name="AppTheme_Light_Blue" parent="AppTheme_Light">
+        <item name="colorPrimary">#2196F3</item>
+    </style>
 </resources>

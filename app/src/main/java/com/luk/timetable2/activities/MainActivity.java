@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.update) {
-            if (!new Utils().isOnline()) {
+            if (!new Utils().isOnline(this)) {
                 new AlertDialog.Builder(this)
                         .setTitle(getString(R.string.error_title))
                         .setMessage(getString(R.string.error_no_network))

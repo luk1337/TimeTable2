@@ -135,26 +135,28 @@ public class MainActivity extends AppCompatActivity {
 
             View view = getLessonTemplate();
 
-            CardView cardView = (CardView) view.findViewById(R.id.card_lesson);
+            if (view != null) {
+                CardView cardView = (CardView) view.findViewById(R.id.card_lesson);
 
-            TextView lesson = (TextView) view.findViewById(R.id.lesson);
-            lesson.setText(_lesson.substring(0, _lesson.length() - 1));
+                TextView lesson = (TextView) view.findViewById(R.id.lesson);
+                lesson.setText(_lesson.substring(0, _lesson.length() - 1));
 
-            // set lesson additional info { hours, classroom }
-            TextView info = (TextView) view.findViewById(R.id.info);
-            info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
+                // set lesson additional info { hours, classroom }
+                TextView info = (TextView) view.findViewById(R.id.info);
+                info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
 
-            // set long click listener
-            view.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener());
+                // set long click listener
+                view.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener());
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                cardView.setBackgroundColor(backgroundColor.data);
-                lesson.setTextColor(fontColor.data);
-                info.setTextColor(fontColor.data);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    cardView.setBackgroundColor(backgroundColor.data);
+                    lesson.setTextColor(fontColor.data);
+                    info.setTextColor(fontColor.data);
+                }
+
+                // add to view
+                container.addView(view);
             }
-
-            // add to view
-            container.addView(view);
         }
     }
 

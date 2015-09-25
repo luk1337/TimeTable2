@@ -106,7 +106,7 @@ public class Parser {
                     }
                 } else {
                     try {
-                        if(lesson.select(QUERY_SUBJECT).size() > 1 && lesson.select(QUERY_ROOM).size() > 0) {
+                        if (lesson.select(QUERY_SUBJECT).size() > 1 && lesson.select(QUERY_ROOM).size() > 0) {
                             String[] _groups = lesson.html().split("<br>");
 
                             for (String group : _groups) {
@@ -124,7 +124,7 @@ public class Parser {
 
                             this.lessons.put(day, array);
                         }
-                    } catch(Exception ex) {
+                    } catch (Exception ex) {
                         // Do nothing, no lesson that time
                     }
                 }

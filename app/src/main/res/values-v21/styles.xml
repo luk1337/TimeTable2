@@ -24,63 +24,63 @@
     </style>
 
     <style name="AppTheme_Dark_Red" parent="AppTheme_Dark">
-        <item name="colorPrimary">#F44336</item>
-        <item name="android:colorPrimary">#F44336</item>
-        <item name="android:colorPrimaryDark">#D32F2F</item>
-        <item name="android:colorAccent">#FF5252</item>
-        <item name="android:navigationBarColor">#D32F2F</item>
+        <item name="colorPrimary">@color/colorPrimary_Red</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Red</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Red</item>
+        <item name="android:colorAccent">@color/colorAccent_Red</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Red</item>
 
-        <item name="template_backgroundColor">#D32F2F</item>
+        <item name="template_backgroundColor">@color/colorPrimaryDark_Red</item>
     </style>
 
     <style name="AppTheme_Light_Red" parent="AppTheme_Light">
-        <item name="colorPrimary">#F44336</item>
-        <item name="android:colorPrimary">#F44336</item>
-        <item name="android:colorPrimaryDark">#D32F2F</item>
-        <item name="android:colorAccent">#FF5252</item>
-        <item name="android:navigationBarColor">#D32F2F</item>
+        <item name="colorPrimary">@color/colorPrimary_Red</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Red</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Red</item>
+        <item name="android:colorAccent">@color/colorAccent_Red</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Red</item>
 
-        <item name="template_backgroundColor">#F44336</item>
+        <item name="template_backgroundColor">@color/colorPrimary_Red</item>
     </style>
 
     <style name="AppTheme_Dark_Green" parent="AppTheme_Dark">
-        <item name="colorPrimary">#4CAF50</item>
-        <item name="android:colorPrimary">#4CAF50</item>
-        <item name="android:colorPrimaryDark">#388E3C</item>
-        <item name="android:colorAccent">#8BC34A</item>
-        <item name="android:navigationBarColor">#388E3C</item>
+        <item name="colorPrimary">@color/colorPrimary_Green</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Green</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Green</item>
+        <item name="android:colorAccent">@color/colorAccent_Green</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Green</item>
 
-        <item name="template_backgroundColor">#388E3C</item>
+        <item name="template_backgroundColor">@color/colorPrimaryDark_Green</item>
     </style>
 
     <style name="AppTheme_Light_Green" parent="AppTheme_Light">
-        <item name="colorPrimary">#4CAF50</item>
-        <item name="android:colorPrimary">#4CAF50</item>
-        <item name="android:colorPrimaryDark">#388E3C</item>
-        <item name="android:colorAccent">#8BC34A</item>
-        <item name="android:navigationBarColor">#388E3C</item>
+        <item name="colorPrimary">@color/colorPrimary_Green</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Green</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Green</item>
+        <item name="android:colorAccent">@color/colorAccent_Green</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Green</item>
 
-        <item name="template_backgroundColor">#4CAF50</item>
+        <item name="template_backgroundColor">@color/colorPrimary_Green</item>
     </style>
 
 
     <style name="AppTheme_Dark_Blue" parent="AppTheme_Dark">
-        <item name="colorPrimary">#2196F3</item>
-        <item name="android:colorPrimary">#2196F3</item>
-        <item name="android:colorPrimaryDark">#1976D2</item>
-        <item name="android:colorAccent">#03A9F4</item>
-        <item name="android:navigationBarColor">#1976D2</item>
+        <item name="colorPrimary">@color/colorPrimary_Blue</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Blue</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Blue</item>
+        <item name="android:colorAccent">@color/colorAccent_Blue</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Blue</item>
 
-        <item name="template_backgroundColor">#1976D2</item>
+        <item name="template_backgroundColor">@color/colorPrimaryDark_Blue</item>
     </style>
 
     <style name="AppTheme_Light_Blue" parent="AppTheme_Light">
-        <item name="colorPrimary">#2196F3</item>
-        <item name="android:colorPrimary">#2196F3</item>
-        <item name="android:colorPrimaryDark">#1976D2</item>
-        <item name="android:colorAccent">#03A9F4</item>
-        <item name="android:navigationBarColor">#1976D2</item>
+        <item name="colorPrimary">@color/colorPrimary_Blue</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Blue</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Blue</item>
+        <item name="android:colorAccent">@color/colorAccent_Blue</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Blue</item>
 
-        <item name="template_backgroundColor">#2196F3</item>
+        <item name="template_backgroundColor">@color/colorPrimary_Blue</item>
     </style>
 </resources>

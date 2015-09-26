@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- red -->
+    <color name="colorPrimary_Red">#F44336</color>
+    <color name="colorPrimaryDark_Red">#D32F2F</color>
+    <color name="colorAccent_Red">#FF5252</color>
+
+    <!-- green -->
+    <color name="colorPrimary_Green">#4CAF50</color>
+    <color name="colorPrimaryDark_Green">#388E3C</color>
+    <color name="colorAccent_Green">#8BC34A</color>
+
+    <!-- blue -->
+    <color name="colorPrimary_Blue">#2196F3</color>
+    <color name="colorPrimaryDark_Blue">#1976D2</color>
+    <color name="colorAccent_Blue">#03A9F4</color>
+</resources>

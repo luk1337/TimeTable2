@@ -28,7 +28,7 @@ public class Parser {
     private String QUERY_LESSON_MULTIPLE = "span[style=font-size:85%]";
     private String QUERY_SUBJECT = "span[class=p]";
     private String QUERY_HOUR = "td[class=g]";
-    private String QUERY_ROOM = "a[class=s]";
+    private String QUERY_ROOM = ".s";
 
     /**
      * @param url Vulcan API link

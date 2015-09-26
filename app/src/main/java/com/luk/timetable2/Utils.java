@@ -104,15 +104,14 @@ public class Utils {
     }
 
     public static void refreshWidgets(Context context) {
-        int widgetIDs_dark[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.dark.WidgetProvider.class));
-        int widgetIDs_light[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.light.WidgetProvider.class));
+        HashMap<Integer, int[]> widgets = new HashMap<>();
+        widgets.put(0, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.dark.WidgetProvider.class)));
+        widgets.put(1, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.light.WidgetProvider.class)));
 
-        for (int id : widgetIDs_dark) {
-            AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(id, R.id.widget);
-        }
-
-        for (int id : widgetIDs_light) {
-            AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(id, R.id.widget);
+        for (int i = 0; i < widgets.size(); i++) {
+            for (int widgetID : widgets.get(i)) {
+                AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(widgetID, R.id.widget);
+            }
         }
     }
 

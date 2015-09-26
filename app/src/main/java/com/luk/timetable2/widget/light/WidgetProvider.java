@@ -7,18 +7,21 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.widget.WidgetViewsFactory;
+import com.luk.timetable2.widget.WidgetViewsService;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class WidgetProvider extends AppWidgetProvider {
-
     private static String REFRESH_CLICKED = "REFRESH";
     private static String TITLE_CLICKED = "START_APP";
+    private static String variant = "light";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -29,8 +32,8 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_light);
+                         int appWidgetId) {
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
         ComponentName watchWidget = new ComponentName(context, WidgetProvider.class);
 
         // setup refresh, title button
@@ -48,11 +51,18 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     private RemoteViews initViews(Context context, AppWidgetManager widgetManager, int widgetId) {
+        RemoteViews mView = new RemoteViews(context.getPackageName(), R.layout.widget);
 
-        RemoteViews mView = new RemoteViews(context.getPackageName(), R.layout.widget_light);
+        Integer[] widgetColors = Utils.getWidgetColorsForVariant(variant);
+
+        // set colors
+        mView.setInt(R.id.background, "setBackgroundResource", widgetColors[1]);
+        mView.setInt(R.id.header, "setBackgroundResource", widgetColors[0]);
+        mView.setTextColor(R.id.title, context.getResources().getColor(widgetColors[2]));
 
         Intent intent = new Intent(context, WidgetViewsService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+        intent.putExtra("variant", variant);
 
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         mView.setRemoteAdapter(R.id.widget, intent);

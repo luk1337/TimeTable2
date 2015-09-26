@@ -1,4 +1,4 @@
-package com.luk.timetable2.widget.dark.green;
+package com.luk.timetable2.widget;
 
 import android.content.Context;
 import android.widget.RemoteViews;
@@ -15,14 +15,14 @@ import java.util.List;
  * Created by luk on 5/12/15.
  */
 public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-
     private Context context = null;
-    ArrayList<String[]> lessons = new ArrayList<>();
+    private Integer[] widgetColors;
+    private ArrayList<String[]> lessons = new ArrayList<>();
 
-    public WidgetViewsFactory(Context context) {
+    public WidgetViewsFactory(Context context, String variant) {
         this.context = context;
+        this.widgetColors = Utils.getWidgetColorsForVariant(variant);
     }
-
 
     @Override
     public void onCreate() {
@@ -79,13 +79,18 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews lesson = new RemoteViews(context.getPackageName(), R.layout.widget_lesson_dark_green);
+        RemoteViews lesson = new RemoteViews(context.getPackageName(), R.layout.widget_lesson);
 
         // set lesson name
         lesson.setTextViewText(R.id.lesson, lessons.get(position)[0]);
 
         // set lesson additional info { hours, classroom }
         lesson.setTextViewText(R.id.info, lessons.get(position)[1]);
+
+        // set colors
+        lesson.setInt(R.id.background, "setBackgroundResource", widgetColors[0]);
+        lesson.setTextColor(R.id.lesson, context.getResources().getColor(widgetColors[2]));
+        lesson.setTextColor(R.id.info, context.getResources().getColor(widgetColors[2]));
 
         return lesson;
     }

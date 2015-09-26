@@ -106,35 +106,7 @@
         </receiver>
 
         <service
-            android:name=".widget.dark.WidgetViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".widget.dark.red.WidgetViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".widget.dark.green.WidgetViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".widget.dark.blue.WidgetViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".widget.light.WidgetViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".widget.light.red.WidgetViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".widget.light.green.WidgetViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <service
-            android:name=".widget.light.blue.WidgetViewsService"
+            android:name=".widget.WidgetViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 

@@ -1,4 +1,4 @@
-package com.luk.timetable2.widget.dark.red;
+package com.luk.timetable2.widget;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;
@@ -9,6 +9,6 @@ import android.widget.RemoteViewsService;
 public class WidgetViewsService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new WidgetViewsFactory(getApplicationContext());
+        return new WidgetViewsFactory(getApplicationContext(), intent.getExtras().getString("variant"));
     }
 }

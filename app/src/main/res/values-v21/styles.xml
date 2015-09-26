@@ -19,11 +19,14 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
 
-        <item name="android:colorPrimaryDark">#BBBBBB</item>
-        <item name="android:navigationBarColor">#BBBBBB</item>
+        <item name="colorPrimary">@color/colorPrimary_Light</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Light</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Light</item>
+        <item name="android:colorAccent">@color/colorAccent_Light</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Light</item>
 
         <item name="template_fontColor">@android:color/black</item>
-        <item name="template_backgroundColor">@android:color/white</item>
+        <item name="template_backgroundColor">@color/colorPrimary_Light</item>
     </style>
 
     <style name="AppTheme_Dark_Red" parent="AppTheme_Dark">

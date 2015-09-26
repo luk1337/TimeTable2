@@ -1,19 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee"
+    android:background="@color/colorPrimaryDark_Light"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="30dp"
-        android:background="#fafafa"
+        android:background="@color/colorPrimary_Light"
         android:layout_marginBottom="10dp">
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="-2.5dp"
             android:gravity="center_vertical"
             android:textSize="25sp"
@@ -25,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:tint="@android:color/black"
             android:src="@drawable/ic_action_refresh"/>
     </RelativeLayout>

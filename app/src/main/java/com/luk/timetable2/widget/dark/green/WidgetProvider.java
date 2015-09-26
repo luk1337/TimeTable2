@@ -1,4 +1,4 @@
-package com.luk.timetable2.widget.dark;
+package com.luk.timetable2.widget.dark.green;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -30,7 +30,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_dark);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_dark_green);
         ComponentName watchWidget = new ComponentName(context, WidgetProvider.class);
 
         // setup refresh, title button
@@ -49,7 +49,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
     private RemoteViews initViews(Context context, AppWidgetManager widgetManager, int widgetId) {
 
-        RemoteViews mView = new RemoteViews(context.getPackageName(), R.layout.widget_dark);
+        RemoteViews mView = new RemoteViews(context.getPackageName(), R.layout.widget_dark_green);
 
         Intent intent = new Intent(context, WidgetViewsService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);

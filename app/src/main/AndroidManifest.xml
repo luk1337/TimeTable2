@@ -25,14 +25,44 @@
             android:label="@string/title_activity_settings" >
         </activity>
 
-        <receiver android:name=".widget.dark.WidgetProvider" android:label="@string/widget_label" >
+        <receiver android:name=".widget.dark.WidgetProvider" android:label="@string/widget_dark_label" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
+                android:resource="@xml/widget_info_dark" />
+        </receiver>
+
+        <receiver android:name=".widget.dark.red.WidgetProvider" android:label="@string/widget_dark_red_label" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_dark_red" />
+        </receiver>
+
+        <receiver android:name=".widget.dark.green.WidgetProvider" android:label="@string/widget_dark_green_label" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_dark_green" />
+        </receiver>
+
+        <receiver android:name=".widget.dark.blue.WidgetProvider" android:label="@string/widget_dark_blue_label" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_dark_blue" />
         </receiver>
 
         <receiver android:name=".widget.light.WidgetProvider" android:label="@string/widget_light_label" >
@@ -45,12 +75,66 @@
                 android:resource="@xml/widget_info_light" />
         </receiver>
 
+        <receiver android:name=".widget.light.red.WidgetProvider" android:label="@string/widget_light_red_label" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_light_red" />
+        </receiver>
+
+        <receiver android:name=".widget.light.green.WidgetProvider" android:label="@string/widget_light_green_label" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_light_green" />
+        </receiver>
+
+        <receiver android:name=".widget.light.blue.WidgetProvider" android:label="@string/widget_light_blue_label" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_light_blue" />
+        </receiver>
+
         <service
             android:name=".widget.dark.WidgetViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <service
+            android:name=".widget.dark.red.WidgetViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".widget.dark.green.WidgetViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".widget.dark.blue.WidgetViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
             android:name=".widget.light.WidgetViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".widget.light.red.WidgetViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".widget.light.green.WidgetViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".widget.light.blue.WidgetViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 

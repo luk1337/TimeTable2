@@ -1,4 +1,4 @@
-package com.luk.timetable2.widget.dark;
+package com.luk.timetable2.widget.light.blue;
 
 import android.content.Context;
 import android.widget.RemoteViews;
@@ -79,7 +79,7 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews lesson = new RemoteViews(context.getPackageName(), R.layout.widget_lesson_dark);
+        RemoteViews lesson = new RemoteViews(context.getPackageName(), R.layout.widget_lesson_light_blue);
 
         // set lesson name
         lesson.setTextViewText(R.id.lesson, lessons.get(position)[0]);

@@ -1,13 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030"
+    android:background="@color/colorPrimaryDark_Dark"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="30dp"
-        android:background="#363636"
+        android:background="@color/colorPrimary_Dark"
         android:layout_marginBottom="10dp">
 
         <TextView

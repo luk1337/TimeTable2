@@ -5,11 +5,14 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
 
-        <item name="android:colorPrimaryDark">#191919</item>
-        <item name="android:navigationBarColor">#191919</item>
+        <item name="colorPrimary">@color/colorPrimary_Dark</item>
+        <item name="android:colorPrimary">@color/colorPrimary_Dark</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark_Dark</item>
+        <item name="android:colorAccent">@color/colorAccent_Dark</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark_Dark</item>
 
         <item name="template_fontColor">@android:color/white</item>
-        <item name="template_backgroundColor">#363636</item>
+        <item name="template_backgroundColor">@color/colorPrimary_Dark</item>
     </style>
 
     <style name="AppTheme_Light" parent="@style/Theme.AppCompat.Light.NoActionBar">

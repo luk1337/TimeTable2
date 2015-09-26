@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         container.removeAllViews();
 
         ArrayList<List<String>> hours = Utils.getHours(this, day);
+        Integer[] colors = Utils.getColorsForVariant(currentTheme);
 
         if (hours == null) return;
 
@@ -144,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
                 view.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener());
 
                 // set colors
-                Integer[] colors = Utils.getColorsForVariant(currentTheme);
                 cardView.setCardBackgroundColor(getApplicationContext().getResources().getColor(colors[0]));
                 lesson.setTextColor(getApplicationContext().getResources().getColor(colors[1]));
                 info.setTextColor(getApplicationContext().getResources().getColor(colors[1]));

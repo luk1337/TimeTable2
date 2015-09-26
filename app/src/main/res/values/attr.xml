@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <attr name="themeName" format="string" />
-    <attr name="template_fontColor" format="color" />
-    <attr name="template_backgroundColor" format="color" />
-</resources>

@@ -76,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    private View getLessonTemplate() {
+    /*private View getLessonTemplate() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             return inflater.inflate(R.layout.template_lesson, null);
         }
 
         switch (currentTheme) {
             case R.style.AppTheme_Dark:
-                return inflater.inflate(R.layout.template_lesson_dark, null);
+                return inflater.inflate(R.layout.template_lesson, null);
             case R.style.AppTheme_Dark_Red:
                 return inflater.inflate(R.layout.template_lesson_dark_red, null);
             case R.style.AppTheme_Dark_Green:
@@ -101,16 +101,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return null;
-    }
+    }*/
 
     public void loadLessons(final int day) {
         LinearLayout container = (LinearLayout) findViewById(R.id.mainLayout);
         container.removeAllViews();
-
-        TypedValue fontColor = new TypedValue();
-        TypedValue backgroundColor = new TypedValue();
-        getTheme().resolveAttribute(R.attr.template_fontColor, fontColor, true);
-        getTheme().resolveAttribute(R.attr.template_backgroundColor, backgroundColor, true);
 
         ArrayList<List<String>> hours = Utils.getHours(this, day);
 
@@ -133,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 _room += l.get(1) + " / ";
             }
 
-            View view = getLessonTemplate();
+            View view = inflater.inflate(R.layout.template_lesson, null);
 
             if (view != null) {
                 CardView cardView = (CardView) view.findViewById(R.id.card_lesson);
@@ -148,11 +143,11 @@ public class MainActivity extends AppCompatActivity {
                 // set long click listener
                 view.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener());
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    cardView.setBackgroundColor(backgroundColor.data);
-                    lesson.setTextColor(fontColor.data);
-                    info.setTextColor(fontColor.data);
-                }
+                // set colors
+                Integer[] colors = Utils.getColorsForVariant(currentTheme);
+                cardView.setCardBackgroundColor(getApplicationContext().getResources().getColor(colors[0]));
+                lesson.setTextColor(getApplicationContext().getResources().getColor(colors[1]));
+                info.setTextColor(getApplicationContext().getResources().getColor(colors[1]));
 
                 // add to view
                 container.addView(view);

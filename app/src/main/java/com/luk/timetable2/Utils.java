@@ -162,4 +162,20 @@ public class Utils {
 
         return variants.get(variant);
     }
+
+    public static Integer[] getColorsForVariant(int variant) {
+        HashMap<Integer, Integer[]> variants = new HashMap<>();
+
+        variants.put(R.style.AppTheme_Dark, new Integer[] { R.color.colorPrimary_Dark, android.R.color.white });
+        variants.put(R.style.AppTheme_Dark_Red, new Integer[] { R.color.colorPrimary_Red, android.R.color.white });
+        variants.put(R.style.AppTheme_Dark_Green, new Integer[] { R.color.colorPrimary_Green, android.R.color.white });
+        variants.put(R.style.AppTheme_Dark_Blue, new Integer[] { R.color.colorPrimary_Blue, android.R.color.white });
+
+        variants.put(R.style.AppTheme_Light, new Integer[] { R.color.colorPrimary_Light, android.R.color.black });
+        variants.put(R.style.AppTheme_Light_Red, new Integer[] { R.color.colorPrimary_Red, android.R.color.black });
+        variants.put(R.style.AppTheme_Light_Green, new Integer[] { R.color.colorPrimary_Green, android.R.color.black });
+        variants.put(R.style.AppTheme_Light_Blue, new Integer[] { R.color.colorPrimary_Blue, android.R.color.black });
+
+        return variants.get(variant);
+    }
 }

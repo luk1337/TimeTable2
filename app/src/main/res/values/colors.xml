@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- widget -->
+    <color name="colorWidgetBG_Dark">#303030</color>
+    <color name="colorWidgetBG_Light">#EEEEEE</color>
+
     <!-- dark -->
     <color name="colorPrimary_Dark">#424242</color>
     <color name="colorPrimaryDark_Dark">#212121</color>

@@ -13,6 +13,7 @@ import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.SettingsActivity.RestoreLessonsListener;
 import com.luk.timetable2.listeners.SettingsActivity.ThemeChangeListener;
+import com.luk.timetable2.listeners.SettingsActivity.URLChangeListener;
 
 /**
  * Created by luk on 9/22/15.
@@ -57,10 +58,10 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(findPreference("theme"));
             bindPreferenceSummaryToValue(findPreference("themeAccent"));
 
+            findPreference("school").setOnPreferenceChangeListener(new URLChangeListener());
             findPreference("theme").setOnPreferenceChangeListener(new ThemeChangeListener());
             findPreference("themeAccent").setOnPreferenceChangeListener(new ThemeChangeListener());
             findPreference("restore_lessons").setOnPreferenceClickListener(new RestoreLessonsListener());
-
         }
 
         /**

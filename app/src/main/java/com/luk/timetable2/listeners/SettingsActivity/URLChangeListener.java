@@ -25,8 +25,8 @@ public class URLChangeListener implements Preference.OnPreferenceChangeListener 
     private String fixURL(String url) {
         if (FilenameUtils.getExtension(url).length() == 0) {
             return FilenameUtils.getFullPath(url) + FilenameUtils.getBaseName(url);
-        } else {
-            return FilenameUtils.getFullPathNoEndSeparator(url);
         }
+
+        return FilenameUtils.getFullPathNoEndSeparator(url);
     }
 }

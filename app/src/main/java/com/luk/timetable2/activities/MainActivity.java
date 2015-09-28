@@ -3,13 +3,11 @@ package com.luk.timetable2.activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +21,7 @@ import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
 import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
+import com.luk.timetable2.listeners.MainActivity.OnSwipeListener;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.ArrayList;
@@ -65,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
         }
+
+        findViewById(R.id.mainScrollView).setOnTouchListener(new OnSwipeListener());
     }
 
     @Override

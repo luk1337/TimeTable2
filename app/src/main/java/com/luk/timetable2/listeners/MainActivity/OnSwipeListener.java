@@ -29,7 +29,7 @@ public class OnSwipeListener implements View.OnTouchListener {
                 if (Math.abs(end - start) > MIN_DISTANCE) {
                     if (end > start && currentPosition > 0) {
                         daySelector.setSelection(currentPosition - 1);
-                    } else if (currentPosition < 4) {
+                    } else if (end < start && currentPosition < 4) {
                         daySelector.setSelection(currentPosition + 1);
                     }
                 }

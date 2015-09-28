@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.luk.timetable2.DatabaseHandler;
 import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
@@ -52,17 +53,10 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             Log.e(TAG, "", e);
             return -1;
         }
-        // create database
-        File dbFile = MainActivity.getInstance().getDatabasePath("db");
-        SQLiteDatabase db = MainActivity.getInstance().openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
 
-        try{
-            db.execSQL("DROP TABLE lessons;");
-        } catch(Exception ex) {
-            // do nothing
-        }
-
-        db.execSQL("CREATE TABLE lessons ( _id INTEGER PRIMARY KEY AUTOINCREMENT, day INTEGER, lesson TEXT, room TEXT, time TEXT, hidden TEXT );");
+        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+        SQLiteDatabase db = databaseHandler.getDB(MainActivity.getInstance());
+        databaseHandler.createTables(MainActivity.getInstance());
 
         for (int day = 1; day <= 5; day++) {
             if (data.get(day) == null) continue;

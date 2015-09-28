@@ -76,33 +76,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    /*private View getLessonTemplate() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            return inflater.inflate(R.layout.template_lesson, null);
-        }
-
-        switch (currentTheme) {
-            case R.style.AppTheme_Dark:
-                return inflater.inflate(R.layout.template_lesson, null);
-            case R.style.AppTheme_Dark_Red:
-                return inflater.inflate(R.layout.template_lesson_dark_red, null);
-            case R.style.AppTheme_Dark_Green:
-                return inflater.inflate(R.layout.template_lesson_dark_green, null);
-            case R.style.AppTheme_Dark_Blue:
-                return inflater.inflate(R.layout.template_lesson_dark_blue, null);
-            case R.style.AppTheme_Light:
-                return inflater.inflate(R.layout.template_lesson_light, null);
-            case R.style.AppTheme_Light_Red:
-                return inflater.inflate(R.layout.template_lesson_light_red, null);
-            case R.style.AppTheme_Light_Green:
-                return inflater.inflate(R.layout.template_lesson_light_green, null);
-            case R.style.AppTheme_Light_Blue:
-                return inflater.inflate(R.layout.template_lesson_light_blue, null);
-        }
-
-        return null;
-    }*/
-
     public void loadLessons(final int day) {
         LinearLayout container = (LinearLayout) findViewById(R.id.mainLayout);
         container.removeAllViews();

@@ -1,4 +1,4 @@
-# ![Logo](https://raw.githubusercontent.com/luk1337/TimeTable2/master/app/src/main/res/mipmap-mdpi/ic_launcher.png) TimeTable2
+# ![Logo](https://raw.githubusercontent.com/luk1337/TimeTable2/readme-assets/icon.png) TimeTable2
 
 App for parsing VULCAN generated timetables.
 
@@ -13,7 +13,7 @@ Available on: [F-Droid](https://f-droid.org/app/com.luk.timetable2)
 
 # Screenshots:
 
-# ![Screenshots](http://i.imgur.com/S3duS7D.png)
+# ![Screenshots](https://raw.githubusercontent.com/luk1337/TimeTable2/readme-assets/screenshot.jpg)
 
 # How to build?
 

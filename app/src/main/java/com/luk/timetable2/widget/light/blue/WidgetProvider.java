@@ -18,7 +18,6 @@ import com.luk.timetable2.widget.WidgetViewsService;
  * Implementation of App Widget functionality.
  */
 public class WidgetProvider extends AppWidgetProvider {
-    private static String REFRESH_CLICKED = "REFRESH";
     private static String TITLE_CLICKED = "START_APP";
     private static String variant = "light_blue";
 
@@ -37,7 +36,6 @@ public class WidgetProvider extends AppWidgetProvider {
 
         // setup refresh, title button
         views.setOnClickPendingIntent(R.id.title, getPendingSelfIntent(context, TITLE_CLICKED));
-        views.setOnClickPendingIntent(R.id.refresh, getPendingSelfIntent(context, REFRESH_CLICKED));
         appWidgetManager.updateAppWidget(watchWidget, views);
 
         Intent intent = new Intent(context, WidgetViewsFactory.class);
@@ -73,9 +71,7 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (REFRESH_CLICKED.equals(intent.getAction())) {
-            Utils.refreshWidgets(context);
-        } else if (TITLE_CLICKED.equals(intent.getAction())) {
+        if (TITLE_CLICKED.equals(intent.getAction())) {
             Intent i = new Intent();
             i.setClassName("com.luk.timetable2", "com.luk.timetable2.activities.MainActivity");
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

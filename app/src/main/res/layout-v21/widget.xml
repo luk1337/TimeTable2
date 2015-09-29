@@ -17,14 +17,7 @@
             android:layout_marginStart="5dp"
             android:gravity="center_vertical"
             android:textSize="20sp"
-            android:text="@string/app_name"/>
-
-        <ImageView
-            android:id="@+id/refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_action_refresh"/>
+            android:text="@string/app_name" />
     </RelativeLayout>
 
     <ListView

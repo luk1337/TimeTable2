@@ -23,6 +23,10 @@ public class URLChangeListener implements Preference.OnPreferenceChangeListener 
     }
 
     private String fixURL(String url) {
+        if (!(url.startsWith("http://") || url.startsWith("https://")) && url.length() > 0) {
+            url = "http://" + url;
+        }
+
         if (FilenameUtils.getExtension(url).length() == 0) {
             return FilenameUtils.getFullPath(url) + FilenameUtils.getBaseName(url);
         }

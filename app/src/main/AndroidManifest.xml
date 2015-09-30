@@ -26,6 +26,8 @@
             android:label="@string/title_activity_settings" >
         </activity>
 
+        <service android:name=".listeners.OnScreenWakeService" />
+
         <receiver android:name=".listeners.RegisterReceiversEvent" android:process=":remote" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

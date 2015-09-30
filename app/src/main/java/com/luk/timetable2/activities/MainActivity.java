@@ -22,6 +22,7 @@ import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
 import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
 import com.luk.timetable2.listeners.MainActivity.OnSwipeListener;
+import com.luk.timetable2.listeners.OnScreenWakeService;
 import com.luk.timetable2.listeners.RegisterReceiversEvent;
 import com.luk.timetable2.tasks.ClassesTask;
 
@@ -69,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         // Set on swipe listener
         findViewById(R.id.mainScrollView).setOnTouchListener(new OnSwipeListener());
 
-        // Register receivers
-        sendBroadcast(new Intent(this, RegisterReceiversEvent.class));
+        // Start services
+        startService(new Intent(this, OnScreenWakeService.class));
     }
 
     @Override

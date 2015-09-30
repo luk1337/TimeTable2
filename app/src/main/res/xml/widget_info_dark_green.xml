@@ -3,6 +3,7 @@
     android:minWidth="110dp"
     android:minHeight="40dp"
     android:initialLayout="@layout/widget"
+    android:previewImage="@drawable/widgetpreview_dark_green"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
     android:initialKeyguardLayout="@layout/widget">

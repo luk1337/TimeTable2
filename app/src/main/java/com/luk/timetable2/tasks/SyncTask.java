@@ -3,6 +3,7 @@ package com.luk.timetable2.tasks;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -15,6 +16,7 @@ import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.listeners.LessonNotifyService;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -101,6 +103,9 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         }
 
         Utils.refreshWidgets(MainActivity.getInstance());
+        MainActivity.getInstance().stopService(new Intent(MainActivity.getInstance(), LessonNotifyService.class));
+        MainActivity.getInstance().startService(new Intent(MainActivity.getInstance(), LessonNotifyService.class));
+
         MainActivity.getInstance().loadLessons(MainActivity.getInstance().day);
 
         if(dialog != null) {

@@ -1,5 +1,7 @@
 package com.luk.timetable2.listeners.MainActivity;
 
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Spinner;
@@ -10,33 +12,26 @@ import com.luk.timetable2.activities.MainActivity;
 /**
  * Created by luk on 9/28/15.
  */
-public class OnSwipeListener implements View.OnTouchListener {
-    private static int sMinDistance = 20;
-    private float mStart, mEnd;
+public class OnSwipeListener extends GestureDetector.SimpleOnGestureListener {
+    private static String TAG = "OnSwipeListener";
+    private static final int SWIPE_MIN_DISTANCE = 80;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 100;
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        switch(event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mStart = event.getX();
-                break;
-            case MotionEvent.ACTION_UP:
-                mEnd = event.getX();
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        Spinner daySelector = (Spinner) MainActivity.getInstance().findViewById(R.id.day);
+        int currentPosition = daySelector.getSelectedItemPosition();
 
-                Spinner daySelector = (Spinner) MainActivity.getInstance().findViewById(R.id.day);
-                int currentPosition = daySelector.getSelectedItemPosition();
-
-                if (Math.abs(mEnd - mStart) > sMinDistance) {
-                    if (mEnd > mStart && currentPosition > 0) {
-                        daySelector.setSelection(currentPosition - 1);
-                    } else if (mEnd < mStart && currentPosition < 4) {
-                        daySelector.setSelection(currentPosition + 1);
-                    }
-                }
-
-                break;
+        try {
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                if (currentPosition < 4) daySelector.setSelection(currentPosition + 1);
+            }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                if (currentPosition > 0) daySelector.setSelection(currentPosition - 1);
+            }
+        } catch(Exception e) {
+            Log.e(TAG, "", e);
         }
 
-        return true;
+        return false;
     }
 }

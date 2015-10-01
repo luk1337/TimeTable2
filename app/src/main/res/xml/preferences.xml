@@ -19,6 +19,12 @@
             android:title="@string/pref_title_restore_lessons" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_category_notifications">
+        <CheckBoxPreference
+            android:key="notifications_vibrate"
+            android:title="@string/pref_title_notification_vibrate" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/pref_category_api" >
         <EditTextPreference
             android:key="school"

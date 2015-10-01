@@ -30,24 +30,24 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private LayoutInflater inflater;
-    private static MainActivity instance;
-    private static int currentTheme;
+    private LayoutInflater mInflater;
+    private static MainActivity sInstance;
+    private static int sCurrentTheme;
     public int day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // save instance
-        instance = this;
+        // save sInstance
+        sInstance = this;
 
         // setup layout
-        currentTheme = Utils.getCurrentTheme(this);
-        setTheme(currentTheme);
+        sCurrentTheme = Utils.getCurrentTheme(this);
+        setTheme(sCurrentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // define some variables we may need
-        inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        if (currentTheme != Utils.getCurrentTheme(this)) {
+        if (sCurrentTheme != Utils.getCurrentTheme(this)) {
             recreate();
         }
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         container.removeAllViews();
 
         ArrayList<List<String>> hours = Utils.getHours(this, day);
-        Integer[] colors = Utils.getColorsForVariant(currentTheme);
+        Integer[] colors = Utils.getColorsForVariant(sCurrentTheme);
 
         if (hours == null) return;
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 _room += l.get(1) + " / ";
             }
 
-            View view = inflater.inflate(R.layout.template_lesson, null);
+            View view = mInflater.inflate(R.layout.template_lesson, null);
 
             if (view != null) {
                 CardView cardView = (CardView) view.findViewById(R.id.card_lesson);
@@ -137,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.actions, menu);
+        MenuInflater mInflater = getMenuInflater();
+        mInflater.inflate(R.menu.actions, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -163,6 +163,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static MainActivity getInstance() {
-        return instance;
+        return sInstance;
     }
 }

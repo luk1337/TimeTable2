@@ -14,8 +14,8 @@ import java.util.Calendar;
  * Created by luk on 9/29/15.
  */
 public class WidgetRefreshService extends Service {
-    private static AlarmManager mAlarmManager;
-    private static PendingIntent mPendingIntent;
+    private static AlarmManager sAlarmManager;
+    private static PendingIntent sPendingIntent;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -26,8 +26,8 @@ public class WidgetRefreshService extends Service {
     public void onCreate() {
         Intent intent = new Intent(getApplicationContext(), WidgetRefreshReceiver.class);
 
-        mAlarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        mPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        sAlarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        sPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis() + AlarmManager.INTERVAL_DAY);
@@ -36,15 +36,15 @@ public class WidgetRefreshService extends Service {
         calendar.set(Calendar.SECOND, 0);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), mPendingIntent);
+            sAlarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sPendingIntent);
             return;
         }
 
-        mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, mPendingIntent);
+        sAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sPendingIntent);
     }
 
     @Override
     public void onDestroy() {
-        mAlarmManager.cancel(mPendingIntent);
+        sAlarmManager.cancel(sPendingIntent);
     }
 }

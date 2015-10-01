@@ -19,7 +19,7 @@ import com.luk.timetable2.listeners.SettingsActivity.URLChangeListener;
  * Created by luk on 9/22/15.
  */
 public class SettingsActivity extends AppCompatActivity {
-    private static SettingsActivity instance;
+    private static SettingsActivity sInstance;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        instance = this;
+        sInstance = this;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static SettingsActivity getInstance() {
-        return instance;
+        return sInstance;
     }
 
     public static class SettingsFragment extends PreferenceFragment {

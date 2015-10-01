@@ -12,7 +12,7 @@ import android.support.v4.content.WakefulBroadcastReceiver;
  * Created by luk on 9/29/15.
  */
 public class DateChangeService extends Service {
-    private static DateChangeReceiver mDateChangeReceiver;
+    private static DateChangeReceiver sDateChangeReceiver;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -21,13 +21,13 @@ public class DateChangeService extends Service {
 
     @Override
     public void onCreate() {
-        mDateChangeReceiver = new DateChangeReceiver();
-        getApplicationContext().registerReceiver(mDateChangeReceiver, new IntentFilter(Intent.ACTION_TIME_CHANGED));
+        sDateChangeReceiver = new DateChangeReceiver();
+        getApplicationContext().registerReceiver(sDateChangeReceiver, new IntentFilter(Intent.ACTION_TIME_CHANGED));
     }
 
     @Override
     public void onDestroy() {
-        getApplicationContext().unregisterReceiver(mDateChangeReceiver);
-        mDateChangeReceiver = null;
+        getApplicationContext().unregisterReceiver(sDateChangeReceiver);
+        sDateChangeReceiver = null;
     }
 }

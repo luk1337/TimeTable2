@@ -11,11 +11,11 @@ import java.io.File;
  * Created by luk on 9/28/15.
  */
 public class DatabaseHandler {
-    private static DatabaseHandler _instance;
-    private static String DB_FILE = "db";
+    private static DatabaseHandler sInstance;
+    private static String sDbFile = "db";
 
     public SQLiteDatabase getDB(Context context) {
-        File dbFile = context.getDatabasePath(DB_FILE);
+        File dbFile = context.getDatabasePath(sDbFile);
 
         return context.openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
     }
@@ -28,10 +28,10 @@ public class DatabaseHandler {
     }
 
     public static DatabaseHandler getInstance() {
-        if (_instance == null) {
-            _instance = new DatabaseHandler();
+        if (sInstance == null) {
+            sInstance = new DatabaseHandler();
         }
 
-        return _instance;
+        return sInstance;
     }
 }

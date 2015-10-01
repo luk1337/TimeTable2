@@ -10,6 +10,7 @@ import android.content.Intent;
 public class RegisterReceiversEvent extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        context.getApplicationContext().startService(new Intent(context, OnScreenWakeService.class));
+        context.getApplicationContext().startService(new Intent(context, WidgetRefreshService.class));
+        context.getApplicationContext().startService(new Intent(context, DateChangeService.class));
     }
 }

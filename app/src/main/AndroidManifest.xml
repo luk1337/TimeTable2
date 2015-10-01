@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -29,9 +30,13 @@
 
         <service android:name=".listeners.WidgetRefreshService" />
         <service android:name=".listeners.WidgetRefreshIntent" />
+        <service android:name=".listeners.LessonNotifyService" />
+        <service android:name=".listeners.LessonNotifyIntent" />
         <service android:name=".listeners.DateChangeService" />
 
         <receiver android:name=".listeners.WidgetRefreshReceiver" />
+        <receiver android:name=".listeners.LessonNotifyReceiver" />
+        <receiver android:name=".listeners.LessonNotifyWakeReceiver" />
         <receiver android:name=".listeners.DateChangeReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.TIME_SET" />

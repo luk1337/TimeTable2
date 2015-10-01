@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.listeners.LessonNotifyService;
 import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
 import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
 import com.luk.timetable2.listeners.MainActivity.OnSwipeListener;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Start services
         startService(new Intent(this, WidgetRefreshService.class));
+        startService(new Intent(this, LessonNotifyService.class));
     }
 
     @Override

@@ -11,6 +11,7 @@ public class RegisterReceiversEvent extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         context.getApplicationContext().startService(new Intent(context, WidgetRefreshService.class));
+        context.getApplicationContext().startService(new Intent(context, LessonNotifyService.class));
         context.getApplicationContext().startService(new Intent(context, DateChangeService.class));
     }
 }

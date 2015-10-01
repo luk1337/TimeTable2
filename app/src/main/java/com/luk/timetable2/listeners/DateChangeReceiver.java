@@ -14,5 +14,10 @@ public class DateChangeReceiver extends WakefulBroadcastReceiver {
 
         context.stopService(new Intent(context, WidgetRefreshService.class));
         context.startService(new Intent(context, WidgetRefreshService.class));
+
+        if (intent.getAction() != null && intent.getAction().equals(Intent.ACTION_TIME_CHANGED)) {
+            context.stopService(new Intent(context, LessonNotifyService.class));
+            context.startService(new Intent(context, LessonNotifyService.class));
+        }
     }
 }

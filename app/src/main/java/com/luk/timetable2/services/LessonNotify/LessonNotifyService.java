@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.luk.timetable2.Utils;
 
@@ -24,6 +25,7 @@ import java.util.Locale;
  * Created by luk on 9/29/15.
  */
 public class LessonNotifyService extends Service {
+    private static String TAG = "LessonNotifyService";
     private static AlarmManager sAlarmManager;
     private static PendingIntent sPendingIntent;
 
@@ -87,7 +89,7 @@ public class LessonNotifyService extends Service {
 
                     timestamps.add(calendar.getTimeInMillis());
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "", e);
                 }
             }
         }

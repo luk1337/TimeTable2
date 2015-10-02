@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by luk on 9/29/15.
@@ -69,7 +70,7 @@ public class LessonNotifyService extends Service {
         for (int day = 0; day < hours.size(); day++) {
             for (int hour = 0; hour < hours.get(day).size(); hour++) {
                 String[] time = hours.get(day).get(hour).get(0).split("-");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("H:mm");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
 
                 try {
                     Timestamp timestamp = new Timestamp(dateFormat.parse(time[0]).getTime());

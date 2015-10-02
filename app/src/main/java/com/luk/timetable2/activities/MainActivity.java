@@ -21,11 +21,11 @@ import android.widget.TextView;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
-import com.luk.timetable2.listeners.LessonNotifyService;
+import com.luk.timetable2.services.LessonNotify.LessonNotifyService;
 import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
 import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
 import com.luk.timetable2.listeners.MainActivity.OnSwipeListener;
-import com.luk.timetable2.listeners.WidgetRefreshService;
+import com.luk.timetable2.services.WidgetRefresh.WidgetRefreshService;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.ArrayList;

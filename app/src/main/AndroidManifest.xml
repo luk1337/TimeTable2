@@ -28,22 +28,22 @@
             android:label="@string/title_activity_settings" >
         </activity>
 
-        <service android:name=".listeners.WidgetRefreshService" />
-        <service android:name=".listeners.WidgetRefreshIntent" />
-        <service android:name=".listeners.LessonNotifyService" />
-        <service android:name=".listeners.LessonNotifyIntent" />
-        <service android:name=".listeners.DateChangeService" />
+        <service android:name=".services.WidgetRefresh.WidgetRefreshService" />
+        <service android:name=".services.WidgetRefresh.WidgetRefreshIntent" />
+        <service android:name=".services.LessonNotify.LessonNotifyService" />
+        <service android:name=".services.LessonNotify.LessonNotifyIntent" />
+        <service android:name=".services.DateChange.DateChangeService" />
 
-        <receiver android:name=".listeners.WidgetRefreshReceiver" />
-        <receiver android:name=".listeners.LessonNotifyReceiver" />
-        <receiver android:name=".listeners.LessonNotifyWakeReceiver" />
-        <receiver android:name=".listeners.DateChangeReceiver" >
+        <receiver android:name=".services.WidgetRefresh.WidgetRefreshReceiver" />
+        <receiver android:name=".services.LessonNotify.LessonNotifyReceiver" />
+        <receiver android:name=".services.LessonNotify.LessonNotifyWakeReceiver" />
+        <receiver android:name=".services.DateChange.DateChangeReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".listeners.RegisterReceiversEvent" android:process=":remote" >
+        <receiver android:name=".services.RegisterReceivers" android:process=":remote" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

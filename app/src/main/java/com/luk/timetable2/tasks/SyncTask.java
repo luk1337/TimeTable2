@@ -2,7 +2,6 @@ package com.luk.timetable2.tasks;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,9 +15,8 @@ import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
-import com.luk.timetable2.listeners.LessonNotifyService;
+import com.luk.timetable2.services.LessonNotify.LessonNotifyService;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 

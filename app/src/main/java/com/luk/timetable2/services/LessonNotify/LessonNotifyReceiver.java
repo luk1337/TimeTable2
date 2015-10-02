@@ -1,4 +1,4 @@
-package com.luk.timetable2.listeners;
+package com.luk.timetable2.services.LessonNotify;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.luk.timetable2.listeners;
+package com.luk.timetable2.services.LessonNotify;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -6,9 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
-import com.luk.timetable2.Utils;
+import com.luk.timetable2.services.LessonNotify.LessonNotifyWakeReceiver;
 
 /**
  * Created by luk on 9/29/15.

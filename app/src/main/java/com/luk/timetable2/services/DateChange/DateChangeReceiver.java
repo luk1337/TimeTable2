@@ -1,8 +1,12 @@
-package com.luk.timetable2.listeners;
+package com.luk.timetable2.services.DateChange;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
+
+import com.luk.timetable2.services.LessonNotify.LessonNotifyService;
+import com.luk.timetable2.services.WidgetRefresh.WidgetRefreshIntent;
+import com.luk.timetable2.services.WidgetRefresh.WidgetRefreshService;
 
 /**
  * Created by luk on 9/29/15.

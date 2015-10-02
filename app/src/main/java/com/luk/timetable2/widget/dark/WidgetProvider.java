@@ -20,7 +20,7 @@ import com.luk.timetable2.widget.WidgetViewsService;
  */
 public class WidgetProvider extends AppWidgetProvider {
     private static String TITLE_CLICKED = "START_APP";
-    private static String variant = "dark";
+    private static String VARIANT = "dark";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -51,7 +51,7 @@ public class WidgetProvider extends AppWidgetProvider {
     private RemoteViews initViews(Context context, int widgetId) {
         RemoteViews mView = new RemoteViews(context.getPackageName(), R.layout.widget);
 
-        Integer[] widgetColors = Utils.getWidgetColorsForVariant(variant);
+        Integer[] widgetColors = Utils.getWidgetColorsForVariant(VARIANT);
 
         // set colors
         mView.setInt(R.id.background, "setBackgroundResource", widgetColors[1]);
@@ -60,7 +60,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         Intent intent = new Intent(context, WidgetViewsService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-        intent.putExtra("variant", variant);
+        intent.putExtra("variant", VARIANT);
 
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         mView.setRemoteAdapter(R.id.widget, intent);

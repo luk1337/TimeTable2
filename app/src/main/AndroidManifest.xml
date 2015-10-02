@@ -31,27 +31,33 @@
             android:label="@string/title_activity_settings" >
         </activity>
 
-        <service android:name=".services.WidgetRefresh.WidgetRefreshService" />
-        <service android:name=".services.WidgetRefresh.WidgetRefreshIntent" />
-        <service android:name=".services.LessonNotify.LessonNotifyService" />
-        <service android:name=".services.LessonNotify.LessonNotifyIntent" />
-        <service android:name=".services.DateChange.DateChangeService" />
-
-        <receiver android:name=".services.WidgetRefresh.WidgetRefreshReceiver" />
-        <receiver android:name=".services.LessonNotify.LessonNotifyReceiver" />
-        <receiver android:name=".services.LessonNotify.LessonNotifyWakeReceiver" />
-        <receiver android:name=".services.DateChange.DateChangeReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.TIME_SET" />
-            </intent-filter>
-        </receiver>
-
+        <!-- on boot/app start registrar -->
         <receiver android:name=".services.RegisterReceivers" android:process=":remote" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
+        <!-- date change services/receivers -->
+        <service android:name=".services.DateChange.DateChangeService" />
+        <receiver android:name=".services.DateChange.DateChangeReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+        </receiver>
+
+        <!-- widget refresh services/receivers -->
+        <service android:name=".services.WidgetRefresh.WidgetRefreshService" />
+        <service android:name=".services.WidgetRefresh.WidgetRefreshIntent" />
+        <receiver android:name=".services.WidgetRefresh.WidgetRefreshReceiver" />
+
+        <!-- lesson notify services/receivers -->
+        <service android:name=".services.LessonNotify.LessonNotifyService" />
+        <service android:name=".services.LessonNotify.LessonNotifyIntent" />
+        <receiver android:name=".services.LessonNotify.LessonNotifyReceiver" />
+        <receiver android:name=".services.LessonNotify.LessonNotifyWakeReceiver" />
+
+        <!-- widgets -->
         <receiver android:name=".widget.dark.WidgetProvider" android:label="@string/widget_dark_label" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

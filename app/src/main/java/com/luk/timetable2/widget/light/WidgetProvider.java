@@ -7,7 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
+import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
 
 import com.luk.timetable2.R;
@@ -42,13 +42,13 @@ public class WidgetProvider extends AppWidgetProvider {
         Intent intent = new Intent(context, WidgetViewsFactory.class);
         views.setRemoteAdapter(R.id.widget, intent);
 
-        RemoteViews mView = initViews(context, appWidgetManager, appWidgetId);
+        RemoteViews mView = initViews(context, appWidgetId);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, mView);
     }
 
-    private RemoteViews initViews(Context context, AppWidgetManager widgetManager, int widgetId) {
+    private RemoteViews initViews(Context context, int widgetId) {
         RemoteViews mView = new RemoteViews(context.getPackageName(), R.layout.widget);
 
         Integer[] widgetColors = Utils.getWidgetColorsForVariant(variant);
@@ -69,7 +69,7 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(@NonNull Context context, @NonNull Intent intent) {
         super.onReceive(context, intent);
 
         if (TITLE_CLICKED.equals(intent.getAction())) {

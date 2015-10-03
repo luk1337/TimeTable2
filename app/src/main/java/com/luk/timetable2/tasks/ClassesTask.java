@@ -79,7 +79,7 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
                             .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int number) {
-                                    new SyncTask(MainActivity.getInstance(), selected[0]).execute();
+                                    new SyncTask(selected[0]).execute();
                                 }
                             })
                             .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {

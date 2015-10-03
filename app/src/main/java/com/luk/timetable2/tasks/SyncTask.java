@@ -26,38 +26,41 @@ import java.util.HashMap;
  */
 public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
     private static String TAG = "SyncTask";
-    private ProgressDialog dialog;
-    private int _class;
-    private String _api;
+    private MainActivity mMainActivity;
+    private ProgressDialog mDialog;
+    private int mClass;
+    private String mUrl;
 
-    public SyncTask(MainActivity activity, int _class) {
+    public SyncTask(int mClass) {
+        mMainActivity = MainActivity.getInstance();
+
         // load prefs
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mMainActivity);
 
-        this._class = _class;
-        this._api = sharedPref.getString("school", "");
+        this.mClass = mClass;
+        this.mUrl = sharedPref.getString("school", "");
     }
 
     @Override
     protected Integer doInBackground(Integer... strings) {
-        MainActivity.getInstance().runOnUiThread(new Runnable() {
+        mMainActivity.runOnUiThread(new Runnable() {
             public void run() {
-                dialog = ProgressDialog.show(MainActivity.getInstance(), null, MainActivity.getInstance().getString(R.string.sync_in_progress), true);
+                mDialog = ProgressDialog.show(mMainActivity, null, MainActivity.getInstance().getString(R.string.sync_in_progress), true);
             }
         });
 
-        HashMap<Integer, ArrayList<HashMap<String, String>>> data = null;
+        HashMap<Integer, ArrayList<HashMap<String, String>>> data;
 
         try {
-            data = new Parser(String.format("%s/plany/o%d.html", _api, _class)).parseLessons();
+            data = new Parser(String.format("%s/plany/o%d.html", mUrl, mClass)).parseLessons();
         } catch (Exception e) {
             Log.e(TAG, "", e);
             return -1;
         }
 
         DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-        SQLiteDatabase db = databaseHandler.getDB(MainActivity.getInstance());
-        databaseHandler.createTables(MainActivity.getInstance());
+        SQLiteDatabase db = databaseHandler.getDB(mMainActivity);
+        databaseHandler.createTables(mMainActivity);
 
         for (int day = 1; day <= 5; day++) {
             if (data.get(day) == null) continue;
@@ -90,9 +93,9 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         super.onPostExecute(result);
 
         if (result == -1) {
-            MainActivity.getInstance().runOnUiThread(new Runnable() {
+            mMainActivity.runOnUiThread(new Runnable() {
                 public void run() {
-                    new AlertDialog.Builder(MainActivity.getInstance())
+                    new AlertDialog.Builder(mMainActivity)
                             .setTitle(MainActivity.getInstance().getString(R.string.error_title))
                             .setMessage(MainActivity.getInstance().getString(R.string.error_offline))
                             .setPositiveButton(android.R.string.yes, null)
@@ -101,15 +104,15 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             });
         }
 
-        Utils.refreshWidgets(MainActivity.getInstance());
-        MainActivity.getInstance().stopService(new Intent(MainActivity.getInstance(), LessonNotifyService.class));
-        MainActivity.getInstance().startService(new Intent(MainActivity.getInstance(), LessonNotifyService.class));
+        Utils.refreshWidgets(mMainActivity);
+        mMainActivity.stopService(new Intent(mMainActivity, LessonNotifyService.class));
+        mMainActivity.startService(new Intent(mMainActivity, LessonNotifyService.class));
 
-        MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(MainActivity.getInstance().getSupportFragmentManager());
-        MainActivity.getInstance().getPager().setAdapter(mainActivityAdapter);
+        MainActivityAdapter mMainActivityAdapter = new MainActivityAdapter(mMainActivity.getSupportFragmentManager());
+        mMainActivity.getPager().setAdapter(mMainActivityAdapter);
 
-        if (dialog != null) {
-            dialog.dismiss();
+        if (mDialog != null) {
+            mDialog.dismiss();
         }
     }
 }

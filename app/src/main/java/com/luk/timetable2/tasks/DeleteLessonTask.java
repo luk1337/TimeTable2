@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 
 import com.luk.timetable2.DatabaseHandler;
 import com.luk.timetable2.activities.MainActivity;
-import com.luk.timetable2.activities.MainActivityAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

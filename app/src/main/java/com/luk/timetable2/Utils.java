@@ -12,9 +12,6 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.luk.timetable2.activities.MainActivity;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

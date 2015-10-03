@@ -5,20 +5,16 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.tasks.RestoreLessonTask;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

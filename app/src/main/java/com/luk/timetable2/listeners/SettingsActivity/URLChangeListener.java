@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.Preference;
 
-import com.luk.timetable2.activities.SettingsActivity;
-
 import org.apache.commons.io.FilenameUtils;
 
 /**

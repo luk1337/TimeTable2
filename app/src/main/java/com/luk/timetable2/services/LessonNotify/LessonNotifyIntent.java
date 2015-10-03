@@ -7,8 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
-import com.luk.timetable2.services.LessonNotify.LessonNotifyWakeReceiver;
-
 /**
  * Created by luk on 9/29/15.
  */

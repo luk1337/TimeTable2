@@ -3,8 +3,6 @@ package com.luk.timetable2;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.luk.timetable2.activities.MainActivity;
-
 import java.io.File;
 
 /**

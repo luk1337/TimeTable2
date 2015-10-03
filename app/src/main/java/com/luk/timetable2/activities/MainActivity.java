@@ -1,82 +1,65 @@
 package com.luk.timetable2.activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
-import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
-import com.luk.timetable2.listeners.MainActivity.OnSwipeListener;
 import com.luk.timetable2.services.RegisterReceivers;
 import com.luk.timetable2.tasks.ClassesTask;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private LayoutInflater mInflater;
     private static MainActivity sInstance;
-    private static int sCurrentTheme;
+    public static int sCurrentTheme;
     public int day;
+    public ViewPager sViewPager;
+    public Spinner mDaySelector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // save sInstance
+        // Save sInstance
         sInstance = this;
 
-        // setup layout
+        // Setup layout
         sCurrentTheme = Utils.getCurrentTheme(this);
         setTheme(sCurrentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // define some variables we may need
-        mInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // Set toolbar
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
 
-        // load lessons for current day
+        // Load lessons for current day
         Calendar calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_WEEK) - 2;
         if (day == -1 || day == 5) day = 0; // set monday
 
-        // set current day
-        Spinner daySelector = (Spinner) findViewById(R.id.day);
-        daySelector.setOnItemSelectedListener(new DayChangeListener());
-        daySelector.setSelection(day);
+        // Set current day
+        mDaySelector = (Spinner) findViewById(R.id.day);
+        mDaySelector.setOnItemSelectedListener(new DayChangeListener());
+        mDaySelector.setSelection(day);
 
         // Hide title name
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
         }
 
-        // Set on swipe listener
-        final GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new OnSwipeListener());
-        findViewById(R.id.mainScrollView).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(final View view, final MotionEvent event) {
-                gestureDetector.onTouchEvent(event);
-                return false;
-            }
-        });
+        sViewPager = (ViewPager) findViewById(R.id.pager);
+        sViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
+        sViewPager.addOnPageChangeListener(new DayChangeListener());
 
         // Start services
         sendBroadcast(new Intent(this, RegisterReceivers.class));
@@ -89,58 +72,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         super.onResume();
-    }
-
-    public void loadLessons(final int day) {
-        LinearLayout container = (LinearLayout) findViewById(R.id.mainLayout);
-        container.removeAllViews();
-
-        ArrayList<List<String>> hours = Utils.getHours(this, day);
-        Integer[] colors = Utils.getColorsForVariant(sCurrentTheme);
-
-        if (hours == null) return;
-
-        for (List<String> hour : hours) {
-            ArrayList<List<String>> lessons = Utils.getLessonsForHour(this, day, hour.get(0));
-
-            if (lessons == null) return;
-
-            String _lesson = "";
-            String _room = "";
-            String _hour = hour.get(0);
-
-            for (List<String> l : lessons) {
-                // set lesson names
-                _lesson += l.get(0) + "\n";
-
-                // set rooms
-                _room += l.get(1) + " / ";
-            }
-
-            View view = mInflater.inflate(R.layout.template_lesson, null);
-
-            if (view != null) {
-                CardView cardView = (CardView) view.findViewById(R.id.card_lesson);
-
-                TextView lesson = (TextView) view.findViewById(R.id.lesson);
-                lesson.setText(_lesson.substring(0, _lesson.length() - 1));
-
-                // set lesson additional info { hours, classroom }
-                TextView info = (TextView) view.findViewById(R.id.info);
-                info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
-
-                // set long click listener
-                view.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener());
-
-                // set colors
-                cardView.setCardBackgroundColor(getApplicationContext().getResources().getColor(colors[0]));
-                lesson.setTextColor(getApplicationContext().getResources().getColor(colors[1]));
-                info.setTextColor(getApplicationContext().getResources().getColor(colors[1]));
-
-                // add to view
-                container.addView(view);
-            }
-        }
     }
 
     @Override

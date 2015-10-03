@@ -8,9 +8,10 @@ import android.database.sqlite.SQLiteStatement;
 import android.view.View;
 import android.widget.TextView;
 
-import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.activities.MainActivity;
+import com.luk.timetable2.activities.MainActivityAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class DeleteDialogListener implements View.OnLongClickListener {
         final ArrayList<List<String>> lessons = Utils.getLessonsForHour(MainActivity.getInstance(), MainActivity.getInstance().day, hour);
 
         if (lessons != null && lessons.size() > 1) {
-            final CharSequence[] items = new String[lessons.size()];;
+            final CharSequence[] items = new String[lessons.size()];
             final int[] selected = {1};
             int i = 0;
 
@@ -39,7 +40,7 @@ public class DeleteDialogListener implements View.OnLongClickListener {
 
             new AlertDialog.Builder(MainActivity.getInstance())
                     .setTitle(MainActivity.getInstance().getString(R.string.select_lesson))
-                    .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int number) {
                             File dbFile = MainActivity.getInstance().getDatabasePath("db");
@@ -60,7 +61,8 @@ public class DeleteDialogListener implements View.OnLongClickListener {
 
                             stmt.execute();
 
-                            MainActivity.getInstance().loadLessons(MainActivity.getInstance().day);
+                            MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(MainActivity.getInstance().getSupportFragmentManager());
+                            MainActivity.getInstance().sViewPager.setAdapter(mainActivityAdapter);
                         }
                     })
                     .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
@@ -84,7 +86,8 @@ public class DeleteDialogListener implements View.OnLongClickListener {
                             stmt.bindString(2, hour);
                             stmt.execute();
 
-                            MainActivity.getInstance().loadLessons(MainActivity.getInstance().day);
+                            MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(MainActivity.getInstance().getSupportFragmentManager());
+                            MainActivity.getInstance().sViewPager.setAdapter(mainActivityAdapter);
                         }
                     })
                     .setNegativeButton(android.R.string.no, null)

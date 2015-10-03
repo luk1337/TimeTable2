@@ -11,10 +11,11 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.luk.timetable2.DatabaseHandler;
-import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.activities.MainActivity;
+import com.luk.timetable2.activities.MainActivityAdapter;
 import com.luk.timetable2.services.LessonNotify.LessonNotifyService;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
                 String _group = lesson.get("group");
                 String _room = lesson.get("room");
 
-                if(_group.length() > 0) {
+                if (_group.length() > 0) {
                     _lesson += String.format(" (%s)", _group);
                 }
 
@@ -104,9 +105,10 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         MainActivity.getInstance().stopService(new Intent(MainActivity.getInstance(), LessonNotifyService.class));
         MainActivity.getInstance().startService(new Intent(MainActivity.getInstance(), LessonNotifyService.class));
 
-        MainActivity.getInstance().loadLessons(MainActivity.getInstance().day);
+        MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(MainActivity.getInstance().getSupportFragmentManager());
+        MainActivity.getInstance().sViewPager.setAdapter(mainActivityAdapter);
 
-        if(dialog != null) {
+        if (dialog != null) {
             dialog.dismiss();
         }
     }

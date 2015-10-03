@@ -1,19 +1,18 @@
 package com.luk.timetable2.listeners.MainActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.view.View;
 import android.widget.TextView;
 
+import com.luk.timetable2.DatabaseHandler;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.activities.MainActivityAdapter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,20 +43,16 @@ public class DeleteDialogListener implements View.OnLongClickListener {
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int number) {
-                            File dbFile = mainActivity.getDatabasePath("db");
-                            SQLiteDatabase db = mainActivity.openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
-                            int i = 1;
+                            SQLiteDatabase sqLiteDatabase = DatabaseHandler.getInstance().getDB(mainActivity);
 
-                            SQLiteStatement stmt = db.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ? AND lesson = ?");
+                            SQLiteStatement stmt = sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ? AND lesson = ?");
                             stmt.bindString(1, String.valueOf(mainActivity.getDay()));
                             stmt.bindString(2, hour);
 
-                            for (List<String> l : lessons) {
+                            for (int i = 0; i < lessons.size(); i++) {
                                 if (i == selected[0]) {
-                                    stmt.bindString(3, l.get(0));
+                                    stmt.bindString(3, lessons.get(i).get(0));
                                 }
-
-                                i++;
                             }
 
                             stmt.execute();
@@ -69,7 +64,7 @@ public class DeleteDialogListener implements View.OnLongClickListener {
                     .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int number) {
-                            selected[0] = number + 1;
+                            selected[0] = number;
                         }
                     })
                     .show();
@@ -79,10 +74,9 @@ public class DeleteDialogListener implements View.OnLongClickListener {
                     .setMessage(mainActivity.getString(R.string.hide_text))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            File dbFile = mainActivity.getDatabasePath("db");
-                            SQLiteDatabase db = mainActivity.openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
+                            SQLiteDatabase sqLiteDatabase = DatabaseHandler.getInstance().getDB(mainActivity);
 
-                            SQLiteStatement stmt = db.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ?");
+                            SQLiteStatement stmt = sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ?");
                             stmt.bindString(1, String.valueOf(mainActivity.getDay()));
                             stmt.bindString(2, hour);
                             stmt.execute();

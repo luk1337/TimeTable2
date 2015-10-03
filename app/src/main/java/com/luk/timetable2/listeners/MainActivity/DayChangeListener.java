@@ -10,12 +10,16 @@ import com.luk.timetable2.activities.MainActivity;
  * Created by luk on 9/13/15.
  */
 public class DayChangeListener implements AdapterView.OnItemSelectedListener, ViewPager.OnPageChangeListener {
+    private MainActivity mMainActivity;
+
+    public DayChangeListener(MainActivity mainActivity) {
+        mMainActivity = mainActivity;;
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        MainActivity mainActivity = MainActivity.getInstance();
-
-        mainActivity.setDay(position);
-        mainActivity.getPager().setCurrentItem(position);
+        mMainActivity.setDay(position);
+        mMainActivity.getPager().setCurrentItem(position);
     }
 
     @Override
@@ -30,10 +34,8 @@ public class DayChangeListener implements AdapterView.OnItemSelectedListener, Vi
 
     @Override
     public void onPageSelected(int position) {
-        MainActivity mainActivity = MainActivity.getInstance();
-
-        mainActivity.setDay(position);
-        mainActivity.getDaySelector().setSelection(position);
+        mMainActivity.setDay(position);
+        mMainActivity.getDaySelector().setSelection(position);
     }
 
     @Override

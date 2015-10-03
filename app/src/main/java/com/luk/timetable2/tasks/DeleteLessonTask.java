@@ -19,13 +19,15 @@ public class DeleteLessonTask extends AsyncTask<Integer, Integer, Integer> {
     private MainActivity mMainActivity;
     private boolean mIsSingleLesson;
     private String mHour;
+    private int mDay;
     private ArrayList<List<String>> mLessons;
     private Integer mLessonSelected;
 
-    public DeleteLessonTask(MainActivity mainActivity, boolean isSingleLesson, String hour, @Nullable ArrayList<List<String>> lessons, @Nullable Integer lessonSelected) {
+    public DeleteLessonTask(MainActivity mainActivity, boolean isSingleLesson, String hour, int day, @Nullable ArrayList<List<String>> lessons, @Nullable Integer lessonSelected) {
         mMainActivity = mainActivity;
         mIsSingleLesson = isSingleLesson;
         mHour = hour;
+        mDay = day;
         mLessons = lessons;
         mLessonSelected = lessonSelected;
     }
@@ -36,13 +38,13 @@ public class DeleteLessonTask extends AsyncTask<Integer, Integer, Integer> {
 
         if (mIsSingleLesson) {
             SQLiteStatement stmt = sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ?");
-            stmt.bindString(1, String.valueOf(mMainActivity.getDay()));
+            stmt.bindString(1, String.valueOf(mDay));
             stmt.bindString(2, mHour);
 
             stmt.execute();
         } else {
             SQLiteStatement stmt = sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ? AND lesson = ?");
-            stmt.bindString(1, String.valueOf(mMainActivity.getDay()));
+            stmt.bindString(1, String.valueOf(mDay));
             stmt.bindString(2, mHour);
 
             for (int i = 0; i < mLessons.size(); i++) {
@@ -61,10 +63,6 @@ public class DeleteLessonTask extends AsyncTask<Integer, Integer, Integer> {
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
 
-        mMainActivity.runOnUiThread(new Runnable() {
-            public void run() {
-                mMainActivity.getPager().setAdapter(new MainActivityAdapter(mMainActivity.getSupportFragmentManager()));
-            }
-        });
+        mMainActivity.refreshContent();
     }
 }

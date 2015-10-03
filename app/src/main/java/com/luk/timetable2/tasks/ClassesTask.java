@@ -1,5 +1,6 @@
 package com.luk.timetable2.tasks;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -8,9 +9,9 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
+import com.luk.timetable2.activities.MainActivity;
 
 import java.util.HashMap;
 
@@ -24,8 +25,8 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
     private String mUrl;
     private HashMap<Integer, String> mData;
 
-    public ClassesTask() {
-        mMainActivity = MainActivity.getInstance();
+    public ClassesTask(MainActivity mainActivity) {
+        mMainActivity = mainActivity;
 
         // load prefs
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mMainActivity);
@@ -80,7 +81,7 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
                             .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface mDialog, int number) {
-                                    new SyncTask(selected[0]).execute();
+                                    new SyncTask(mMainActivity, selected[0]).execute();
                                 }
                             })
                             .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {

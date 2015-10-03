@@ -67,7 +67,7 @@ public class MainActivityFragment extends Fragment {
                 info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
 
                 // set long click listener
-                template.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener());
+                template.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener((MainActivity) getActivity(), day));
 
                 // set colors
                 cardView.setCardBackgroundColor(getActivity().getResources().getColor(colors[0]));

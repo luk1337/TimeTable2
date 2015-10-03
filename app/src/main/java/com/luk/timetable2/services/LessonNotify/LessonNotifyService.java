@@ -58,7 +58,9 @@ public class LessonNotifyService extends Service {
 
     @Override
     public void onDestroy() {
-        sAlarmManager.cancel(sPendingIntent);
+        if (sAlarmManager != null) {
+            sAlarmManager.cancel(sPendingIntent);
+        }
     }
 
     private long getNearestDate() {

@@ -1,5 +1,6 @@
 package com.luk.timetable2.tasks;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import com.luk.timetable2.Utils;
 import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.activities.MainActivityAdapter;
 import com.luk.timetable2.services.LessonNotify.LessonNotifyService;
+import com.luk.timetable2.services.RegisterReceivers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +33,8 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
     private int mClass;
     private String mUrl;
 
-    public SyncTask(int mClass) {
-        mMainActivity = MainActivity.getInstance();
+    public SyncTask(MainActivity mainActivity, int mClass) {
+        mMainActivity = mainActivity;
 
         // load prefs
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mMainActivity);
@@ -45,7 +47,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
     protected Integer doInBackground(Integer... strings) {
         mMainActivity.runOnUiThread(new Runnable() {
             public void run() {
-                mDialog = ProgressDialog.show(mMainActivity, null, MainActivity.getInstance().getString(R.string.sync_in_progress), true);
+                mDialog = ProgressDialog.show(mMainActivity, null, mMainActivity.getString(R.string.sync_in_progress), true);
             }
         });
 
@@ -96,8 +98,8 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             mMainActivity.runOnUiThread(new Runnable() {
                 public void run() {
                     new AlertDialog.Builder(mMainActivity)
-                            .setTitle(MainActivity.getInstance().getString(R.string.error_title))
-                            .setMessage(MainActivity.getInstance().getString(R.string.error_offline))
+                            .setTitle(mMainActivity.getString(R.string.error_title))
+                            .setMessage(mMainActivity.getString(R.string.error_offline))
                             .setPositiveButton(android.R.string.yes, null)
                             .show();
                 }
@@ -105,11 +107,8 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         }
 
         Utils.refreshWidgets(mMainActivity);
-        mMainActivity.stopService(new Intent(mMainActivity, LessonNotifyService.class));
-        mMainActivity.startService(new Intent(mMainActivity, LessonNotifyService.class));
-
-        MainActivityAdapter mMainActivityAdapter = new MainActivityAdapter(mMainActivity.getSupportFragmentManager());
-        mMainActivity.getPager().setAdapter(mMainActivityAdapter);
+        mMainActivity.refreshContent();
+        mMainActivity.sendBroadcast(new Intent(mMainActivity, RegisterReceivers.class));
 
         if (mDialog != null) {
             mDialog.dismiss();

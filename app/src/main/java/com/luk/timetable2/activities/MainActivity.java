@@ -23,7 +23,6 @@ import com.luk.timetable2.tasks.ClassesTask;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    private static MainActivity sInstance;
     private int mCurrentTheme;
     private int mDay;
 
@@ -32,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Save sInstance
-        sInstance = this;
-
         // Setup layout
         mCurrentTheme = Utils.getCurrentTheme(this);
         setTheme(mCurrentTheme);
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set current day
         mDaySelector = (Spinner) findViewById(R.id.day);
-        mDaySelector.setOnItemSelectedListener(new DayChangeListener());
+        mDaySelector.setOnItemSelectedListener(new DayChangeListener(this));
         mDaySelector.setSelection(mDay);
 
         // Hide title name
@@ -62,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
-        mViewPager.addOnPageChangeListener(new DayChangeListener());
+        mViewPager.addOnPageChangeListener(new DayChangeListener(this));
 
         // Start services
         sendBroadcast(new Intent(this, RegisterReceivers.class));
@@ -73,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         if (mCurrentTheme != Utils.getCurrentTheme(this)) {
             recreate();
         }
-        
-        mViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
+
+        refreshContent();
 
         super.onResume();
     }
@@ -98,13 +94,17 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
 
-            new ClassesTask().execute();
+            new ClassesTask(this).execute();
         } else if (item.getItemId() == R.id.settings) {
             Intent i = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(i);
         }
 
         return false;
+    }
+
+    public void refreshContent() {
+        mViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
     }
 
     public ViewPager getPager() {
@@ -121,9 +121,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void setDay(int day) {
         mDay = day;
-    }
-
-    public static MainActivity getInstance() {
-        return sInstance;
     }
 }

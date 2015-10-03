@@ -106,7 +106,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         MainActivity.getInstance().startService(new Intent(MainActivity.getInstance(), LessonNotifyService.class));
 
         MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(MainActivity.getInstance().getSupportFragmentManager());
-        MainActivity.getInstance().sViewPager.setAdapter(mainActivityAdapter);
+        MainActivity.getInstance().getPager().setAdapter(mainActivityAdapter);
 
         if (dialog != null) {
             dialog.dismiss();

@@ -22,10 +22,11 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private static MainActivity sInstance;
-    public static int sCurrentTheme;
-    public int day;
-    public ViewPager sViewPager;
-    public Spinner mDaySelector;
+    private int mCurrentTheme;
+    private int mDay;
+
+    private ViewPager mViewPager;
+    private Spinner mDaySelector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         sInstance = this;
 
         // Setup layout
-        sCurrentTheme = Utils.getCurrentTheme(this);
-        setTheme(sCurrentTheme);
+        mCurrentTheme = Utils.getCurrentTheme(this);
+        setTheme(mCurrentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,22 +45,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Load lessons for current day
         Calendar calendar = Calendar.getInstance();
-        day = calendar.get(Calendar.DAY_OF_WEEK) - 2;
-        if (day == -1 || day == 5) day = 0; // set monday
+        mDay = calendar.get(Calendar.DAY_OF_WEEK) - 2;
+        if (mDay == -1 || mDay == 5) mDay = 0; // set monday
 
         // Set current day
         mDaySelector = (Spinner) findViewById(R.id.day);
         mDaySelector.setOnItemSelectedListener(new DayChangeListener());
-        mDaySelector.setSelection(day);
+        mDaySelector.setSelection(mDay);
 
         // Hide title name
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
         }
 
-        sViewPager = (ViewPager) findViewById(R.id.pager);
-        sViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
-        sViewPager.addOnPageChangeListener(new DayChangeListener());
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
+        mViewPager.addOnPageChangeListener(new DayChangeListener());
 
         // Start services
         sendBroadcast(new Intent(this, RegisterReceivers.class));
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        if (sCurrentTheme != Utils.getCurrentTheme(this)) {
+        if (mCurrentTheme != Utils.getCurrentTheme(this)) {
             recreate();
         }
 
@@ -100,6 +101,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    public ViewPager getPager() {
+        return mViewPager;
+    }
+
+    public Spinner getDaySelector() {
+        return mDaySelector;
+    }
+
+    public int getCurrentTheme() {
+        return mCurrentTheme;
+    }
+
+    public int getDay() {
+        return mDay;
+    }
+
+    public void setDay(int day) {
+        mDay = day;
     }
 
     public static MainActivity getInstance() {

@@ -23,10 +23,11 @@ import java.util.List;
 public class DeleteDialogListener implements View.OnLongClickListener {
     @Override
     public boolean onLongClick(View v) {
-        TextView info = (TextView) v.findViewById(R.id.info);
+        final MainActivity mainActivity = MainActivity.getInstance();
+        final TextView info = (TextView) v.findViewById(R.id.info);
         final String hour = info.getText().toString().split("\n")[0]; // hour
 
-        final ArrayList<List<String>> lessons = Utils.getLessonsForHour(MainActivity.getInstance(), MainActivity.getInstance().day, hour);
+        final ArrayList<List<String>> lessons = Utils.getLessonsForHour(mainActivity, mainActivity.getDay(), hour);
 
         if (lessons != null && lessons.size() > 1) {
             final CharSequence[] items = new String[lessons.size()];
@@ -38,17 +39,17 @@ public class DeleteDialogListener implements View.OnLongClickListener {
                 i++;
             }
 
-            new AlertDialog.Builder(MainActivity.getInstance())
-                    .setTitle(MainActivity.getInstance().getString(R.string.select_lesson))
+            new AlertDialog.Builder(mainActivity)
+                    .setTitle(mainActivity.getString(R.string.select_lesson))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int number) {
-                            File dbFile = MainActivity.getInstance().getDatabasePath("db");
-                            SQLiteDatabase db = MainActivity.getInstance().openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
+                            File dbFile = mainActivity.getDatabasePath("db");
+                            SQLiteDatabase db = mainActivity.openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
                             int i = 1;
 
                             SQLiteStatement stmt = db.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ? AND lesson = ?");
-                            stmt.bindString(1, String.valueOf(MainActivity.getInstance().day));
+                            stmt.bindString(1, String.valueOf(mainActivity.getDay()));
                             stmt.bindString(2, hour);
 
                             for (List<String> l : lessons) {
@@ -61,8 +62,8 @@ public class DeleteDialogListener implements View.OnLongClickListener {
 
                             stmt.execute();
 
-                            MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(MainActivity.getInstance().getSupportFragmentManager());
-                            MainActivity.getInstance().sViewPager.setAdapter(mainActivityAdapter);
+                            MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(mainActivity.getSupportFragmentManager());
+                            mainActivity.getPager().setAdapter(mainActivityAdapter);
                         }
                     })
                     .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
@@ -73,21 +74,21 @@ public class DeleteDialogListener implements View.OnLongClickListener {
                     })
                     .show();
         } else {
-            new AlertDialog.Builder(MainActivity.getInstance())
-                    .setTitle(MainActivity.getInstance().getString(R.string.hide_title))
-                    .setMessage(MainActivity.getInstance().getString(R.string.hide_text))
+            new AlertDialog.Builder(mainActivity)
+                    .setTitle(mainActivity.getString(R.string.hide_title))
+                    .setMessage(mainActivity.getString(R.string.hide_text))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            File dbFile = MainActivity.getInstance().getDatabasePath("db");
-                            SQLiteDatabase db = MainActivity.getInstance().openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
+                            File dbFile = mainActivity.getDatabasePath("db");
+                            SQLiteDatabase db = mainActivity.openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
 
                             SQLiteStatement stmt = db.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ?");
-                            stmt.bindString(1, String.valueOf(MainActivity.getInstance().day));
+                            stmt.bindString(1, String.valueOf(mainActivity.getDay()));
                             stmt.bindString(2, hour);
                             stmt.execute();
 
-                            MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(MainActivity.getInstance().getSupportFragmentManager());
-                            MainActivity.getInstance().sViewPager.setAdapter(mainActivityAdapter);
+                            MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(mainActivity.getSupportFragmentManager());
+                            mainActivity.getPager().setAdapter(mainActivityAdapter);
                         }
                     })
                     .setNegativeButton(android.R.string.no, null)

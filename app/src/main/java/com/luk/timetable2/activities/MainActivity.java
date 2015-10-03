@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
 
-            new ClassesTask(this).execute();
+            new ClassesTask().execute();
         } else if (item.getItemId() == R.id.settings) {
             Intent i = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(i);

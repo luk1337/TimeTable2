@@ -19,29 +19,30 @@ import java.util.HashMap;
  */
 public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
     private static String TAG = "ClassesTask";
-    private ProgressDialog dialog;
-    private String _api;
-    private HashMap<Integer, String> data;
+    private MainActivity mMainActivity;
+    private ProgressDialog mDialog;
+    private String mUrl;
+    private HashMap<Integer, String> mData;
 
-    public ClassesTask(MainActivity activity) {
+    public ClassesTask() {
+        mMainActivity = MainActivity.getInstance();
+
         // load prefs
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mMainActivity);
 
-        this._api = sharedPref.getString("school", "");
+        this.mUrl = sharedPref.getString("school", "");
     }
 
     @Override
     protected Integer doInBackground(Integer... strings) {
-        MainActivity.getInstance().runOnUiThread(new Runnable() {
+        mMainActivity.runOnUiThread(new Runnable() {
             public void run() {
-                dialog = ProgressDialog.show(MainActivity.getInstance(), null, MainActivity.getInstance().getString(R.string.sync_in_progress), true);
+                mDialog = ProgressDialog.show(mMainActivity, null, mMainActivity.getString(R.string.sync_in_progress), true);
             }
         });
 
-        data = null;
-
         try {
-            data = new Parser(String.format("%s/lista.html", _api)).parseClasses();
+            mData = new Parser(String.format("%s/lista.html", mUrl)).parseClasses();
         } catch (Exception e) {
             Log.e(TAG, "", e);
             return -1;
@@ -55,36 +56,36 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
         super.onPostExecute(result);
 
         if (result == -1) {
-            MainActivity.getInstance().runOnUiThread(new Runnable() {
+            mMainActivity.runOnUiThread(new Runnable() {
                 public void run() {
-                    new AlertDialog.Builder(MainActivity.getInstance())
-                            .setTitle(MainActivity.getInstance().getString(R.string.error_title))
-                            .setMessage(MainActivity.getInstance().getString(R.string.error_offline))
+                    new AlertDialog.Builder(mMainActivity)
+                            .setTitle(mMainActivity.getString(R.string.error_title))
+                            .setMessage(mMainActivity.getString(R.string.error_offline))
                             .setPositiveButton(android.R.string.yes, null)
                             .show();
                 }
             });
         } else {
-            final CharSequence[] items = new String[data.size()];;
+            final CharSequence[] items = new String[mData.size()];
             final int[] selected = {1};
 
-            for (int i = 1; i <= data.size(); i++) {
-                items[i -1] = data.get(i);
+            for (int i = 1; i <= mData.size(); i++) {
+                items[i -1] = mData.get(i);
             }
 
-            MainActivity.getInstance().runOnUiThread(new Runnable() {
+            mMainActivity.runOnUiThread(new Runnable() {
                 public void run() {
-                    new AlertDialog.Builder(MainActivity.getInstance())
-                            .setTitle(MainActivity.getInstance().getString(R.string.select_class))
+                    new AlertDialog.Builder(mMainActivity)
+                            .setTitle(mMainActivity.getString(R.string.select_class))
                             .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int number) {
+                                public void onClick(DialogInterface mDialog, int number) {
                                     new SyncTask(selected[0]).execute();
                                 }
                             })
                             .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int number) {
+                                public void onClick(DialogInterface mDialog, int number) {
                                     selected[0] = number + 1;
                                 }
                             })
@@ -93,8 +94,8 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
             });
         }
 
-        if(dialog != null) {
-            dialog.dismiss();
+        if(mDialog != null) {
+            mDialog.dismiss();
         }
     }
 }

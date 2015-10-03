@@ -155,7 +155,7 @@ public class Parser {
         // get room
         try {
             _room = lesson.select(QUERY_ROOM).get(num).html();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             // do nothing, no room
         }
 

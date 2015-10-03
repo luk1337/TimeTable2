@@ -1,5 +1,6 @@
 package com.luk.timetable2.listeners.SettingsActivity;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.Preference;
 
@@ -11,13 +12,19 @@ import org.apache.commons.io.FilenameUtils;
  * Created by luk on 9/22/15.
  */
 public class URLChangeListener implements Preference.OnPreferenceChangeListener {
+    private final Activity mActivity;
+
+    public URLChangeListener(Activity activity) {
+        mActivity = activity;
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         SharedPreferences.Editor editor = preference.getSharedPreferences().edit();
         editor.putString("school", fixURL((String) newValue));
         editor.apply();
 
-        SettingsActivity.getInstance().recreate();
+        mActivity.recreate();
 
         return false;
     }

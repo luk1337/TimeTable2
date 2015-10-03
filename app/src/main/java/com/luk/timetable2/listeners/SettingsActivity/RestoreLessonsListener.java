@@ -1,5 +1,6 @@
 package com.luk.timetable2.listeners.SettingsActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.luk.timetable2.activities.MainActivity;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.tasks.RestoreLessonTask;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,6 +27,12 @@ import java.util.List;
  * Created by luk on 9/22/15.
  */
 public class RestoreLessonsListener implements Preference.OnPreferenceClickListener {
+    private final Activity mActivity;
+
+    public RestoreLessonsListener(Activity activity) {
+        mActivity = activity;
+    }
+
     @Override
     public boolean onPreferenceClick(final Preference preference) {
         final Context context = preference.getContext();
@@ -58,22 +66,15 @@ public class RestoreLessonsListener implements Preference.OnPreferenceClickListe
                     .setTitle(resources.getString(R.string.restore_title))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            File dbFile = context.getDatabasePath("db");
-                            SQLiteDatabase db = context.openOrCreateDatabase(dbFile.getAbsolutePath(), Context.MODE_PRIVATE, null);
-
                             for (int i = 0; i < view.getChildCount(); i++) {
                                 if (view.getChildAt(i).getTag() != null) {
                                     CheckBox checkBox = (CheckBox) view.getChildAt(i);
 
                                     if (checkBox.isChecked()) {
-                                        SQLiteStatement stmt = db.compileStatement("UPDATE `lessons` SET hidden = '0' WHERE _id = ?");
-                                        stmt.bindString(1, checkBox.getTag().toString());
-                                        stmt.execute();
+                                        new RestoreLessonTask(mActivity, checkBox.getTag().toString()).execute();
                                     }
                                 }
                             }
-
-                            MainActivity.getInstance().recreate();
                         }
                     })
                     .setNegativeButton(android.R.string.no, null)

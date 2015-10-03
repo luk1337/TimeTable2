@@ -1,7 +1,9 @@
 package com.luk.timetable2.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -71,15 +73,10 @@ public class MainActivity extends AppCompatActivity {
         if (mCurrentTheme != Utils.getCurrentTheme(this)) {
             recreate();
         }
+        
+        mViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
 
         super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        sInstance = null;
-
-        super.onDestroy();
     }
 
     @Override

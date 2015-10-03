@@ -20,8 +20,6 @@ import com.luk.timetable2.listeners.SettingsActivity.URLChangeListener;
  * Created by luk on 9/22/15.
  */
 public class SettingsActivity extends AppCompatActivity {
-    private static SettingsActivity sInstance;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setTheme(Utils.getCurrentTheme(this));
@@ -29,15 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_settings);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-
-        sInstance = this;
-    }
-
-    @Override
-    protected void onDestroy() {
-        sInstance = null;
-
-        super.onDestroy();
     }
 
     @Override
@@ -51,10 +40,6 @@ public class SettingsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static SettingsActivity getInstance() {
-        return sInstance;
-    }
-
     public static class SettingsFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -66,11 +51,11 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(findPreference("theme"));
             bindPreferenceSummaryToValue(findPreference("themeAccent"));
 
-            findPreference("school").setOnPreferenceChangeListener(new URLChangeListener());
-            findPreference("theme").setOnPreferenceChangeListener(new ThemeChangeListener());
-            findPreference("themeAccent").setOnPreferenceChangeListener(new ThemeChangeListener());
-            findPreference("notifications_vibrate").setOnPreferenceChangeListener(new NotificationsChangeListener());
-            findPreference("restore_lessons").setOnPreferenceClickListener(new RestoreLessonsListener());
+            findPreference("school").setOnPreferenceChangeListener(new URLChangeListener(getActivity()));
+            findPreference("theme").setOnPreferenceChangeListener(new ThemeChangeListener(getActivity()));
+            findPreference("themeAccent").setOnPreferenceChangeListener(new ThemeChangeListener(getActivity()));
+            findPreference("notifications_vibrate").setOnPreferenceChangeListener(new NotificationsChangeListener(getActivity()));
+            findPreference("restore_lessons").setOnPreferenceClickListener(new RestoreLessonsListener(getActivity()));
         }
 
         /**

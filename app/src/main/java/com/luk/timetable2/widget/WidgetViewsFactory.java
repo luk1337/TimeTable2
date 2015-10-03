@@ -15,13 +15,13 @@ import java.util.List;
  * Created by luk on 5/12/15.
  */
 public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    private Context context = null;
-    private Integer[] widgetColors;
-    private ArrayList<String[]> lessons = new ArrayList<>();
+    private Context mContext = null;
+    private Integer[] mWidgetColors;
+    private ArrayList<String[]> mLessons = new ArrayList<>();
 
-    public WidgetViewsFactory(Context context, String variant) {
-        this.context = context;
-        this.widgetColors = Utils.getWidgetColorsForVariant(variant);
+    public WidgetViewsFactory(Context mContext, String variant) {
+        this.mContext = mContext;
+        this.mWidgetColors = Utils.getWidgetColorsForVariant(variant);
     }
 
     @Override
@@ -30,27 +30,27 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
     }
 
     private void loadLessons() {
-        lessons.clear();
+        mLessons.clear();
 
-        // load lessons for current day
+        // load mLessons for current day
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK) - 2;
         if(day == -1 || day == 5) day = 0; // set monday
 
-        ArrayList<List<String>> hours = Utils.getHours(context, day);
+        ArrayList<List<String>> hours = Utils.getHours(mContext, day);
 
         if (hours == null) return;
 
         for (List<String> hour : hours) {
-            ArrayList<List<String>> lessons = Utils.getLessonsForHour(context, day, hour.get(0));
+            ArrayList<List<String>> mLessons = Utils.getLessonsForHour(mContext, day, hour.get(0));
 
-            if (lessons == null) return;
+            if (mLessons == null) return;
 
             String _lesson = "";
             String _room = "";
             String _hour = hour.get(0);
 
-            for (List<String> l : lessons) {
+            for (List<String> l : mLessons) {
                 // set lesson names
                 _lesson += l.get(0) + "\n";
 
@@ -58,7 +58,7 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
                 _room += l.get(1) + " / ";
             }
 
-            this.lessons.add(new String[]{_lesson.substring(0, _lesson.length() - 1), _hour + "\n" + _room.substring(0, _room.length() - 3)});
+            this.mLessons.add(new String[]{_lesson.substring(0, _lesson.length() - 1), _hour + "\n" + _room.substring(0, _room.length() - 3)});
         }
     }
 
@@ -74,23 +74,23 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public int getCount() {
-        return lessons.size();
+        return mLessons.size();
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews lesson = new RemoteViews(context.getPackageName(), R.layout.widget_lesson);
+        RemoteViews lesson = new RemoteViews(mContext.getPackageName(), R.layout.widget_lesson);
 
         // set lesson name
-        lesson.setTextViewText(R.id.lesson, lessons.get(position)[0]);
+        lesson.setTextViewText(R.id.lesson, mLessons.get(position)[0]);
 
         // set lesson additional info { hours, classroom }
-        lesson.setTextViewText(R.id.info, lessons.get(position)[1]);
+        lesson.setTextViewText(R.id.info, mLessons.get(position)[1]);
 
         // set colors
-        lesson.setInt(R.id.background, "setBackgroundResource", widgetColors[0]);
-        lesson.setTextColor(R.id.lesson, context.getResources().getColor(widgetColors[2]));
-        lesson.setTextColor(R.id.info, context.getResources().getColor(widgetColors[2]));
+        lesson.setInt(R.id.background, "setBackgroundResource", mWidgetColors[0]);
+        lesson.setTextColor(R.id.lesson, mContext.getResources().getColor(mWidgetColors[2]));
+        lesson.setTextColor(R.id.info, mContext.getResources().getColor(mWidgetColors[2]));
 
         return lesson;
     }

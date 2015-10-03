@@ -5,8 +5,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.luk.timetable2.Utils;
@@ -36,13 +38,15 @@ public class LessonNotifyService extends Service {
 
     @Override
     public void onCreate() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         long nearestDate = getNearestDate();
+
+        if (!sharedPref.getBoolean("notifications_vibrate", false) || nearestDate == -1) return;
+
         Intent intent = new Intent(getApplicationContext(), LessonNotifyReceiver.class);
 
         sAlarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         sPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-
-        if (nearestDate == -1) return;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             sAlarmManager.setExact(AlarmManager.RTC_WAKEUP, nearestDate, sPendingIntent);

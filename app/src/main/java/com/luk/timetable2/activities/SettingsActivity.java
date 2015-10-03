@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.listeners.SettingsActivity.NotificationsChangeListener;
 import com.luk.timetable2.listeners.SettingsActivity.RestoreLessonsListener;
 import com.luk.timetable2.listeners.SettingsActivity.ThemeChangeListener;
 import com.luk.timetable2.listeners.SettingsActivity.URLChangeListener;
@@ -61,6 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
             findPreference("school").setOnPreferenceChangeListener(new URLChangeListener());
             findPreference("theme").setOnPreferenceChangeListener(new ThemeChangeListener());
             findPreference("themeAccent").setOnPreferenceChangeListener(new ThemeChangeListener());
+            findPreference("notifications_vibrate").setOnPreferenceChangeListener(new NotificationsChangeListener());
             findPreference("restore_lessons").setOnPreferenceClickListener(new RestoreLessonsListener());
         }
 

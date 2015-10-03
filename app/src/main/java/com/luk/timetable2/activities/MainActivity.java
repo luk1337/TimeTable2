@@ -118,10 +118,6 @@ public class MainActivity extends AppCompatActivity {
         return mDaySelector;
     }
 
-    public int getCurrentTheme() {
-        return mCurrentTheme;
-    }
-
     public int getDay() {
         return mDay;
     }

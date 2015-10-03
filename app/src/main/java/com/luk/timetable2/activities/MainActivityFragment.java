@@ -33,7 +33,7 @@ public class MainActivityFragment extends Fragment {
         mainLayout.removeAllViews();
 
         ArrayList<List<String>> hours = Utils.getHours(getActivity(), day);
-        Integer[] colors = Utils.getColorsForVariant(MainActivity.getInstance().getCurrentTheme());
+        Integer[] colors = Utils.getColorsForVariant(Utils.getCurrentTheme(getActivity()));
 
         if (hours == null) return null;
 

@@ -24,11 +24,13 @@ public class MainActivityFragment extends Fragment {
     public static final String ARG_DAY = "day";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         int day = getArguments().getInt(ARG_DAY);
         View rootView = inflater.inflate(R.layout.layout_lessons, container, false);
 
-        LayoutInflater mInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater mInflater =
+                (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout mainLayout = (LinearLayout) rootView.findViewById(R.id.mainLayout);
         mainLayout.removeAllViews();
 
@@ -38,7 +40,8 @@ public class MainActivityFragment extends Fragment {
         if (hours == null) return null;
 
         for (List<String> hour : hours) {
-            ArrayList<List<String>> lessons = Utils.getLessonsForHour(getActivity(), day, hour.get(0));
+            ArrayList<List<String>> lessons =
+                    Utils.getLessonsForHour(getActivity(), day, hour.get(0));
 
             if (lessons == null) continue;
 
@@ -67,7 +70,8 @@ public class MainActivityFragment extends Fragment {
                 info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
 
                 // set long click listener
-                template.findViewById(R.id.card_lesson).setOnLongClickListener(new DeleteDialogListener((MainActivity) getActivity(), day));
+                template.findViewById(R.id.card_lesson).setOnLongClickListener(
+                        new DeleteDialogListener((MainActivity) getActivity(), day));
 
                 // set colors
                 cardView.setCardBackgroundColor(getActivity().getResources().getColor(colors[0]));

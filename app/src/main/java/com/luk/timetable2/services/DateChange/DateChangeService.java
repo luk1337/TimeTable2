@@ -19,7 +19,11 @@ public class DateChangeService extends Service {
     @Override
     public void onCreate() {
         sDateChangeReceiver = new DateChangeReceiver();
-        getApplicationContext().registerReceiver(sDateChangeReceiver, new IntentFilter(Intent.ACTION_TIME_CHANGED));
+
+        getApplicationContext().registerReceiver(
+                sDateChangeReceiver,
+                new IntentFilter(Intent.ACTION_TIME_CHANGED)
+        );
     }
 
     @Override

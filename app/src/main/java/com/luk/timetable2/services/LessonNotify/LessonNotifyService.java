@@ -45,7 +45,8 @@ public class LessonNotifyService extends Service {
 
         Intent intent = new Intent(getApplicationContext(), LessonNotifyReceiver.class);
 
-        sAlarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        sAlarmManager =
+                (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         sPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

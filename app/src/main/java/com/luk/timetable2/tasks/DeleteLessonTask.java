@@ -22,7 +22,9 @@ public class DeleteLessonTask extends AsyncTask<Integer, Integer, Integer> {
     private ArrayList<List<String>> mLessons;
     private Integer mLessonSelected;
 
-    public DeleteLessonTask(MainActivity mainActivity, boolean isSingleLesson, String hour, int day, @Nullable ArrayList<List<String>> lessons, @Nullable Integer lessonSelected) {
+    public DeleteLessonTask(MainActivity mainActivity, boolean isSingleLesson, String hour, int day,
+                            @Nullable ArrayList<List<String>> lessons,
+                            @Nullable Integer lessonSelected) {
         mMainActivity = mainActivity;
         mIsSingleLesson = isSingleLesson;
         mHour = hour;
@@ -36,13 +38,19 @@ public class DeleteLessonTask extends AsyncTask<Integer, Integer, Integer> {
         SQLiteDatabase sqLiteDatabase = DatabaseHandler.getInstance().getDB(mMainActivity);
 
         if (mIsSingleLesson) {
-            SQLiteStatement stmt = sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ?");
+            SQLiteStatement stmt = sqLiteDatabase.compileStatement(
+                    "UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ?"
+            );
+
             stmt.bindString(1, String.valueOf(mDay));
             stmt.bindString(2, mHour);
 
             stmt.execute();
         } else {
-            SQLiteStatement stmt = sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ? AND lesson = ?");
+            SQLiteStatement stmt = sqLiteDatabase.compileStatement(
+                    "UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ? AND lesson = ?"
+            );
+
             stmt.bindString(1, String.valueOf(mDay));
             stmt.bindString(2, mHour);
 

@@ -25,7 +25,8 @@ public class Utils {
     private static String TAG = "Utils";
 
     public boolean isOnline(Activity activity) {
-        ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm =
+                (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
@@ -36,7 +37,8 @@ public class Utils {
         SQLiteDatabase db = databaseHandler.getDB(context);
 
         try {
-            Cursor c = db.rawQuery(String.format("SELECT time FROM lessons WHERE day = '%d' AND hidden = '0' GROUP by time ORDER by _id", day), null);
+            Cursor c = db.rawQuery(String.format("SELECT time FROM lessons WHERE day = '%d'" +
+                    " AND hidden = '0' GROUP by time ORDER by _id", day), null);
 
             if (c.moveToFirst()) {
                 do {
@@ -46,7 +48,7 @@ public class Utils {
 
             c.close();
             db.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "", e);
             return null;
         }
@@ -54,23 +56,30 @@ public class Utils {
         return array;
     }
 
-    public static ArrayList<List<String>> getLessonsForHour(Context context, Integer day, String hour) {
+    public static ArrayList<List<String>> getLessonsForHour(Context context, Integer day,
+                                                            String hour) {
         ArrayList<List<String>> array = new ArrayList<>();
         DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
         SQLiteDatabase db = databaseHandler.getDB(context);
 
         try {
-            Cursor c = db.rawQuery(String.format("SELECT * from lessons WHERE day = '%d' AND time = '%s' AND hidden = '0'", day, hour), null);
+            Cursor c = db.rawQuery(String.format("SELECT * from lessons WHERE day = '%d'" +
+                    " AND time = '%s' AND hidden = '0'", day, hour), null);
 
             if (c.moveToFirst()) {
                 do {
-                    array.add(Arrays.asList(c.getString(2), c.getString(3), c.getString(4), String.valueOf(c.getInt(0))));
+                    array.add(Arrays.asList(
+                            c.getString(2),
+                            c.getString(3),
+                            c.getString(4),
+                            String.valueOf(c.getInt(0))
+                    ));
                 } while (c.moveToNext());
             }
 
             c.close();
             db.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "", e);
             return null;
         }
@@ -84,17 +93,23 @@ public class Utils {
         SQLiteDatabase db = databaseHandler.getDB(context);
 
         try {
-            Cursor c = db.rawQuery(String.format("SELECT * from lessons WHERE day = '%d' AND hidden = '1'", day), null);
+            Cursor c = db.rawQuery(String.format("SELECT * from lessons WHERE day = '%d'" +
+                    " AND hidden = '1'", day), null);
 
             if (c.moveToFirst()) {
                 do {
-                    array.add(Arrays.asList(c.getString(2), c.getString(3), c.getString(4), String.valueOf(c.getInt(0))));
+                    array.add(Arrays.asList(
+                            c.getString(2),
+                            c.getString(3),
+                            c.getString(4),
+                            String.valueOf(c.getInt(0))
+                    ));
                 } while (c.moveToNext());
             }
 
             c.close();
             db.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "", e);
             return null;
         }
@@ -103,21 +118,28 @@ public class Utils {
     }
 
     public static void refreshWidgets(Context context) {
-        HashMap<Integer, int[]> widgets = new HashMap<>();
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        String[] widgets = new String[]{
+                "com.luk.timetable2.widget.dark.WidgetProvider",
+                "com.luk.timetable2.widget.dark.red.WidgetProvider",
+                "com.luk.timetable2.widget.dark.green.WidgetProvider",
+                "com.luk.timetable2.widget.dark.blue.WidgetProvider",
+                "com.luk.timetable2.widget.light.WidgetProvider",
+                "com.luk.timetable2.widget.light.red.WidgetProvider",
+                "com.luk.timetable2.widget.light.green.WidgetProvider",
+                "com.luk.timetable2.widget.light.blue.WidgetProvider",
+        };
 
-        widgets.put(0, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.dark.WidgetProvider.class)));
-        widgets.put(1, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.dark.red.WidgetProvider.class)));
-        widgets.put(2, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.dark.green.WidgetProvider.class)));
-        widgets.put(3, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.dark.blue.WidgetProvider.class)));
+        for (String widget : widgets) {
+            try {
+                Class<?> widgetClass = Class.forName(widget);
+                ComponentName componentName = new ComponentName(context, widgetClass);
 
-        widgets.put(4, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.light.WidgetProvider.class)));
-        widgets.put(5, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.light.red.WidgetProvider.class)));
-        widgets.put(6, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.light.green.WidgetProvider.class)));
-        widgets.put(7, AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, com.luk.timetable2.widget.light.blue.WidgetProvider.class)));
-
-        for (int i = 0; i < widgets.size(); i++) {
-            for (int widgetID : widgets.get(i)) {
-                AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(widgetID, R.id.widget);
+                for (int widgetID : appWidgetManager.getAppWidgetIds(componentName)) {
+                    appWidgetManager.notifyAppWidgetViewDataChanged(widgetID, R.id.widget);
+                }
+            } catch (ClassNotFoundException e) {
+                Log.e(TAG, "", e);
             }
         }
     }
@@ -149,15 +171,23 @@ public class Utils {
     public static Integer[] getWidgetColorsForVariant(String variant) {
         HashMap<String, Integer[]> variants = new HashMap<>();
 
-        variants.put("dark", new Integer[] { R.color.colorPrimary_Dark, R.color.colorWidgetBG_Dark, android.R.color.white });
-        variants.put("dark_red", new Integer[] { R.color.colorPrimary_Red, R.color.colorWidgetBG_Dark, android.R.color.white });
-        variants.put("dark_green", new Integer[] { R.color.colorPrimary_Green, R.color.colorWidgetBG_Dark, android.R.color.white });
-        variants.put("dark_blue", new Integer[] { R.color.colorPrimary_Blue, R.color.colorWidgetBG_Dark, android.R.color.white });
+        variants.put("dark", new Integer[]{
+                R.color.colorPrimary_Dark, R.color.colorWidgetBG_Dark, android.R.color.white});
+        variants.put("dark_red", new Integer[]{
+                R.color.colorPrimary_Red, R.color.colorWidgetBG_Dark, android.R.color.white});
+        variants.put("dark_green", new Integer[]{
+                R.color.colorPrimary_Green, R.color.colorWidgetBG_Dark, android.R.color.white});
+        variants.put("dark_blue", new Integer[]{
+                R.color.colorPrimary_Blue, R.color.colorWidgetBG_Dark, android.R.color.white});
 
-        variants.put("light", new Integer[] { R.color.colorPrimary_Light, R.color.colorWidgetBG_Light, android.R.color.black });
-        variants.put("light_red", new Integer[] { R.color.colorPrimary_Red, R.color.colorWidgetBG_Light, android.R.color.black });
-        variants.put("light_green", new Integer[] { R.color.colorPrimary_Green, R.color.colorWidgetBG_Light, android.R.color.black });
-        variants.put("light_blue", new Integer[] { R.color.colorPrimary_Blue, R.color.colorWidgetBG_Light, android.R.color.black });
+        variants.put("light", new Integer[]{
+                R.color.colorPrimary_Light, R.color.colorWidgetBG_Light, android.R.color.black});
+        variants.put("light_red", new Integer[]{
+                R.color.colorPrimary_Red, R.color.colorWidgetBG_Light, android.R.color.black});
+        variants.put("light_green", new Integer[]{
+                R.color.colorPrimary_Green, R.color.colorWidgetBG_Light, android.R.color.black});
+        variants.put("light_blue", new Integer[]{
+                R.color.colorPrimary_Blue, R.color.colorWidgetBG_Light, android.R.color.black});
 
         return variants.get(variant);
     }
@@ -165,15 +195,23 @@ public class Utils {
     public static Integer[] getColorsForVariant(int variant) {
         HashMap<Integer, Integer[]> variants = new HashMap<>();
 
-        variants.put(R.style.AppTheme_Dark, new Integer[] { R.color.colorPrimary_Dark, android.R.color.white });
-        variants.put(R.style.AppTheme_Dark_Red, new Integer[] { R.color.colorPrimary_Red, android.R.color.white });
-        variants.put(R.style.AppTheme_Dark_Green, new Integer[] { R.color.colorPrimary_Green, android.R.color.white });
-        variants.put(R.style.AppTheme_Dark_Blue, new Integer[] { R.color.colorPrimary_Blue, android.R.color.white });
+        variants.put(R.style.AppTheme_Dark, new Integer[]{R.color.colorPrimary_Dark,
+                android.R.color.white});
+        variants.put(R.style.AppTheme_Dark_Red, new Integer[]{R.color.colorPrimary_Red,
+                android.R.color.white});
+        variants.put(R.style.AppTheme_Dark_Green, new Integer[]{R.color.colorPrimary_Green,
+                android.R.color.white});
+        variants.put(R.style.AppTheme_Dark_Blue, new Integer[]{R.color.colorPrimary_Blue,
+                android.R.color.white});
 
-        variants.put(R.style.AppTheme_Light, new Integer[] { R.color.colorPrimary_Light, android.R.color.black });
-        variants.put(R.style.AppTheme_Light_Red, new Integer[] { R.color.colorPrimary_Red, android.R.color.black });
-        variants.put(R.style.AppTheme_Light_Green, new Integer[] { R.color.colorPrimary_Green, android.R.color.black });
-        variants.put(R.style.AppTheme_Light_Blue, new Integer[] { R.color.colorPrimary_Blue, android.R.color.black });
+        variants.put(R.style.AppTheme_Light, new Integer[]{R.color.colorPrimary_Light,
+                android.R.color.black});
+        variants.put(R.style.AppTheme_Light_Red, new Integer[]{R.color.colorPrimary_Red,
+                android.R.color.black});
+        variants.put(R.style.AppTheme_Light_Green, new Integer[]{R.color.colorPrimary_Green,
+                android.R.color.black});
+        variants.put(R.style.AppTheme_Light_Blue, new Integer[]{R.color.colorPrimary_Blue,
+                android.R.color.black});
 
         return variants.get(variant);
     }

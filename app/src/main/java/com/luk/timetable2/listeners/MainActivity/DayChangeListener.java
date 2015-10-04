@@ -9,11 +9,13 @@ import com.luk.timetable2.activities.MainActivity;
 /**
  * Created by luk on 9/13/15.
  */
-public class DayChangeListener implements AdapterView.OnItemSelectedListener, ViewPager.OnPageChangeListener {
+public class DayChangeListener implements AdapterView.OnItemSelectedListener,
+        ViewPager.OnPageChangeListener {
     private MainActivity mMainActivity;
 
     public DayChangeListener(MainActivity mainActivity) {
-        mMainActivity = mainActivity;;
+        mMainActivity = mainActivity;
+        ;
     }
 
     @Override

@@ -17,10 +17,12 @@ public class LessonNotifyIntent extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         if (sharedPref.getBoolean("notifications_vibrate", false)) {
-            Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            Vibrator v =
+                    (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
             v.vibrate(200);
         }
 

@@ -37,7 +37,12 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
     protected Integer doInBackground(Integer... strings) {
         mMainActivity.runOnUiThread(new Runnable() {
             public void run() {
-                mDialog = ProgressDialog.show(mMainActivity, null, mMainActivity.getString(R.string.sync_in_progress), true);
+                mDialog = ProgressDialog.show(
+                        mMainActivity,
+                        null,
+                        mMainActivity.getString(R.string.sync_in_progress),
+                        true
+                );
             }
         });
 
@@ -70,19 +75,20 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
             final int[] selected = {1};
 
             for (int i = 1; i <= mData.size(); i++) {
-                items[i -1] = mData.get(i);
+                items[i - 1] = mData.get(i);
             }
 
             mMainActivity.runOnUiThread(new Runnable() {
                 public void run() {
                     new AlertDialog.Builder(mMainActivity)
                             .setTitle(mMainActivity.getString(R.string.select_class))
-                            .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface mDialog, int number) {
-                                    new SyncTask(mMainActivity, selected[0]).execute();
-                                }
-                            })
+                            .setPositiveButton(android.R.string.yes,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface mDialog, int number) {
+                                            new SyncTask(mMainActivity, selected[0]).execute();
+                                        }
+                                    })
                             .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface mDialog, int number) {
@@ -94,7 +100,7 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
             });
         }
 
-        if(mDialog != null) {
+        if (mDialog != null) {
             mDialog.dismiss();
         }
     }

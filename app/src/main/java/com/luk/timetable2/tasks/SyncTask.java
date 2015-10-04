@@ -44,7 +44,12 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
     protected Integer doInBackground(Integer... strings) {
         mMainActivity.runOnUiThread(new Runnable() {
             public void run() {
-                mDialog = ProgressDialog.show(mMainActivity, null, mMainActivity.getString(R.string.sync_in_progress), true);
+                mDialog = ProgressDialog.show(
+                        mMainActivity,
+                        null,
+                        mMainActivity.getString(R.string.sync_in_progress),
+                        true
+                );
             }
         });
 
@@ -74,7 +79,10 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
                     _lesson += String.format(" (%s)", _group);
                 }
 
-                SQLiteStatement stmt = db.compileStatement("INSERT INTO `lessons` VALUES (NULL, ?, ?, ?, ?, '0');");
+                SQLiteStatement stmt = db.compileStatement(
+                        "INSERT INTO `lessons` VALUES (NULL, ?, ?, ?, ?, '0');"
+                );
+
                 stmt.bindString(1, String.valueOf(day - 1));
                 stmt.bindString(2, _lesson);
                 stmt.bindString(3, _room);

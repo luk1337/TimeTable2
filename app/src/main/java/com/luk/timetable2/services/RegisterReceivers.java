@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class RegisterReceivers extends BroadcastReceiver {
     private static String TAG = "RegisterReceivers";
-    private static String[] SERVICES = new String[] {
+    private static String[] SERVICES = new String[]{
             "com.luk.timetable2.services.DateChange.DateChangeService",
             "com.luk.timetable2.services.LessonNotify.LessonNotifyService",
             "com.luk.timetable2.services.WidgetRefresh.WidgetRefreshService"

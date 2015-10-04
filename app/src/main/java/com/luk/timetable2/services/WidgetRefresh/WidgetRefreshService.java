@@ -26,7 +26,8 @@ public class WidgetRefreshService extends Service {
     public void onCreate() {
         Intent intent = new Intent(getApplicationContext(), WidgetRefreshReceiver.class);
 
-        sAlarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        sAlarmManager =
+                (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         sPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
@@ -36,11 +37,21 @@ public class WidgetRefreshService extends Service {
         calendar.set(Calendar.SECOND, 0);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sAlarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sPendingIntent);
+            sAlarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),
+                    sPendingIntent
+            );
+
             return;
         }
 
-        sAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sPendingIntent);
+        sAlarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,
+                sPendingIntent
+        );
     }
 
     @Override

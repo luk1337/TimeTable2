@@ -22,7 +22,8 @@ public class DatabaseHandler {
         SQLiteDatabase sqLiteDatabase = getDB(context);
 
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS lessons;");
-        sqLiteDatabase.execSQL("CREATE TABLE lessons ( _id INTEGER PRIMARY KEY AUTOINCREMENT, day INTEGER, lesson TEXT, room TEXT, time TEXT, hidden TEXT );");
+        sqLiteDatabase.execSQL("CREATE TABLE lessons ( _id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " day INTEGER, lesson TEXT, room TEXT, time TEXT, hidden TEXT );");
     }
 
     public static DatabaseHandler getInstance() {

@@ -67,7 +67,10 @@ public class RestoreLessonsListener implements Preference.OnPreferenceClickListe
                                     CheckBox checkBox = (CheckBox) view.getChildAt(i);
 
                                     if (checkBox.isChecked()) {
-                                        new RestoreLessonTask(mActivity, checkBox.getTag().toString()).execute();
+                                        new RestoreLessonTask(
+                                                mActivity,
+                                                checkBox.getTag().toString()
+                                        ).execute();
                                     }
                                 }
                             }

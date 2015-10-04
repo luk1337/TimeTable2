@@ -63,12 +63,20 @@ class Task extends AsyncTask<Integer, Integer, Integer> {
                 public void run() {
                     new AlertDialog.Builder(mMainActivity)
                             .setTitle(mMainActivity.getString(R.string.select_lesson))
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int number) {
-                                    new DeleteLessonTask(mMainActivity, false, mHour, mDay, lessons, selected[0]).execute();
-                                }
-                            })
+                            .setPositiveButton(android.R.string.yes,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int number) {
+                                            new DeleteLessonTask(
+                                                    mMainActivity,
+                                                    false,
+                                                    mHour,
+                                                    mDay,
+                                                    lessons,
+                                                    selected[0]
+                                            ).execute();
+                                        }
+                                    })
                             .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int number) {
@@ -86,7 +94,14 @@ class Task extends AsyncTask<Integer, Integer, Integer> {
                             .setMessage(mMainActivity.getString(R.string.hide_text))
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    new DeleteLessonTask(mMainActivity, true, mHour, mDay, null, null).execute();
+                                    new DeleteLessonTask(
+                                            mMainActivity,
+                                            true,
+                                            mHour,
+                                            mDay,
+                                            null,
+                                            null
+                                    ).execute();
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null)

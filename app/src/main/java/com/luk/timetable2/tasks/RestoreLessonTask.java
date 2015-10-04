@@ -23,7 +23,8 @@ public class RestoreLessonTask extends AsyncTask<Integer, Integer, Integer> {
     protected Integer doInBackground(Integer... strings) {
         SQLiteDatabase sqLiteDatabase = DatabaseHandler.getInstance().getDB(mActivity);
 
-        SQLiteStatement stmt = sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '0' WHERE _id = ?");
+        SQLiteStatement stmt =
+                sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '0' WHERE _id = ?");
         stmt.bindString(1, mId);
         stmt.execute();
 

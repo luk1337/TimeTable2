@@ -51,45 +51,51 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(findPreference("theme"));
             bindPreferenceSummaryToValue(findPreference("themeAccent"));
 
-            findPreference("school").setOnPreferenceChangeListener(new URLChangeListener(getActivity()));
-            findPreference("theme").setOnPreferenceChangeListener(new ThemeChangeListener(getActivity()));
-            findPreference("themeAccent").setOnPreferenceChangeListener(new ThemeChangeListener(getActivity()));
-            findPreference("notifications_vibrate").setOnPreferenceChangeListener(new NotificationsChangeListener(getActivity()));
-            findPreference("restore_lessons").setOnPreferenceClickListener(new RestoreLessonsListener(getActivity()));
+            findPreference("school").setOnPreferenceChangeListener(
+                    new URLChangeListener(getActivity()));
+            findPreference("theme").setOnPreferenceChangeListener(
+                    new ThemeChangeListener(getActivity()));
+            findPreference("themeAccent").setOnPreferenceChangeListener(
+                    new ThemeChangeListener(getActivity()));
+            findPreference("notifications_vibrate").setOnPreferenceChangeListener(
+                    new NotificationsChangeListener(getActivity()));
+            findPreference("restore_lessons").setOnPreferenceClickListener(
+                    new RestoreLessonsListener(getActivity()));
         }
 
         /**
          * A preference value change listener that updates the preference's summary
          * to reflect its new value.
          */
-        private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object value) {
-                String stringValue = value.toString();
+        private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener =
+                new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object value) {
+                        String stringValue = value.toString();
 
-                if (preference instanceof ListPreference) {
-                    // For list preferences, look up the correct display value in
-                    // the preference's 'entries' list.
-                    ListPreference listPreference = (ListPreference) preference;
-                    int index = listPreference.findIndexOfValue(stringValue);
+                        if (preference instanceof ListPreference) {
+                            // For list preferences, look up the correct display value in
+                            // the preference's 'entries' list.
+                            ListPreference listPreference = (ListPreference) preference;
+                            int index = listPreference.findIndexOfValue(stringValue);
 
-                    // Set the summary to reflect the new value.
-                    preference.setSummary(
-                            index >= 0
-                                    ? listPreference.getEntries()[index]
-                                    : null);
-                } else {
-                    // For all other preferences, set the summary to the value's
-                    // simple string representation.
+                            // Set the summary to reflect the new value.
+                            preference.setSummary(
+                                    index >= 0
+                                            ? listPreference.getEntries()[index]
+                                            : null);
+                        } else {
+                            // For all other preferences, set the summary to the value's
+                            // simple string representation.
 
-                    if (value.toString().equals(""))
-                        return false;
+                            if (value.toString().equals(""))
+                                return false;
 
-                    preference.setSummary(stringValue);
-                }
-                return true;
-            }
-        };
+                            preference.setSummary(stringValue);
+                        }
+                        return true;
+                    }
+                };
 
         /**
          * Binds a preference's summary to its value. More specifically, when the

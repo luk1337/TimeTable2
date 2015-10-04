@@ -36,7 +36,8 @@ public class URLChangeListener implements Preference.OnPreferenceChangeListener 
             return FilenameUtils.getFullPath(url) + FilenameUtils.getBaseName(url);
         }
 
-        if (FilenameUtils.getFullPath(url).equals("http:/") || FilenameUtils.getFullPath(url).equals("http://")) {
+        if (FilenameUtils.getFullPath(url).equals("http:/") ||
+                FilenameUtils.getFullPath(url).equals("http://")) {
             return FilenameUtils.getFullPath(url + "/");
         }
 

@@ -31,7 +31,7 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+                         int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
         ComponentName watchWidget = new ComponentName(context, WidgetProvider.class);
 

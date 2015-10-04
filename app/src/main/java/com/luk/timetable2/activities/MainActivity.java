@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Setup layout
-        mCurrentTheme = Utils.getCurrentTheme(this);
-        setTheme(mCurrentTheme);
+        setTheme(mCurrentTheme = Utils.getCurrentTheme(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

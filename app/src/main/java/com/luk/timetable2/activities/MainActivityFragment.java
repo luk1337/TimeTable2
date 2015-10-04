@@ -3,6 +3,7 @@ package com.luk.timetable2.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,8 +76,8 @@ public class MainActivityFragment extends Fragment {
 
                 // set colors
                 cardView.setCardBackgroundColor(getActivity().getResources().getColor(colors[0]));
-                lesson.setTextColor(getActivity().getResources().getColor(colors[1]));
-                info.setTextColor(getActivity().getResources().getColor(colors[1]));
+                lesson.setTextColor(ContextCompat.getColor(getActivity(), (colors[1])));
+                info.setTextColor(ContextCompat.getColor(getActivity(), colors[1]));
 
                 // add to view
                 mainLayout.addView(template);

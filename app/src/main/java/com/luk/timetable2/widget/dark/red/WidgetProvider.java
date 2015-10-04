@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.widget.RemoteViews;
 
 import com.luk.timetable2.R;
@@ -56,7 +57,7 @@ public class WidgetProvider extends AppWidgetProvider {
         // set colors
         mView.setInt(R.id.background, "setBackgroundResource", widgetColors[1]);
         mView.setInt(R.id.header, "setBackgroundResource", widgetColors[0]);
-        mView.setTextColor(R.id.title, context.getResources().getColor(widgetColors[2]));
+        mView.setTextColor(R.id.title, ContextCompat.getColor(context, widgetColors[2]));
 
         Intent intent = new Intent(context, WidgetViewsService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);

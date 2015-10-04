@@ -25,7 +25,7 @@
             android:title="@string/pref_title_notification_vibrate" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_category_api" >
+    <PreferenceCategory android:title="@string/pref_category_api">
         <EditTextPreference
             android:key="school"
             android:title="@string/pref_title_school" />

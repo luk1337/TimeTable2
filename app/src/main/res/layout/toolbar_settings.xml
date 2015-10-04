@@ -6,5 +6,4 @@
     android:background="?attr/colorPrimary"
     android:minHeight="@dimen/abc_action_bar_default_height_material"
     app:navigationIcon="?attr/homeAsUpIndicator"
-    app:title="@string/title_activity_settings">
-</android.support.v7.widget.Toolbar>
+    app:title="@string/title_activity_settings" />

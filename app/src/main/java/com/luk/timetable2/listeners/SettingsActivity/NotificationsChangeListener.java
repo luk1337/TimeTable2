@@ -19,6 +19,7 @@ public class NotificationsChangeListener implements Preference.OnPreferenceChang
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mActivity.sendBroadcast(new Intent(mActivity, RegisterReceivers.class));
+        mActivity.recreate();
 
         return true;
     }

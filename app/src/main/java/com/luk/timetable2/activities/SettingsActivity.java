@@ -1,10 +1,12 @@
 package com.luk.timetable2.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -65,6 +67,17 @@ public class SettingsActivity extends AppCompatActivity {
                     new NotificationsLengthChangeListener(getActivity()));
             findPreference("restore_lessons").setOnPreferenceClickListener(
                     new RestoreLessonsListener(getActivity()));
+
+            if (!areNotificationsEnabled()) {
+                findPreference("notifications_vibrate_length").setEnabled(false);
+            }
+        }
+
+        private boolean areNotificationsEnabled() {
+            SharedPreferences sharedPref =
+                    PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+            return sharedPref.getBoolean("notifications_vibrate", false);
         }
 
         /**

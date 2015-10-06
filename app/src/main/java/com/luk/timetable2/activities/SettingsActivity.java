@@ -56,8 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(findPreference("notifications_vibrate_length"));
             bindPreferenceSummaryToValue(findPreference("notifications_vibrate_time"));
 
-            findPreference("school").setOnPreferenceChangeListener(
-                    new URLChangeListener(getActivity()));
+            findPreference("school").setOnPreferenceChangeListener(new URLChangeListener());
             findPreference("theme").setOnPreferenceChangeListener(
                     new ThemeChangeListener(getActivity()));
             findPreference("themeAccent").setOnPreferenceChangeListener(

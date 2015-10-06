@@ -24,7 +24,7 @@ import java.util.List;
 public class Utils {
     private static String TAG = "Utils";
 
-    public boolean isOnline(Activity activity) {
+    public static boolean isOnline(Activity activity) {
         ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

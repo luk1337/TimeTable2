@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.luk.timetable2.Parser;
 import com.luk.timetable2.R;
+import com.luk.timetable2.Utils;
 import com.luk.timetable2.activities.MainActivity;
 
 import java.util.HashMap;
@@ -61,11 +62,14 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
         super.onPostExecute(result);
 
         if (result == -1) {
+            final String msg = mMainActivity.getString(Utils.isOnline(mMainActivity) ?
+                    R.string.error_offline : R.string.error_no_network);
+
             mMainActivity.runOnUiThread(new Runnable() {
                 public void run() {
                     new AlertDialog.Builder(mMainActivity)
                             .setTitle(mMainActivity.getString(R.string.error_title))
-                            .setMessage(mMainActivity.getString(R.string.error_offline))
+                            .setMessage(msg)
                             .setPositiveButton(android.R.string.yes, null)
                             .show();
                 }

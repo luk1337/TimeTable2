@@ -1,6 +1,5 @@
 package com.luk.timetable2.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -29,18 +28,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Setup layout
-        setTheme(mCurrentTheme = Utils.getCurrentTheme(this));
+        super.setTheme(mCurrentTheme = Utils.getCurrentTheme(this));
         super.onCreate(savedInstanceState);
+
+        // Set layout
         setContentView(R.layout.activity_main);
 
         // Set toolbar
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar;
+
+        if ((actionBar = getSupportActionBar()) != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
         // Get current day
-        Calendar calendar = Calendar.getInstance();
-        mDay = calendar.get(Calendar.DAY_OF_WEEK) - 2;
+        mDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2;
         if (mDay == -1 || mDay == 5) mDay = 0; // set monday
 
         // Set current day
@@ -48,13 +51,8 @@ public class MainActivity extends AppCompatActivity {
         mDaySelector.setOnItemSelectedListener(new DayChangeListener(this));
         mDaySelector.setSelection(mDay);
 
-        // Hide title name
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
-
+        // Set view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
         mViewPager.addOnPageChangeListener(new DayChangeListener(this));
 
         // Start services
@@ -63,13 +61,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        super.onResume();
+
         if (mCurrentTheme != Utils.getCurrentTheme(this)) {
             recreate();
+            return;
         }
 
         refreshContent();
-
-        super.onResume();
     }
 
     @Override
@@ -77,24 +76,19 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu items for use in the action bar
         MenuInflater mInflater = getMenuInflater();
         mInflater.inflate(R.menu.actions, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.update) {
-            if (!new Utils().isOnline(this)) {
-                new AlertDialog.Builder(this)
-                        .setTitle(getString(R.string.error_title))
-                        .setMessage(getString(R.string.error_no_network))
-                        .setPositiveButton(android.R.string.yes, null).show();
-                return false;
-            }
-
-            new ClassesTask(this).execute();
-        } else if (item.getItemId() == R.id.settings) {
-            Intent i = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(i);
+        switch (item.getItemId()) {
+            case R.id.update:
+                new ClassesTask(this).execute();
+                break;
+            case R.id.settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                break;
         }
 
         return false;

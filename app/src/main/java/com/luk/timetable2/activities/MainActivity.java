@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
 
-        // Load lessons for current day
+        // Get current day
         Calendar calendar = Calendar.getInstance();
         mDay = calendar.get(Calendar.DAY_OF_WEEK) - 2;
         if (mDay == -1 || mDay == 5) mDay = 0; // set monday

@@ -54,6 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(findPreference("theme"));
             bindPreferenceSummaryToValue(findPreference("themeAccent"));
             bindPreferenceSummaryToValue(findPreference("notifications_vibrate_length"));
+            bindPreferenceSummaryToValue(findPreference("notifications_vibrate_time"));
 
             findPreference("school").setOnPreferenceChangeListener(
                     new URLChangeListener(getActivity()));
@@ -65,11 +66,14 @@ public class SettingsActivity extends AppCompatActivity {
                     new NotificationsChangeListener(getActivity()));
             findPreference("notifications_vibrate_length").setOnPreferenceChangeListener(
                     new NotificationsLengthChangeListener(getActivity()));
+            findPreference("notifications_vibrate_time").setOnPreferenceChangeListener(
+                    new NotificationsLengthChangeListener(getActivity()));
             findPreference("restore_lessons").setOnPreferenceClickListener(
                     new RestoreLessonsListener(getActivity()));
 
             if (!areNotificationsEnabled()) {
                 findPreference("notifications_vibrate_length").setEnabled(false);
+                findPreference("notifications_vibrate_time").setEnabled(false);
             }
         }
 

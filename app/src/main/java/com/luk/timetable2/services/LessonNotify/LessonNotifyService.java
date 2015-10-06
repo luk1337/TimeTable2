@@ -30,6 +30,7 @@ public class LessonNotifyService extends Service {
     private static String TAG = "LessonNotifyService";
     private static AlarmManager sAlarmManager;
     private static PendingIntent sPendingIntent;
+    private static int sVibrationTime;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -48,7 +49,9 @@ public class LessonNotifyService extends Service {
         sAlarmManager =
                 (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         sPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-
+        sVibrationTime =
+                Integer.parseInt(sharedPref.getString("notifications_vibrate_time", "0"));
+        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             sAlarmManager.setExact(AlarmManager.RTC_WAKEUP, nearestDate, sPendingIntent);
             return;
@@ -96,7 +99,7 @@ public class LessonNotifyService extends Service {
                         calendar.add(Calendar.DATE, 7);
                     }
 
-                    timestamps.add(calendar.getTimeInMillis());
+                    timestamps.add(calendar.getTimeInMillis() - (sVibrationTime * 60000));
                 } catch (ParseException e) {
                     Log.e(TAG, "", e);
                 }

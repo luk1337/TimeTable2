@@ -12,6 +12,7 @@
     <string name="pref_title_restore_lessons">Restore hidden lessons</string>
     <string name="pref_title_notification_vibrate">Vibrate before the lesson</string>
     <string name="pref_title_notification_vibrate_length">Vibration length (ms)</string>
+    <string name="pref_title_notification_vibrate_time">Vibrate earlier (min)</string>
 
     <string-array name="themeEntries">
         <item>Dark</item>

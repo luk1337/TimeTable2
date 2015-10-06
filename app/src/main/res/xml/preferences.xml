@@ -29,6 +29,12 @@
             android:title="@string/pref_title_notification_vibrate_length"
             android:inputType="number"
             android:defaultValue="250" />
+
+        <EditTextPreference
+            android:key="notifications_vibrate_time"
+            android:title="@string/pref_title_notification_vibrate_time"
+            android:inputType="number"
+            android:defaultValue="0" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_category_api">

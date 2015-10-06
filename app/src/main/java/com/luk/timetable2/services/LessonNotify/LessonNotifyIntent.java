@@ -19,12 +19,11 @@ public class LessonNotifyIntent extends IntentService {
     protected void onHandleIntent(Intent intent) {
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        Integer vibrationLength =
+                Integer.parseInt(sharedPref.getString("notifications_vibrate_length", "250"));
 
-        if (sharedPref.getBoolean("notifications_vibrate", false)) {
-            Vibrator v =
-                    (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-            v.vibrate(200);
-        }
+        Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(vibrationLength);
 
         LessonNotifyWakeReceiver.completeWakefulIntent(intent);
     }

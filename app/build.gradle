@@ -8,8 +8,8 @@ android {
         applicationId "com.luk.timetable2"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 17
-        versionName "5.4"
+        versionCode 18
+        versionName "5.5"
     }
     buildTypes {
         release {

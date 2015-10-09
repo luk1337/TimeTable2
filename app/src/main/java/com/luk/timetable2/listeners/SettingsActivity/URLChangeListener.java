@@ -1,6 +1,7 @@
 package com.luk.timetable2.listeners.SettingsActivity;
 
 import android.content.SharedPreferences;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 
@@ -17,6 +18,7 @@ public class URLChangeListener implements Preference.OnPreferenceChangeListener 
         PreferenceManager preferenceManager = preference.getPreferenceManager();
 
         editor.putString("school", correctURL).apply();
+        ((EditTextPreference) preferenceManager.findPreference("school")).setText(correctURL);
         preferenceManager.findPreference("school").setSummary(correctURL);
 
         return false;

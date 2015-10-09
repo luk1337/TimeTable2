@@ -44,7 +44,7 @@ public class Parser {
     public HashMap<Integer, String> parseClasses() throws IOException {
         HashMap<Integer, String> class_list = new HashMap<>();
 
-        Document data = Jsoup.connect(url).get();
+        Document data = Jsoup.connect(url).header("Accept", "*/*").get();
 
         Elements classes_select = data.select(QUERY_CLASSES_SELECT);
         Elements classes_a = data.select(QUERY_CLASSES_A);
@@ -76,7 +76,7 @@ public class Parser {
      * @throws IOException
      */
     public HashMap<Integer, ArrayList<HashMap<String, String>>> parseLessons() throws IOException {
-        Document data = Jsoup.connect(url).get();
+        Document data = Jsoup.connect(url).header("Accept", "*/*").get();
         Elements table = data.select(QUERY_TABLE);
         Elements tr = table.select("tr");
 

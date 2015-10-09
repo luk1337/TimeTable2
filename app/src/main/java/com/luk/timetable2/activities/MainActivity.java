@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshContent() {
         mViewPager.setAdapter(new MainActivityAdapter(getSupportFragmentManager()));
+        mViewPager.setCurrentItem(mDaySelector.getSelectedItemPosition());
     }
 
     public ViewPager getPager() {

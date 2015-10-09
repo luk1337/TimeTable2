@@ -68,7 +68,9 @@ public class MainActivityFragment extends Fragment {
 
                 // set lesson additional info { hours, classroom }
                 TextView info = (TextView) template.findViewById(R.id.info);
-                info.setText(_hour + "\n" + _room.substring(0, _room.length() - 3));
+                info.setText(
+                        String.format("%s\n%s", _hour, _room.substring(0, _room.length() - 3))
+                );
 
                 // set long click listener
                 template.findViewById(R.id.card_lesson).setOnLongClickListener(

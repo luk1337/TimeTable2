@@ -1,4 +1,4 @@
-package com.luk.timetable2;
+package com.luk.timetable2.parser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class Parser {
     private String url;
     private ArrayList<String> hours = new ArrayList<>();
-    private HashMap<Integer, ArrayList<HashMap<String, String>>> lessons = new HashMap<>();
+    private HashMap<Integer, ArrayList<Lesson>> lessons = new HashMap<>();
     private Pattern regex_group = Pattern.compile("-[a-zA-z0-9/]+$");
 
     private String QUERY_CLASSES_SELECT = "select[name=oddzialy]";
@@ -75,7 +75,7 @@ public class Parser {
      * @return list of lessons
      * @throws IOException
      */
-    public HashMap<Integer, ArrayList<HashMap<String, String>>> parseLessons() throws IOException {
+    public HashMap<Integer, ArrayList<Lesson>> parseLessons() throws IOException {
         Document data = Jsoup.connect(url).header("Accept", "*/*").get();
         Elements table = data.select(QUERY_TABLE);
         Elements tr = table.select("tr");
@@ -98,9 +98,8 @@ public class Parser {
             for (Element lesson : lessons) {
                 if (lesson.select(QUERY_LESSON_MULTIPLE).size() > 0 && lesson.select(QUERY_SUBJECT).size() < lesson.select(QUERY_LESSON_MULTIPLE).size()) {
                     for (int l = 0; l < lesson.select(QUERY_LESSON_MULTIPLE).size(); l++) {
-                        HashMap _lesson = parseLesson(lesson, hours.get(i - 1), l);
-                        ArrayList<HashMap<String, String>> array = this.lessons.get(day) == null ? new ArrayList<>() : (ArrayList) this.lessons.get(day);
-                        array.add(_lesson);
+                        ArrayList<Lesson> array = this.lessons.get(day) == null ? new ArrayList<>() : (ArrayList) this.lessons.get(day);
+                        array.add(parseLesson(lesson, hours.get(i - 1), l));
 
                         this.lessons.put(day, array);
                     }
@@ -111,16 +110,14 @@ public class Parser {
 
                             for (String group : _groups) {
                                 Element elem = Jsoup.parse(group);
-                                HashMap _lesson = parseLesson(elem, hours.get(i - 1), 0);
-                                ArrayList<HashMap<String, String>> array = this.lessons.get(day) == null ? new ArrayList<>() : (ArrayList) this.lessons.get(day);
-                                array.add(_lesson);
+                                ArrayList<Lesson> array = this.lessons.get(day) == null ? new ArrayList<>() : (ArrayList) this.lessons.get(day);
+                                array.add(parseLesson(elem, hours.get(i - 1), 0));
 
                                 this.lessons.put(day, array);
                             }
                         } else {
-                            HashMap _lesson = parseLesson(lesson, hours.get(i - 1), 0);
-                            ArrayList<HashMap<String, String>> array = this.lessons.get(day) == null ? new ArrayList<>() : (ArrayList) this.lessons.get(day);
-                            array.add(_lesson);
+                            ArrayList<Lesson> array = this.lessons.get(day) == null ? new ArrayList<>() : (ArrayList) this.lessons.get(day);
+                            array.add(parseLesson(lesson, hours.get(i - 1), 0));
 
                             this.lessons.put(day, array);
                         }
@@ -142,9 +139,7 @@ public class Parser {
      *
      * @return list of lessons
      */
-    private HashMap<String, String> parseLesson(Element lesson, String hour, Integer num) {
-        HashMap<String, String> map = new HashMap<>();
-
+    private Lesson parseLesson(Element lesson, String hour, Integer num) {
         String _lesson = lesson.select(QUERY_SUBJECT).get(num).html();
         String _room = "";
         String _group = "";
@@ -176,12 +171,7 @@ public class Parser {
             }
         }
 
-        map.put("hour", hour);
-        map.put("lesson", _lesson);
-        map.put("room", _room);
-        map.put("group", _group);
-
-        return map;
+        return new Lesson(_lesson, _room, hour, _group);
     }
 
 }

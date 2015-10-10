@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.luk.timetable2.Parser;
+import com.luk.timetable2.parser.Parser;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.activities.MainActivity;

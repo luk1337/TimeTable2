@@ -11,7 +11,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.luk.timetable2.DatabaseHandler;
-import com.luk.timetable2.Parser;
+import com.luk.timetable2.parser.Lesson;
+import com.luk.timetable2.parser.Parser;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.activities.MainActivity;
@@ -53,7 +54,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             }
         });
 
-        HashMap<Integer, ArrayList<HashMap<String, String>>> data;
+        HashMap<Integer, ArrayList<Lesson>> data;
 
         try {
             data = new Parser(String.format("%s/plany/o%d.html", mUrl, mClass)).parseLessons();
@@ -69,14 +70,14 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         for (int day = 1; day <= 5; day++) {
             if (data.get(day) == null) continue;
 
-            for (HashMap<String, String> lesson : data.get(day)) {
-                String _hour = lesson.get("hour");
-                String _lesson = lesson.get("lesson");
-                String _group = lesson.get("group");
-                String _room = lesson.get("room");
+            for (Lesson lesson : data.get(day)) {
+                String name = lesson.getName();
+                String room = lesson.getRoom();
+                String hour = lesson.getHour();
+                String group = lesson.getGroup();
 
-                if (_group.length() > 0) {
-                    _lesson += String.format(" (%s)", _group);
+                if (group.length() > 0) {
+                    name = String.format("%s (%s)", name, group);
                 }
 
                 SQLiteStatement stmt = db.compileStatement(
@@ -84,9 +85,9 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
                 );
 
                 stmt.bindString(1, String.valueOf(day - 1));
-                stmt.bindString(2, _lesson);
-                stmt.bindString(3, _room);
-                stmt.bindString(4, _hour);
+                stmt.bindString(2, name);
+                stmt.bindString(3, room);
+                stmt.bindString(4, hour);
                 stmt.execute();
             }
         }

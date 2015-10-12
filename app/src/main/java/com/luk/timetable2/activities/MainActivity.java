@@ -74,11 +74,11 @@ public class MainActivity extends AppCompatActivity {
         if (mCurrentTheme != Utils.getCurrentTheme(this)) {
             if (android.os.Build.VERSION.SDK_INT >= 11) {
                 recreate();
-            } else {
-                startActivity(getIntent());
-                finish();
+                return;
             }
 
+            startActivity(getIntent());
+            finish();
             return;
         }
 

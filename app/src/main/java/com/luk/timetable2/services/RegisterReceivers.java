@@ -10,20 +10,22 @@ import android.util.Log;
  */
 public class RegisterReceivers extends BroadcastReceiver {
     private static String TAG = "RegisterReceivers";
-    private static String[] SERVICES = new String[]{
-            "com.luk.timetable2.services.DateChange.DateChangeService",
-            "com.luk.timetable2.services.LessonNotify.LessonNotifyService",
-            "com.luk.timetable2.services.WidgetRefresh.WidgetRefreshService"
+    private static String[][] SERVICES = new String[][]{
+            {"com.luk.timetable2.services.DateChange.DateChangeService", "7"},
+            {"com.luk.timetable2.services.LessonNotify.LessonNotifyService", "7"},
+            {"com.luk.timetable2.services.WidgetRefresh.WidgetRefreshService", "11"}
     };
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        for (String service : SERVICES) {
+        for (String[] service : SERVICES) {
             try {
-                Class<?> serviceClass = Class.forName(service);
+                Class<?> serviceClass = Class.forName(service[0]);
 
-                context.getApplicationContext().stopService(new Intent(context, serviceClass));
-                context.getApplicationContext().startService(new Intent(context, serviceClass));
+                if (android.os.Build.VERSION.SDK_INT >= Integer.parseInt(service[1])) {
+                    context.getApplicationContext().stopService(new Intent(context, serviceClass));
+                    context.getApplicationContext().startService(new Intent(context, serviceClass));
+                }
             } catch (ClassNotFoundException e) {
                 Log.e(TAG, "", e);
             }

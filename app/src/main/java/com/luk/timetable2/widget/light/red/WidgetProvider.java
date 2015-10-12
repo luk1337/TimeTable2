@@ -1,5 +1,6 @@
 package com.luk.timetable2.widget.light.red;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -7,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
 
@@ -30,6 +32,7 @@ public class WidgetProvider extends AppWidgetProvider {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                          int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);

@@ -1,24 +1,24 @@
-package com.luk.timetable2.activities;
+package com.luk.timetable2.activities.v7;
 
-import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
-import com.luk.timetable2.listeners.SettingsActivity.NotificationsChangeListener;
-import com.luk.timetable2.listeners.SettingsActivity.NotificationsLengthChangeListener;
-import com.luk.timetable2.listeners.SettingsActivity.RestoreLessonsListener;
-import com.luk.timetable2.listeners.SettingsActivity.ThemeChangeListener;
-import com.luk.timetable2.listeners.SettingsActivity.URLChangeListener;
+import com.luk.timetable2.activities.MainActivity;
+import com.luk.timetable2.listeners.SettingsActivity.v7.NotificationsChangeListener;
+import com.luk.timetable2.listeners.SettingsActivity.v7.NotificationsLengthChangeListener;
+import com.luk.timetable2.listeners.SettingsActivity.v7.RestoreLessonsListener;
+import com.luk.timetable2.listeners.SettingsActivity.v7.ThemeChangeListener;
+import com.luk.timetable2.listeners.SettingsActivity.v7.URLChangeListener;
 
 /**
  * Created by luk on 9/22/15.
@@ -37,18 +37,16 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class SettingsFragment extends PreferenceFragment {
+    public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        public void onCreatePreferences(Bundle bundle, String s) {
             this.addPreferencesFromResource(R.xml.preferences);
 
             bindPreferenceSummaryToValue(findPreference("school"));

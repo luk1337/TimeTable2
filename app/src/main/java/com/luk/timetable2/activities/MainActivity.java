@@ -64,7 +64,13 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if (mCurrentTheme != Utils.getCurrentTheme(this)) {
-            recreate();
+            if (android.os.Build.VERSION.SDK_INT >= 11) {
+                recreate();
+            } else {
+                startActivity(getIntent());
+                finish();
+            }
+
             return;
         }
 
@@ -87,7 +93,14 @@ public class MainActivity extends AppCompatActivity {
                 new ClassesTask(this).execute();
                 break;
             case R.id.settings:
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                if (android.os.Build.VERSION.SDK_INT >= 11) {
+                    startActivity(new Intent(MainActivity.this,
+                            com.luk.timetable2.activities.SettingsActivity.class));
+                } else {
+                    startActivity(new Intent(MainActivity.this,
+                            com.luk.timetable2.activities.v7.SettingsActivity.class));
+                }
+
                 break;
         }
 

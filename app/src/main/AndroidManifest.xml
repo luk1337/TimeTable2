@@ -30,6 +30,11 @@
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings" />
 
+        <activity
+            android:name=".activities.v7.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_settings" />
+
         <!-- on boot/app start registrar -->
         <receiver
             android:name=".services.RegisterReceivers"
@@ -63,7 +68,8 @@
         <!-- widgets -->
         <receiver
             android:name=".widget.dark.WidgetProvider"
-            android:label="@string/widget_dark_label">
+            android:label="@string/widget_dark_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -75,7 +81,8 @@
 
         <receiver
             android:name=".widget.dark.red.WidgetProvider"
-            android:label="@string/widget_dark_red_label">
+            android:label="@string/widget_dark_red_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -87,7 +94,8 @@
 
         <receiver
             android:name=".widget.dark.green.WidgetProvider"
-            android:label="@string/widget_dark_green_label">
+            android:label="@string/widget_dark_green_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -99,7 +107,8 @@
 
         <receiver
             android:name=".widget.dark.blue.WidgetProvider"
-            android:label="@string/widget_dark_blue_label">
+            android:label="@string/widget_dark_blue_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -111,7 +120,8 @@
 
         <receiver
             android:name=".widget.light.WidgetProvider"
-            android:label="@string/widget_light_label">
+            android:label="@string/widget_light_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -123,7 +133,8 @@
 
         <receiver
             android:name=".widget.light.red.WidgetProvider"
-            android:label="@string/widget_light_red_label">
+            android:label="@string/widget_light_red_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -135,7 +146,8 @@
 
         <receiver
             android:name=".widget.light.green.WidgetProvider"
-            android:label="@string/widget_light_green_label">
+            android:label="@string/widget_light_green_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -147,7 +159,8 @@
 
         <receiver
             android:name=".widget.light.blue.WidgetProvider"
-            android:label="@string/widget_light_blue_label">
+            android:label="@string/widget_light_blue_label"
+            android:enabled="@bool/widgetsEnabled">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

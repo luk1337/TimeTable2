@@ -30,7 +30,6 @@ public class LessonNotifyService extends Service {
     private static String TAG = "LessonNotifyService";
     private static AlarmManager sAlarmManager;
     private static PendingIntent sPendingIntent;
-    private static int sVibrationTime;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -49,9 +48,9 @@ public class LessonNotifyService extends Service {
         sAlarmManager =
                 (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         sPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-        sVibrationTime =
-                Integer.parseInt(sharedPref.getString("notifications_vibrate_time", "0"));
-        
+
+        Log.v(TAG, "nD: " + nearestDate);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             sAlarmManager.setExact(AlarmManager.RTC_WAKEUP, nearestDate, sPendingIntent);
             return;
@@ -68,6 +67,10 @@ public class LessonNotifyService extends Service {
     }
 
     private long getNearestDate() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        int vibrationTime =
+                Integer.parseInt(sharedPref.getString("notifications_vibrate_time", "0"));
+
         long currentTime = Calendar.getInstance().getTimeInMillis();
         int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2;
         HashMap<Integer, ArrayList<List<String>>> hours = new HashMap<>();
@@ -87,7 +90,8 @@ public class LessonNotifyService extends Service {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
 
                 try {
-                    Timestamp timestamp = new Timestamp(dateFormat.parse(time[0]).getTime());
+                    Timestamp timestamp = new Timestamp(
+                            dateFormat.parse(time[0]).getTime() - (vibrationTime * 60000));
                     Calendar calendar = Calendar.getInstance();
                     calendar.set(Calendar.DAY_OF_WEEK, day + 2);
                     calendar.set(Calendar.HOUR_OF_DAY, timestamp.getHours());
@@ -99,7 +103,7 @@ public class LessonNotifyService extends Service {
                         calendar.add(Calendar.DATE, 7);
                     }
 
-                    timestamps.add(calendar.getTimeInMillis() - (sVibrationTime * 60000));
+                    timestamps.add(calendar.getTimeInMillis());
                 } catch (ParseException e) {
                     Log.e(TAG, "", e);
                 }

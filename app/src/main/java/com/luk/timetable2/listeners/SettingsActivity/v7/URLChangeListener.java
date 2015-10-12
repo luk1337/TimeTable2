@@ -1,11 +1,9 @@
-package com.luk.timetable2.listeners.SettingsActivity;
+package com.luk.timetable2.listeners.SettingsActivity.v7;
 
-import android.annotation.TargetApi;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
+import android.support.v7.preference.EditTextPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -13,14 +11,13 @@ import org.apache.commons.io.FilenameUtils;
  * Created by luk on 9/22/15.
  */
 public class URLChangeListener implements Preference.OnPreferenceChangeListener {
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String correctURL = fixURL((String) newValue);
         SharedPreferences.Editor editor = preference.getSharedPreferences().edit();
         PreferenceManager preferenceManager = preference.getPreferenceManager();
 
-        editor.putString("school", correctURL).apply();
+        editor.putString("school", correctURL).commit();
         ((EditTextPreference) preferenceManager.findPreference("school")).setText(correctURL);
         preferenceManager.findPreference("school").setSummary(correctURL);
 

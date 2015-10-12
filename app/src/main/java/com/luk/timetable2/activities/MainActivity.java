@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.luk.timetable2.R;
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
         mDaySelector = (Spinner) findViewById(R.id.day);
         mDaySelector.setOnItemSelectedListener(new DayChangeListener(this));
         mDaySelector.setSelection(mDay);
+
+        if (android.os.Build.VERSION.SDK_INT <= 10) {
+            ArrayAdapter daysAdapter = ArrayAdapter.createFromResource(this, R.array.days,
+                    android.R.layout.simple_spinner_item);
+            daysAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            mDaySelector.setAdapter(daysAdapter);
+        }
 
         // Set view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);

@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.MainActivity.DayChangeListener;
-import com.luk.timetable2.services.RegisterReceivers;
 import com.luk.timetable2.tasks.ClassesTask;
 
 import java.util.Calendar;
@@ -62,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
         // Set view pager
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.addOnPageChangeListener(new DayChangeListener(this));
-
-        // Start services
-        sendBroadcast(new Intent(this, RegisterReceivers.class));
     }
 
     @Override

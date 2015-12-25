@@ -1,5 +1,6 @@
 package com.luk.timetable2;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -9,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -117,6 +119,7 @@ public class Utils {
         return array;
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void refreshWidgets(Context context) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         String[] widgets = new String[]{

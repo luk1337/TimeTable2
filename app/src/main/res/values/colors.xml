@@ -9,7 +9,7 @@
     <color name="colorPrimaryDark_Dark">#212121</color>
     <color name="colorAccent_Dark">#616161</color>
 
-    <!-- dark -->
+    <!-- light -->
     <color name="colorPrimary_Light">#BDBDBD</color>
     <color name="colorPrimaryDark_Light">#9E9E9E</color>
     <color name="colorAccent_Light">#BDBDBD</color>

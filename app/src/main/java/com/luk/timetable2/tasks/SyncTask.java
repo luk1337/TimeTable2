@@ -76,7 +76,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
                 String hour = lesson.getHour();
                 String group = lesson.getGroup();
 
-                if (group.length() > 0) {
+                if (group != null) {
                     name = String.format("%s (%s)", name, group);
                 }
 

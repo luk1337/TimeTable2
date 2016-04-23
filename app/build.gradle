@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        pickFirst 'META-INF/NOTICE.txt'
+        pickFirst 'META-INF/LICENSE.txt'
+    }
 }
 
 dependencies {
@@ -28,4 +32,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'org.jsoup:jsoup:1.8.2'
     compile 'org.apache.commons:commons-io:1.3.2'
+    compile 'org.apache.commons:commons-lang3:3.4'
 }

@@ -1,5 +1,6 @@
 package com.luk.timetable2.parser;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -144,39 +145,38 @@ public class Parser {
      *
      * @return list of lessons
      */
-    private Lesson parseLesson(Element lesson, String hour, Integer num) {
-        String name = lesson.select(QUERY_SUBJECT).get(num).html();
-        String room = "";
-        String group = "";
-
-        // make _lesson uppercase
-        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+    private Lesson parseLesson(Element element, String hour, Integer num) {
+        Lesson lesson = new Lesson();
+        lesson.setName(StringUtils.capitalize(element.select(QUERY_SUBJECT).get(num).html()));
+        lesson.setHour(hour);
 
         // get room
         try {
-            room = lesson.select(QUERY_ROOM).get(num).html();
+            lesson.setRoom(element.select(QUERY_ROOM).get(num).html());
         } catch (Exception ex) {
             // do nothing, no room
         }
 
         // get group
-        Matcher match = mRegexGroup.matcher(name);
+        Matcher match = mRegexGroup.matcher(lesson.getName());
 
         if (match.find()) {
-            name = name.replace(match.group(0), ""); // remove group from lesson
-            group = match.group(0).substring(1);
+            // remove group from lesson
+            lesson.setName(lesson.getName().replace(match.group(0), ""));
+
+            lesson.setGroup(match.group(0).substring(1));
         } else {
-            for (String line : lesson.html().split("\n")) {
+            for (String line : element.html().split("\n")) {
                 match = mRegexGroup.matcher(line.trim());
 
                 if (match.find()) {
-                    group = match.group(num).substring(1);
+                    lesson.setGroup(match.group(num).substring(1));
                     break;
                 }
             }
         }
 
-        return new Lesson(name, room, hour, group);
+        return lesson;
     }
 
 }

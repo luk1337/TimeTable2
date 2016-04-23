@@ -9,26 +9,35 @@ public class Lesson {
     private String mHour;
     private String mGroup;
 
-    public Lesson(String name, String room, String hour, String group) {
-        mName = name;
-        mRoom = room;
-        mHour = hour;
-        mGroup = group;
-    }
-
     public String getName() {
         return mName;
+    }
+
+    public void setName(String name) {
+         mName = name;
     }
 
     public String getRoom() {
         return mRoom;
     }
 
+    public void setRoom(String room) {
+        mRoom = room;
+    }
+
     public String getHour() {
         return mHour;
     }
 
+    public void setHour(String hour) {
+        mHour = hour;
+    }
+
     public String getGroup() {
         return mGroup;
+    }
+
+    public void setGroup(String group) {
+        mGroup = group;
     }
 }

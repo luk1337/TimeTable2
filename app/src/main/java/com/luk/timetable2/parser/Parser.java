@@ -40,8 +40,8 @@ public class Parser {
      * @return list of classes
      * @throws IOException
      */
-    public HashMap<Integer, String> parseClasses() throws IOException {
-        HashMap<Integer, String> classes = new HashMap<>();
+    public Classes parseClasses() throws IOException {
+        Classes classes = new Classes();
 
         Document data = Jsoup.connect(mUrl).header("Accept", "*/*").get();
 
@@ -76,9 +76,9 @@ public class Parser {
      * @return list of lessons
      * @throws IOException
      */
-    public HashMap<Integer, ArrayList<Lesson>> parseLessons() throws IOException {
+    public LessonGroup parseLessons() throws IOException {
+        LessonGroup lessonGroup = new LessonGroup();
         ArrayList<String> hours = new ArrayList<>();
-        HashMap<Integer, ArrayList<Lesson>> lessons = new HashMap<>();
         Document data = Jsoup.connect(mUrl).header("Accept", "*/*").get();
         Elements table = data.select(QUERY_TABLE);
         Elements tr = table.select("tr");
@@ -98,16 +98,15 @@ public class Parser {
             Elements elementsLessons = tr.get(i).select(QUERY_LESSON);
 
             for (Element lesson : elementsLessons) {
-                ArrayList<Lesson> array = (lessons.get(day) == null) ?
-                        new ArrayList<Lesson>() : lessons.get(day);
+                ArrayList<Lesson> lessons = lessonGroup.getLessons(day);
 
                 if (lesson.select(QUERY_LESSON_MULTIPLE).size() > 0 &&
                         lesson.select(QUERY_SUBJECT).size() <
                                 lesson.select(QUERY_LESSON_MULTIPLE).size()) {
                     for (int g = 0; g < lesson.select(QUERY_LESSON_MULTIPLE).size(); g++) {
-                        array.add(parseLesson(lesson, hours.get(i - 1), g));
+                        lessons.add(parseLesson(lesson, hours.get(i - 1), g));
 
-                        lessons.put(day, array);
+                        lessonGroup.put(day, lessons);
                     }
                 } else {
                     try {
@@ -117,14 +116,14 @@ public class Parser {
 
                             for (String group : _groups) {
                                 Element elem = Jsoup.parse(group);
-                                array.add(parseLesson(elem, hours.get(i - 1), 0));
+                                lessons.add(parseLesson(elem, hours.get(i - 1), 0));
 
-                                lessons.put(day, array);
+                                lessonGroup.put(day, lessons);
                             }
                         } else {
-                            array.add(parseLesson(lesson, hours.get(i - 1), 0));
+                            lessons.add(parseLesson(lesson, hours.get(i - 1), 0));
 
-                            lessons.put(day, array);
+                            lessonGroup.put(day, lessons);
                         }
                     } catch (Exception ex) {
                         // Do nothing, no lesson that time
@@ -135,7 +134,7 @@ public class Parser {
             }
         }
 
-        return lessons;
+        return lessonGroup;
     }
 
     /**

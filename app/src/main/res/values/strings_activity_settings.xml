@@ -26,12 +26,12 @@
         <item>Blue</item>
     </string-array>
 
-    <string-array name="themeValues">
+    <string-array name="themeValues" translatable="false">
         <item>dark</item>
         <item>light</item>
     </string-array>
 
-    <string-array name="themeAccentValues">
+    <string-array name="themeAccentValues" translatable="false">
         <item>normal</item>
         <item>red</item>
         <item>green</item>

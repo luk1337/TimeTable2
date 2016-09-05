@@ -46,6 +46,7 @@ public class DeleteLessonTask extends AsyncTask<Integer, Integer, Integer> {
             stmt.bindString(2, mHour);
 
             stmt.execute();
+            stmt.close();
         } else {
             SQLiteStatement stmt = sqLiteDatabase.compileStatement(
                     "UPDATE `lessons` SET hidden = '1' WHERE day = ? AND time = ? AND lesson = ?"
@@ -61,6 +62,7 @@ public class DeleteLessonTask extends AsyncTask<Integer, Integer, Integer> {
             }
 
             stmt.execute();
+            stmt.close();
         }
 
         return 0;

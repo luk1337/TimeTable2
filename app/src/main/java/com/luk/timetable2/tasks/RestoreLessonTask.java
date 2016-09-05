@@ -27,6 +27,7 @@ public class RestoreLessonTask extends AsyncTask<Integer, Integer, Integer> {
                 sqLiteDatabase.compileStatement("UPDATE `lessons` SET hidden = '0' WHERE _id = ?");
         stmt.bindString(1, mId);
         stmt.execute();
+        stmt.close();
 
         return 0;
     }

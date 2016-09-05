@@ -89,6 +89,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
                 stmt.bindString(3, room);
                 stmt.bindString(4, hour);
                 stmt.execute();
+                stmt.close();
             }
         }
 

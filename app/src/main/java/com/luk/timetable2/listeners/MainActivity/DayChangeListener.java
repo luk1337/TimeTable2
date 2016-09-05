@@ -15,7 +15,6 @@ public class DayChangeListener implements AdapterView.OnItemSelectedListener,
 
     public DayChangeListener(MainActivity mainActivity) {
         mMainActivity = mainActivity;
-        ;
     }
 
     @Override

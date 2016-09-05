@@ -40,16 +40,16 @@ public class Utils {
         SQLiteDatabase db = databaseHandler.getDB(context);
 
         try {
-            Cursor c = db.rawQuery(String.format("SELECT time FROM lessons WHERE day = '%d'" +
-                    " AND hidden = '0' GROUP by time ORDER by _id", day), null);
+            Cursor cursor = db.query("lessons", new String[]{ "time" }, "day = ?",
+                    new String[]{ day.toString() }, null, null, null);
 
-            if (c.moveToFirst()) {
+            if (cursor.moveToFirst()) {
                 do {
-                    array.add(Collections.singletonList(c.getString(0)));
-                } while (c.moveToNext());
+                    array.add(Collections.singletonList(cursor.getString(0)));
+                } while (cursor.moveToNext());
             }
 
-            c.close();
+            cursor.close();
             db.close();
         } catch (Exception e) {
             if (DEBUG) {
@@ -69,21 +69,22 @@ public class Utils {
         SQLiteDatabase db = databaseHandler.getDB(context);
 
         try {
-            Cursor c = db.rawQuery(String.format("SELECT * from lessons WHERE day = '%d'" +
-                    " AND time = '%s' AND hidden = '0'", day, hour), null);
+            Cursor cursor = db.query("lessons", new String[]{ "*" },
+                    "day = ? AND time = ? AND hidden = ?",
+                    new String[]{ day.toString(), hour, "0" }, null, null, null);
 
-            if (c.moveToFirst()) {
+            if (cursor.moveToFirst()) {
                 do {
                     array.add(Arrays.asList(
-                            c.getString(2),
-                            c.getString(3),
-                            c.getString(4),
-                            String.valueOf(c.getInt(0))
+                            cursor.getString(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            String.valueOf(cursor.getInt(0))
                     ));
-                } while (c.moveToNext());
+                } while (cursor.moveToNext());
             }
 
-            c.close();
+            cursor.close();
             db.close();
         } catch (Exception e) {
             if (DEBUG) {
@@ -102,21 +103,22 @@ public class Utils {
         SQLiteDatabase db = databaseHandler.getDB(context);
 
         try {
-            Cursor c = db.rawQuery(String.format("SELECT * from lessons WHERE day = '%d'" +
-                    " AND hidden = '1'", day), null);
+            Cursor cursor = db.query("lessons", new String[]{ "*" },
+                    "day = ? AND hidden = ?",
+                    new String[]{ day.toString(), "1" }, null, null, null);
 
-            if (c.moveToFirst()) {
+            if (cursor.moveToFirst()) {
                 do {
                     array.add(Arrays.asList(
-                            c.getString(2),
-                            c.getString(3),
-                            c.getString(4),
-                            String.valueOf(c.getInt(0))
+                            cursor.getString(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            String.valueOf(cursor.getInt(0))
                     ));
-                } while (c.moveToNext());
+                } while (cursor.moveToNext());
             }
 
-            c.close();
+            cursor.close();
             db.close();
         } catch (Exception e) {
             if (DEBUG) {

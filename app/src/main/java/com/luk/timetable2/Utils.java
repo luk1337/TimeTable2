@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class Utils {
     private static String TAG = "Utils";
+    private static boolean DEBUG = false;
 
     public static boolean isOnline(Activity activity) {
         ConnectivityManager cm =
@@ -51,7 +52,10 @@ public class Utils {
             c.close();
             db.close();
         } catch (Exception e) {
-            Log.e(TAG, "", e);
+            if (DEBUG) {
+                Log.e(TAG, "", e);
+            }
+
             return null;
         }
 
@@ -82,7 +86,10 @@ public class Utils {
             c.close();
             db.close();
         } catch (Exception e) {
-            Log.e(TAG, "", e);
+            if (DEBUG) {
+                Log.e(TAG, "", e);
+            }
+
             return null;
         }
 
@@ -112,7 +119,10 @@ public class Utils {
             c.close();
             db.close();
         } catch (Exception e) {
-            Log.e(TAG, "", e);
+            if (DEBUG) {
+                Log.e(TAG, "", e);
+            }
+
             return null;
         }
 

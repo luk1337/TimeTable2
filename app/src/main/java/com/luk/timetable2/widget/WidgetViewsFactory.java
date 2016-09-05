@@ -3,6 +3,7 @@ package com.luk.timetable2.widget;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -95,8 +96,8 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
 
         // set colors
         lesson.setInt(R.id.background, "setBackgroundResource", mWidgetColors[0]);
-        lesson.setTextColor(R.id.lesson, mContext.getResources().getColor(mWidgetColors[2]));
-        lesson.setTextColor(R.id.info, mContext.getResources().getColor(mWidgetColors[2]));
+        lesson.setTextColor(R.id.lesson, ContextCompat.getColor(mContext, mWidgetColors[2]));
+        lesson.setTextColor(R.id.info, ContextCompat.getColor(mContext, mWidgetColors[2]));
 
         return lesson;
     }

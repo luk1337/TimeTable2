@@ -1,6 +1,8 @@
 package com.luk.timetable2.listeners.SettingsActivity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
 import android.preference.Preference;
 
 /**
@@ -13,6 +15,7 @@ public class ThemeChangeListener implements Preference.OnPreferenceChangeListene
         mActivity = activity;
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mActivity.recreate();

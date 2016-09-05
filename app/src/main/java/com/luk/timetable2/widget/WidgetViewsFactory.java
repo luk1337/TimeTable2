@@ -1,6 +1,8 @@
 package com.luk.timetable2.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -14,6 +16,7 @@ import java.util.List;
 /**
  * Created by luk on 5/12/15.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private Context mContext = null;
     private Integer[] mWidgetColors;

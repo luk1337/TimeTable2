@@ -15,12 +15,8 @@ public class ThemeChangeListener implements Preference.OnPreferenceChangeListene
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
-            mActivity.recreate();
-        } else {
-            mActivity.startActivity(mActivity.getIntent());
-            mActivity.finish();
-        }
+        mActivity.startActivity(mActivity.getIntent());
+        mActivity.finish();
 
         return true;
     }

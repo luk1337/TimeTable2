@@ -46,25 +46,25 @@
         </receiver>
 
         <!-- date change services/receivers -->
-        <service android:name=".services.DateChange.DateChangeService" />
-        <receiver android:name=".services.DateChange.DateChangeReceiver">
+        <service android:name=".services$DateChange$DateChangeService" />
+        <receiver android:name=".services$DateChange$DateChangeReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
 
         <!-- widget refresh services/receivers -->
-        <service android:name=".services.WidgetRefresh.WidgetRefreshService" />
-        <service android:name=".services.WidgetRefresh.WidgetRefreshIntent" />
+        <service android:name=".services$WidgetRefresh$WidgetRefreshService" />
+        <service android:name=".services$WidgetRefresh$WidgetRefreshIntent" />
 
-        <receiver android:name=".services.WidgetRefresh.WidgetRefreshReceiver" />
+        <receiver android:name=".services$WidgetRefresh$WidgetRefreshReceiver" />
 
         <!-- lesson notify services/receivers -->
-        <service android:name=".services.LessonNotify.LessonNotifyService" />
-        <service android:name=".services.LessonNotify.LessonNotifyIntent" />
+        <service android:name=".services$LessonNotify$LessonNotifyService" />
+        <service android:name=".services$LessonNotify$LessonNotifyIntent" />
 
-        <receiver android:name=".services.LessonNotify.LessonNotifyReceiver" />
-        <receiver android:name=".services.LessonNotify.LessonNotifyWakeReceiver" />
+        <receiver android:name=".services$LessonNotify$LessonNotifyReceiver" />
+        <receiver android:name=".services$LessonNotify$LessonNotifyWakeReceiver" />
 
         <!-- widgets -->
         <receiver

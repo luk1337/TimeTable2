@@ -1,6 +1,7 @@
 package com.luk.timetable2.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mDaySelector.setOnItemSelectedListener(new DayChangeListener(this));
         mDaySelector.setSelection(mDay);
 
-        if (android.os.Build.VERSION.SDK_INT <= 10) {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             ArrayAdapter daysAdapter = ArrayAdapter.createFromResource(this, R.array.days,
                     android.R.layout.simple_spinner_item);
             daysAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if (mCurrentTheme != Utils.getCurrentTheme(this)) {
-            if (android.os.Build.VERSION.SDK_INT >= 11) {
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 recreate();
                 return;
             }
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 new ClassesTask(this).execute();
                 break;
             case R.id.settings:
-                if (android.os.Build.VERSION.SDK_INT >= 11) {
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                     startActivity(new Intent(MainActivity.this,
                             com.luk.timetable2.activities.SettingsActivity.class));
                 } else {

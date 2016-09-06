@@ -41,7 +41,7 @@ public class Utils {
 
         try {
             Cursor cursor = db.query("lessons", new String[]{ "time" }, "day = ?",
-                    new String[]{ day.toString() }, null, null, null);
+                    new String[]{ day.toString() }, "time", null, "_id");
 
             if (cursor.moveToFirst()) {
                 do {

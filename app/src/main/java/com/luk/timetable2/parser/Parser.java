@@ -92,13 +92,13 @@ public class Parser {
         }
 
         for (int i = 1; i < tr.size(); i++) {
-            int day = 1;
             String hour = tr.get(i).select(QUERY_HOUR).html().replace("- ", "-");
             hours.add(hour);
 
             Elements elementsLessons = tr.get(i).select(QUERY_LESSON);
 
             for (Element lesson : elementsLessons) {
+                int day = elementsLessons.indexOf(lesson) + 1;
                 ArrayList<Lesson> lessons = lessonGroup.getLessons(day);
 
                 if (lesson.select(QUERY_LESSON_MULTIPLE).size() > 0 &&
@@ -130,8 +130,6 @@ public class Parser {
                         // Do nothing, no lesson that time
                     }
                 }
-
-                day++;
             }
         }
 

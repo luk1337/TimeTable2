@@ -51,6 +51,10 @@ public class MainActivityFragment extends Fragment {
                     name += String.format(" (%s)", lesson.getGroupNumber());
                 }
 
+                if (lesson.getTeacher() != null) {
+                    name += String.format(" [%s]", lesson.getTeacher());
+                }
+
                 if (lessons.size() > 1 && lessons.indexOf(lesson) + 1 < lessons.size()) {
                     name += "\n";
                     room += " / ";

@@ -72,28 +72,24 @@ public class LessonNotifyService extends Service {
                 Integer.parseInt(sharedPref.getString("notifications_vibrate_time", "0"));
 
         long currentTime = Calendar.getInstance().getTimeInMillis();
-        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2;
-        HashMap<Integer, ArrayList<List<String>>> hours = new HashMap<>();
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
+        HashMap<Integer, List> hours = new HashMap<>();
         ArrayList<Long> timestamps = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            ArrayList<List<String>> _hours = Utils.getHours(getApplicationContext(), i);
-
-            if (_hours != null) {
-                hours.put(i, _hours);
-            }
+        for (int i = 1; i <= 5; i++) {
+            hours.put(i - 1, Utils.getHours(i));
         }
 
         for (int day = 0; day < hours.size(); day++) {
             for (int hour = 0; hour < hours.get(day).size(); hour++) {
-                String[] time = hours.get(day).get(hour).get(0).split("-");
+                String[] time = hours.get(day).get(hour).toString().split("-");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
 
                 try {
                     Timestamp timestamp = new Timestamp(
                             dateFormat.parse(time[0]).getTime() - (vibrationTime * 60000));
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.DAY_OF_WEEK, day + 2);
+                    calendar.set(Calendar.DAY_OF_WEEK, day + 1);
                     calendar.set(Calendar.HOUR_OF_DAY, timestamp.getHours());
                     calendar.set(Calendar.MINUTE, timestamp.getMinutes());
                     calendar.set(Calendar.SECOND, 0);

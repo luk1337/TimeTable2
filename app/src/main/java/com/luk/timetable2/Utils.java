@@ -6,17 +6,17 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.luk.timetable2.models.Lesson;
+import com.orm.query.Condition;
+import com.orm.query.Select;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class Utils {
     private static String TAG = "Utils";
-    private static boolean DEBUG = false;
 
     public static boolean isOnline(Activity activity) {
         ConnectivityManager cm =
@@ -34,101 +33,34 @@ public class Utils {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    public static ArrayList<List<String>> getHours(Context context, Integer day) {
-        ArrayList<List<String>> array = new ArrayList<>();
-        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-        SQLiteDatabase db = databaseHandler.getDB(context);
+    public static List<String> getHours(Integer day) {
+        List<String> hours = new ArrayList<>();
+        List<Lesson> lessons = Select.from(Lesson.class)
+                .where(Condition.prop("day").eq(day), Condition.prop("hidden").eq("0"))
+                .list();
 
-        try {
-            Cursor cursor = db.query("lessons", new String[]{ "time" }, "day = ?",
-                    new String[]{ day.toString() }, "time", null, "_id");
-
-            if (cursor.moveToFirst()) {
-                do {
-                    array.add(Collections.singletonList(cursor.getString(0)));
-                } while (cursor.moveToNext());
+        for (Lesson lesson : lessons) {
+            if (hours.indexOf(lesson.getTime()) == -1) {
+                hours.add(lesson.getTime());
             }
-
-            cursor.close();
-            db.close();
-        } catch (Exception e) {
-            if (DEBUG) {
-                Log.e(TAG, "", e);
-            }
-
-            return null;
         }
 
-        return array;
+        return hours;
     }
 
-    public static ArrayList<List<String>> getLessonsForHour(Context context, Integer day,
-                                                            String hour) {
-        ArrayList<List<String>> array = new ArrayList<>();
-        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-        SQLiteDatabase db = databaseHandler.getDB(context);
-
-        try {
-            Cursor cursor = db.query("lessons", new String[]{ "*" },
-                    "day = ? AND time = ? AND hidden = ?",
-                    new String[]{ day.toString(), hour, "0" }, null, null, null);
-
-            if (cursor.moveToFirst()) {
-                do {
-                    array.add(Arrays.asList(
-                            cursor.getString(2),
-                            cursor.getString(3),
-                            cursor.getString(4),
-                            String.valueOf(cursor.getInt(0))
-                    ));
-                } while (cursor.moveToNext());
-            }
-
-            cursor.close();
-            db.close();
-        } catch (Exception e) {
-            if (DEBUG) {
-                Log.e(TAG, "", e);
-            }
-
-            return null;
-        }
-
-        return array;
+    public static List<Lesson> getLessonsForHour(Integer day, String time) {
+        return Select.from(Lesson.class)
+                .where(Condition.prop("day").eq(day),
+                        Condition.prop("time").eq(time),
+                        Condition.prop("hidden").eq("0"))
+                .list();
     }
 
-    public static ArrayList<List<String>> getHiddenLessons(Context context, Integer day) {
-        ArrayList<List<String>> array = new ArrayList<>();
-        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-        SQLiteDatabase db = databaseHandler.getDB(context);
-
-        try {
-            Cursor cursor = db.query("lessons", new String[]{ "*" },
-                    "day = ? AND hidden = ?",
-                    new String[]{ day.toString(), "1" }, null, null, null);
-
-            if (cursor.moveToFirst()) {
-                do {
-                    array.add(Arrays.asList(
-                            cursor.getString(2),
-                            cursor.getString(3),
-                            cursor.getString(4),
-                            String.valueOf(cursor.getInt(0))
-                    ));
-                } while (cursor.moveToNext());
-            }
-
-            cursor.close();
-            db.close();
-        } catch (Exception e) {
-            if (DEBUG) {
-                Log.e(TAG, "", e);
-            }
-
-            return null;
-        }
-
-        return array;
+    public static List<Lesson> getHiddenLessons(Integer day) {
+        return Select.from(Lesson.class)
+                .where(Condition.prop("day").eq(day),
+                        Condition.prop("hidden").eq("1"))
+                .list();
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)

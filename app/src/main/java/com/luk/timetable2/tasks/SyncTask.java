@@ -4,18 +4,15 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.luk.timetable2.DatabaseHandler;
-import com.luk.timetable2.parser.Lesson;
-import com.luk.timetable2.parser.Parser;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.activities.MainActivity;
+import com.luk.timetable2.parser.Lesson;
+import com.luk.timetable2.parser.Parser;
 import com.luk.timetable2.services.RegisterReceivers;
 
 import java.util.ArrayList;
@@ -63,37 +60,28 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
             return -1;
         }
 
-        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-        SQLiteDatabase db = databaseHandler.getDB(mMainActivity);
-        databaseHandler.createTables(mMainActivity);
+        com.luk.timetable2.models.Lesson.deleteAll(Lesson.class);
 
         for (int day = 1; day <= 5; day++) {
             if (data.get(day) == null) continue;
 
-            for (Lesson lesson : data.get(day)) {
-                String name = lesson.getName();
-                String room = lesson.getRoom();
-                String hour = lesson.getHour();
-                String group = lesson.getGroup();
+            for (Lesson l : data.get(day)) {
+                String name = l.getName();
+                String room = l.getRoom();
+                String hour = l.getHour();
+                String group = l.getGroup();
 
-                if (group != null) {
-                    name = String.format("%s (%s)", name, group);
-                }
-
-                SQLiteStatement stmt = db.compileStatement(
-                        "INSERT INTO `lessons` VALUES (NULL, ?, ?, ?, ?, '0');"
-                );
-
-                stmt.bindString(1, String.valueOf(day - 1));
-                stmt.bindString(2, name);
-                stmt.bindString(3, room);
-                stmt.bindString(4, hour);
-                stmt.execute();
-                stmt.close();
+                com.luk.timetable2.models.Lesson lesson = new com.luk.timetable2.models.Lesson();
+                lesson.setName(name);
+                lesson.setClassRoom(room);
+                lesson.setGroupNumber(group);
+                lesson.setTime(hour);
+                lesson.setDay(day);
+                lesson.setHidden(false);
+                lesson.save();
             }
         }
 
-        db.close();
         return 0;
     }
 

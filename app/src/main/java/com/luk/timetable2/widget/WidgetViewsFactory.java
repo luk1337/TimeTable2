@@ -9,6 +9,7 @@ import android.widget.RemoteViewsService;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.models.Lesson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,34 +39,30 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
 
         // load mLessons for current day
         Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK) - 2;
-        if (day == -1 || day == 5) day = 0; // set monday
+        int day = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        if (day == 0 || day == 6) day = 1; // set monday
 
-        ArrayList<List<String>> hours = Utils.getHours(mContext, day);
+        List<String> hours = Utils.getHours(day);
+        for (String hour : hours) {
+            List<Lesson> lessons = Utils.getLessonsForHour(day, hour);
+            String name = "";
+            String room = "";
 
-        if (hours == null) return;
+            for (Lesson lesson : lessons) {
+                name += lesson.getName();
+                room += lesson.getClassRoom();
 
-        for (List<String> hour : hours) {
-            ArrayList<List<String>> mLessons = Utils.getLessonsForHour(mContext, day, hour.get(0));
+                if (lesson.getGroupNumber() != null) {
+                    name += String.format(" (%s)", lesson.getGroupNumber());
+                }
 
-            if (mLessons == null) return;
-
-            String _lesson = "";
-            String _room = "";
-            String _hour = hour.get(0);
-
-            for (List<String> l : mLessons) {
-                // set lesson names
-                _lesson += l.get(0) + "\n";
-
-                // set rooms
-                _room += l.get(1) + " / ";
+                if (lessons.size() > 1 && lessons.indexOf(lesson) + 1 < lessons.size()) {
+                    name += "\n";
+                    room += " / ";
+                }
             }
 
-            this.mLessons.add(new String[]{
-                    _lesson.substring(0, _lesson.length() - 1),
-                    _hour + "\n" + _room.substring(0, _room.length() - 3)
-            });
+            this.mLessons.add(new String[]{name, String.format("%s\n%s", hour, room)});
         }
     }
 

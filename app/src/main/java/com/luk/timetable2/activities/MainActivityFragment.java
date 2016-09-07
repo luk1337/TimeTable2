@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.MainActivity.DeleteDialogListener;
+import com.luk.timetable2.models.Lesson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,42 +35,38 @@ public class MainActivityFragment extends Fragment {
         LinearLayout mainLayout = (LinearLayout) rootView.findViewById(R.id.mainLayout);
         mainLayout.removeAllViews();
 
-        ArrayList<List<String>> hours = Utils.getHours(getActivity(), day);
+        List<String> hours = Utils.getHours(day);
         Integer[] colors = Utils.getColorsForVariant(Utils.getCurrentTheme(getActivity()));
 
-        if (hours == null) return null;
+        for (String hour : hours) {
+            List<Lesson> lessons = Utils.getLessonsForHour(day, hour);
+            String name = "";
+            String room = "";
 
-        for (List<String> hour : hours) {
-            ArrayList<List<String>> lessons =
-                    Utils.getLessonsForHour(getActivity(), day, hour.get(0));
+            for (Lesson lesson : lessons) {
+                name += lesson.getName();
+                room += lesson.getClassRoom();
 
-            if (lessons == null) continue;
+                if (lesson.getGroupNumber() != null) {
+                    name += String.format(" (%s)", lesson.getGroupNumber());
+                }
 
-            String _lesson = "";
-            String _room = "";
-            String _hour = hour.get(0);
-
-            for (List<String> l : lessons) {
-                // set lesson names
-                _lesson += l.get(0) + "\n";
-
-                // set rooms
-                _room += l.get(1) + " / ";
+                if (lessons.size() > 1 && lessons.indexOf(lesson) + 1 < lessons.size()) {
+                    name += "\n";
+                    room += " / ";
+                }
             }
 
             View template = mInflater.inflate(R.layout.template_lesson, null);
-
             if (template != null) {
                 CardView cardView = (CardView) template.findViewById(R.id.card_lesson);
 
                 TextView lesson = (TextView) template.findViewById(R.id.lesson);
-                lesson.setText(_lesson.substring(0, _lesson.length() - 1));
+                lesson.setText(name);
 
                 // set lesson additional info { hours, classroom }
                 TextView info = (TextView) template.findViewById(R.id.info);
-                info.setText(
-                        String.format("%s\n%s", _hour, _room.substring(0, _room.length() - 3))
-                );
+                info.setText(String.format("%s\n%s", hour, room));
 
                 // set long click listener
                 template.findViewById(R.id.card_lesson).setOnLongClickListener(

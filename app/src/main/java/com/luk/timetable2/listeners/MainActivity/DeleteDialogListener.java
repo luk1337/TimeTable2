@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
 import com.luk.timetable2.activities.MainActivity;
+import com.luk.timetable2.models.Lesson;
 import com.luk.timetable2.tasks.DeleteLessonTask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,14 +49,14 @@ class Task extends AsyncTask<Integer, Integer, Integer> {
 
     @Override
     protected Integer doInBackground(Integer... params) {
-        final ArrayList<List<String>> lessons = Utils.getLessonsForHour(mMainActivity, mDay, mHour);
+        final List<Lesson> lessons = Utils.getLessonsForHour(mDay, mHour);
 
-        if (lessons != null && lessons.size() > 1) {
+        if (lessons.size() > 1) {
             final CharSequence[] items = new String[lessons.size()];
             final int[] selected = {1};
 
-            for (int i = 0; i < lessons.size(); i++) {
-                items[i] = lessons.get(i).get(0);
+            for (Lesson lesson : lessons) {
+                items[lessons.indexOf(lesson)] = lesson.getName();
             }
 
             mMainActivity.runOnUiThread(new Runnable() {
@@ -72,7 +72,6 @@ class Task extends AsyncTask<Integer, Integer, Integer> {
                                                     false,
                                                     mHour,
                                                     mDay,
-                                                    lessons,
                                                     selected[0]
                                             ).execute();
                                         }
@@ -95,12 +94,7 @@ class Task extends AsyncTask<Integer, Integer, Integer> {
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new DeleteLessonTask(
-                                            mMainActivity,
-                                            true,
-                                            mHour,
-                                            mDay,
-                                            null,
-                                            null
+                                            mMainActivity, true, mHour, mDay, null
                                     ).execute();
                                 }
                             })

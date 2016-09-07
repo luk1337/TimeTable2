@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Get current day
-        mDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 2;
-        if (mDay == -1 || mDay == 5) mDay = 0; // set monday
+        mDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
+        if (mDay == 0 || mDay == 6) mDay = 1; // set monday
 
         // Set current day
         mDaySelector = (Spinner) findViewById(R.id.day);

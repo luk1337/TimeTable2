@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import com.luk.timetable2.R;
 import com.luk.timetable2.Utils;
+import com.luk.timetable2.models.Lesson;
 import com.luk.timetable2.tasks.RestoreLessonTask;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,19 +38,19 @@ public class RestoreLessonsListener implements Preference.OnPreferenceClickListe
         final List<String> days = Arrays.asList(resources.getStringArray(R.array.days));
 
         for (int day = 0; day < 5; day++) {
-            ArrayList<List<String>> lessons = Utils.getHiddenLessons(context, day);
+            List<Lesson> lessons = Utils.getHiddenLessons(day);
 
-            if (lessons != null && lessons.size() > 0) {
+            if (lessons.size() > 0) {
                 TextView textView = new TextView(context);
                 textView.setText(String.format("%s:", days.get(day)));
                 textView.setPadding(0, 15, 0, 15);
 
                 view.addView(textView);
 
-                for (List<String> l : lessons) {
+                for (Lesson lesson : lessons) {
                     CheckBox checkBox = new CheckBox(context);
-                    checkBox.setTag(l.get(3));
-                    checkBox.setText(String.format("%s: %s", l.get(2), l.get(0)));
+                    checkBox.setTag(lesson.getId());
+                    checkBox.setText(String.format("%s: %s", lesson.getTime(), lesson.getName()));
 
                     view.addView(checkBox);
                 }
@@ -67,10 +67,7 @@ public class RestoreLessonsListener implements Preference.OnPreferenceClickListe
                                     CheckBox checkBox = (CheckBox) view.getChildAt(i);
 
                                     if (checkBox.isChecked()) {
-                                        new RestoreLessonTask(
-                                                mActivity,
-                                                checkBox.getTag().toString()
-                                        ).execute();
+                                        new RestoreLessonTask(checkBox.getTag().toString()).execute();
                                     }
                                 }
                             }

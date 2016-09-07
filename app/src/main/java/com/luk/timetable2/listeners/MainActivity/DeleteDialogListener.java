@@ -56,7 +56,13 @@ class Task extends AsyncTask<Integer, Integer, Integer> {
             final int[] selected = {1};
 
             for (Lesson lesson : lessons) {
-                items[lessons.indexOf(lesson)] = lesson.getName();
+                String name = lesson.getName();
+
+                if (lesson.getGroupNumber() != null) {
+                    name += String.format(" (%s)", lesson.getGroupNumber());
+                }
+
+                items[lessons.indexOf(lesson)] = name;
             }
 
             mMainActivity.runOnUiThread(new Runnable() {

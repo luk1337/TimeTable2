@@ -48,9 +48,15 @@ public class RestoreLessonsListener implements Preference.OnPreferenceClickListe
                 view.addView(textView);
 
                 for (Lesson lesson : lessons) {
+                    String name = lesson.getName();
+
+                    if (lesson.getGroupNumber() != null) {
+                        name += String.format(" (%s)", lesson.getGroupNumber());
+                    }
+
                     CheckBox checkBox = new CheckBox(context);
                     checkBox.setTag(lesson.getId());
-                    checkBox.setText(String.format("%s: %s", lesson.getTime(), lesson.getName()));
+                    checkBox.setText(String.format("%s: %s", lesson.getTime(), name));
 
                     view.addView(checkBox);
                 }

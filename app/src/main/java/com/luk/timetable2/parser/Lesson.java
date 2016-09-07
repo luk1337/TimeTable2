@@ -5,6 +5,7 @@ package com.luk.timetable2.parser;
  */
 public class Lesson {
     private String mName;
+    private String mTeacher;
     private String mRoom;
     private String mHour;
     private String mGroup;
@@ -15,6 +16,14 @@ public class Lesson {
 
     public void setName(String name) {
          mName = name;
+    }
+
+    public String getTeacher() {
+        return mTeacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.mTeacher = teacher;
     }
 
     public String getRoom() {

@@ -67,12 +67,14 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
 
             for (Lesson l : data.get(day)) {
                 String name = l.getName();
+                String teacher = l.getTeacher();
                 String room = l.getRoom();
                 String hour = l.getHour();
                 String group = l.getGroup();
 
                 com.luk.timetable2.models.Lesson lesson = new com.luk.timetable2.models.Lesson();
                 lesson.setName(name);
+                lesson.setTeacher(teacher);
                 lesson.setClassRoom(room);
                 lesson.setGroupNumber(group);
                 lesson.setTime(hour);

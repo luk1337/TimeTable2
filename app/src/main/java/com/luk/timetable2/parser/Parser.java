@@ -27,6 +27,7 @@ public class Parser {
     private String QUERY_LESSON_MULTIPLE = "span[style=font-size:85%]";
     private String QUERY_SUBJECT = "span[class=p]";
     private String QUERY_HOUR = "td[class=g]";
+    private String QUERY_TEACHER = ".n";
     private String QUERY_ROOM = ".s";
 
     /**
@@ -148,6 +149,13 @@ public class Parser {
         Lesson lesson = new Lesson();
         lesson.setName(StringUtils.capitalize(element.select(QUERY_SUBJECT).get(num).html()));
         lesson.setHour(hour);
+
+        // get teacher
+        try {
+            lesson.setTeacher(element.select(QUERY_TEACHER).get(num).html());
+        } catch (Exception ex) {
+            // do nothing, no teacher
+        }
 
         // get room
         try {

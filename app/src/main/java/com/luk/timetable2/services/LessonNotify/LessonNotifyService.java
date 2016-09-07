@@ -49,8 +49,6 @@ public class LessonNotifyService extends Service {
                 (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         sPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
 
-        Log.v(TAG, "nD: " + nearestDate);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             sAlarmManager.setExact(AlarmManager.RTC_WAKEUP, nearestDate, sPendingIntent);
             return;

@@ -1,7 +1,9 @@
 package com.luk.timetable2.activities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -38,6 +40,9 @@ public class MainActivityFragment extends Fragment {
         List<String> hours = Utils.getHours(day);
         Integer[] colors = Utils.getColorsForVariant(Utils.getCurrentTheme(getActivity()));
 
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean displayTeacherNames = sharedPref.getBoolean("display_teacher_names", false);
+
         for (String hour : hours) {
             List<Lesson> lessons = Utils.getLessonsForHour(day, hour);
             String name = "";
@@ -51,7 +56,7 @@ public class MainActivityFragment extends Fragment {
                     name += String.format(" (%s)", lesson.getGroupNumber());
                 }
 
-                if (lesson.getTeacher() != null) {
+                if (displayTeacherNames && lesson.getTeacher() != null) {
                     name += String.format(" [%s]", lesson.getTeacher());
                 }
 

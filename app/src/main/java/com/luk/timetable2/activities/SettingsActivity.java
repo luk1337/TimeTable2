@@ -17,6 +17,7 @@ import com.luk.timetable2.Utils;
 import com.luk.timetable2.listeners.SettingsActivity.NotificationsChangeListener;
 import com.luk.timetable2.listeners.SettingsActivity.NotificationsLengthChangeListener;
 import com.luk.timetable2.listeners.SettingsActivity.RestoreLessonsListener;
+import com.luk.timetable2.listeners.SettingsActivity.TeacherNamesChangeListener;
 import com.luk.timetable2.listeners.SettingsActivity.ThemeChangeListener;
 import com.luk.timetable2.listeners.SettingsActivity.URLChangeListener;
 
@@ -62,6 +63,8 @@ public class SettingsActivity extends AppCompatActivity {
                     new ThemeChangeListener(getActivity()));
             findPreference("themeAccent").setOnPreferenceChangeListener(
                     new ThemeChangeListener(getActivity()));
+            findPreference("display_teacher_names").setOnPreferenceChangeListener(
+                    new TeacherNamesChangeListener(getActivity()));
             findPreference("notifications_vibrate").setOnPreferenceChangeListener(
                     new NotificationsChangeListener(getActivity()));
             findPreference("notifications_vibrate_length").setOnPreferenceChangeListener(

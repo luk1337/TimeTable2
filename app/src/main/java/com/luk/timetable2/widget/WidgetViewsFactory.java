@@ -2,7 +2,9 @@ package com.luk.timetable2.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -42,6 +44,9 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
         int day = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         if (day == 0 || day == 6) day = 1; // set monday
 
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        boolean displayTeacherNames = sharedPref.getBoolean("display_teacher_names", false);
+
         List<String> hours = Utils.getHours(day);
         for (String hour : hours) {
             List<Lesson> lessons = Utils.getLessonsForHour(day, hour);
@@ -56,7 +61,7 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
                     name += String.format(" (%s)", lesson.getGroupNumber());
                 }
 
-                if (lesson.getTeacher() != null) {
+                if (displayTeacherNames && lesson.getTeacher() != null) {
                     name += String.format(" [%s]", lesson.getTeacher());
                 }
 

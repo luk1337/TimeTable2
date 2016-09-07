@@ -9,6 +9,7 @@
 
     <string name="pref_title_theme">Motyw</string>
     <string name="pref_title_themeAccent">Akcent motywu</string>
+    <string name="pref_title_display_teacher_names">Wyświetlaj imiona nauczycieli</string>
     <string name="pref_title_restore_lessons">Przywróć ukryte lekcje</string>
     <string name="pref_title_notification_vibrate">Wibruj przed lekcją</string>
     <string name="pref_title_notification_vibrate_length">Długość wibracji (ms)</string>

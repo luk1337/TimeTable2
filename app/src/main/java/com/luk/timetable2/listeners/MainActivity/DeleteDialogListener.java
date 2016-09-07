@@ -53,7 +53,7 @@ class Task extends AsyncTask<Integer, Integer, Integer> {
 
         if (lessons.size() > 1) {
             final CharSequence[] items = new String[lessons.size()];
-            final int[] selected = {1};
+            final int[] selected = {0};
 
             for (Lesson lesson : lessons) {
                 String name = lesson.getName();

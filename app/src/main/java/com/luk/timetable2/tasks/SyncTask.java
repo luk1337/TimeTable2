@@ -54,7 +54,7 @@ public class SyncTask extends AsyncTask<Integer, Integer, Integer> {
         HashMap<Integer, ArrayList<Lesson>> data;
 
         try {
-            data = new Parser(String.format("%s/plany/o%d.html", mUrl, mClass)).parseLessons();
+            data = new Parser(mUrl).parseLessons(mClass);
         } catch (Exception e) {
             Log.e(TAG, "", e);
             return -1;

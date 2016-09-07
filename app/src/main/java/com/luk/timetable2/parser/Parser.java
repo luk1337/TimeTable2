@@ -30,6 +30,9 @@ public class Parser {
     private String QUERY_TEACHER = ".n";
     private String QUERY_ROOM = ".s";
 
+    private String PATH_CLASSES = "/lista.html";
+    private String PATH_LESSONS = "/plany/o%d.html";
+
     /**
      * @param url Vulcan API link
      */
@@ -42,12 +45,13 @@ public class Parser {
      * @throws IOException
      */
     public Classes parseClasses() throws IOException {
-        Classes classes = new Classes();
-
-        Document data = Jsoup.connect(mUrl).header("Accept", "*/*").get();
+        String url = mUrl + PATH_CLASSES;
+        Document data = Jsoup.connect(url).header("Accept", "*/*").get();
 
         Elements classes_select = data.select(QUERY_CLASSES_SELECT);
         Elements classes_a = data.select(QUERY_CLASSES_A);
+
+        Classes classes = new Classes();
 
         if (classes_select.size() > 0) {
             for (Element c : classes_select.select("option")) {
@@ -77,12 +81,14 @@ public class Parser {
      * @return list of lessons
      * @throws IOException
      */
-    public LessonGroup parseLessons() throws IOException {
-        LessonGroup lessonGroup = new LessonGroup();
-        ArrayList<String> hours = new ArrayList<>();
-        Document data = Jsoup.connect(mUrl).header("Accept", "*/*").get();
+    public LessonGroup parseLessons(int id) throws IOException {
+        String url = mUrl + String.format(PATH_LESSONS, id);
+        Document data = Jsoup.connect(url).header("Accept", "*/*").get();
         Elements table = data.select(QUERY_TABLE);
         Elements tr = table.select("tr");
+
+        LessonGroup lessonGroup = new LessonGroup();
+        ArrayList<String> hours = new ArrayList<>();
 
         for (Element hour : table.select(QUERY_HOUR)) {
             String h = hour.html();

@@ -48,7 +48,7 @@ public class ClassesTask extends AsyncTask<Integer, Integer, Integer> {
         });
 
         try {
-            mData = new Parser(String.format("%s/lista.html", mUrl)).parseClasses();
+            mData = new Parser(mUrl).parseClasses();
         } catch (Exception e) {
             Log.e(TAG, "", e);
             return -1;

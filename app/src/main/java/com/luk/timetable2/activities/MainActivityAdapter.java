@@ -16,7 +16,7 @@ public class MainActivityAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Bundle args = new Bundle();
-        args.putInt(MainActivityFragment.ARG_DAY, position);
+        args.putInt(MainActivityFragment.ARG_DAY, position + 1);
 
         Fragment fragment = new MainActivityFragment();
         fragment.setArguments(args);

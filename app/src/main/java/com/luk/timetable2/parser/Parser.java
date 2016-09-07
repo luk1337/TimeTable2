@@ -113,9 +113,9 @@ public class Parser {
                     try {
                         if (lesson.select(QUERY_SUBJECT).size() > 1 &&
                                 lesson.select(QUERY_ROOM).size() > 0) {
-                            String[] _groups = lesson.html().split("<br>");
+                            String[] groups = lesson.html().split("<br>");
 
-                            for (String group : _groups) {
+                            for (String group : groups) {
                                 Element elem = Jsoup.parse(group);
                                 lessons.add(parseLesson(elem, hours.get(i - 1), 0));
 

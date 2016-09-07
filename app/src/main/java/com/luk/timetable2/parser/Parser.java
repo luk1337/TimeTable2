@@ -151,43 +151,83 @@ public class Parser {
      */
     private Lesson parseLesson(Element element, String hour, Integer num) {
         Lesson lesson = new Lesson();
-        lesson.setName(StringUtils.capitalize(element.select(QUERY_SUBJECT).get(num).html()));
+
+        lesson.setName(getName(element, num));
+        lesson.setTeacher(getTeacher(element, num));
+        lesson.setRoom(getRoom(element, num));
+        lesson.setGroup(getGroup(element, lesson.getName(), num));
         lesson.setHour(hour);
 
-        // get teacher
-        try {
-            lesson.setTeacher(element.select(QUERY_TEACHER).get(num).html());
-        } catch (Exception ex) {
-            // do nothing, no teacher
-        }
+        // Correct up lesson name (remove group from it)
+        lesson.setName(lesson.getName().replaceAll("(-|)" + lesson.getGroup(), ""));
 
-        // get room
-        try {
-            lesson.setRoom(element.select(QUERY_ROOM).get(num).html());
-        } catch (Exception ex) {
-            // do nothing, no room
-        }
+        return lesson;
+    }
 
-        // get group
-        Matcher match = mRegexGroup.matcher(lesson.getName());
+    /**
+     * Should return lesson's name or null.
+     * Used internally.
+     *
+     * @return lesson's name or null
+     */
+    private String getName(Element element, int num) {
+        String name = element.select(QUERY_SUBJECT).get(num).html();
+        name = StringUtils.capitalize(name);
+        name = StringUtils.trim(name);
+
+        return name;
+    }
+
+    /**
+     * Should return lesson's teacher or null.
+     * Used internally.
+     *
+     * @return lesson's teacher or null
+     */
+    private String getTeacher(Element element, int num) {
+        try {
+            return element.select(QUERY_TEACHER).get(num).html();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Should return lesson's class room or null.
+     * Used internally.
+     *
+     * @return lesson's class room or null
+     */
+    private String getRoom(Element element, int num) {
+        try {
+            return element.select(QUERY_ROOM).get(num).html();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Should return lesson's group or null.
+     * Used internally.
+     *
+     * @return lesson's group or null
+     */
+    private String getGroup(Element element, String name, int num) {
+        Matcher match = mRegexGroup.matcher(name);
 
         if (match.find()) {
-            // remove group from lesson
-            lesson.setName(lesson.getName().replace(match.group(0), ""));
-
-            lesson.setGroup(match.group(0).substring(1));
+            return match.group(0).substring(1);
         } else {
             for (String line : element.html().split("\n")) {
                 match = mRegexGroup.matcher(line.trim());
 
                 if (match.find()) {
-                    lesson.setGroup(match.group(num).substring(1));
-                    break;
+                    return match.group(num).substring(1);
                 }
             }
         }
 
-        return lesson;
+        return null;
     }
 
 }

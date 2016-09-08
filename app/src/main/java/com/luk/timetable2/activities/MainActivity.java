@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         // Set current day
         mDaySelector = (Spinner) findViewById(R.id.day);
         mDaySelector.setOnItemSelectedListener(new DayChangeListener(this));
-        mDaySelector.setSelection(mDay);
+        mDaySelector.setSelection(mDay - 1);
 
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             ArrayAdapter daysAdapter = ArrayAdapter.createFromResource(this, R.array.days,

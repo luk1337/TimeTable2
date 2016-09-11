@@ -71,29 +71,26 @@ public class LessonNotifyService extends Service {
 
         long currentTime = Calendar.getInstance().getTimeInMillis();
         int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
-        HashMap<Integer, List> hours = new HashMap<>();
         ArrayList<Long> timestamps = new ArrayList<>();
 
         for (int i = 1; i <= 5; i++) {
-            hours.put(i - 1, Utils.getHours(i));
-        }
+            List<String> hours = Utils.getHours(i);
 
-        for (int day = 0; day < hours.size(); day++) {
-            for (int hour = 0; hour < hours.get(day).size(); hour++) {
-                String[] time = hours.get(day).get(hour).toString().split("-");
+            for (String hour : hours) {
+                String[] time = hour.split("-");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
 
                 try {
                     Timestamp timestamp = new Timestamp(
                             dateFormat.parse(time[0]).getTime() - (vibrationTime * 60000));
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.DAY_OF_WEEK, day + 1);
+                    calendar.set(Calendar.DAY_OF_WEEK, i + 1);
                     calendar.set(Calendar.HOUR_OF_DAY, timestamp.getHours());
                     calendar.set(Calendar.MINUTE, timestamp.getMinutes());
                     calendar.set(Calendar.SECOND, 0);
                     calendar.set(Calendar.MILLISECOND, 0);
 
-                    if (day < currentDay) {
+                    if (i < currentDay) {
                         calendar.add(Calendar.DATE, 7);
                     }
 
